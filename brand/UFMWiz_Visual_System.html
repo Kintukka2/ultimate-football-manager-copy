@@ -147,7 +147,7 @@ body {
 .rail__wm {
   display: inline-block; font-family: var(--display); font-weight: 400;
   font-size: 24px; letter-spacing: .03em; color: var(--ink);
-  border-bottom: 3px solid var(--gd-rim); padding-bottom: 2px;
+  border-bottom: 3px solid #FF6B1A; padding-bottom: 2px;
 }
 .rail__wm i { font-style: normal; color: var(--ink-3); }
 .rail a {
@@ -183,6 +183,10 @@ body {
   line-height: .9; letter-spacing: .01em;
   margin: 0; text-wrap: balance; color: var(--ink);
   text-shadow: var(--tmp-shadow);
+}
+.masthead h1 .grass {
+  background: repeating-linear-gradient(90deg, #2F8F5B 0 .42em, #44A872 .42em .84em);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .masthead h1 em {
   font-style: normal;
@@ -680,35 +684,52 @@ code {
 .rar.is-base figcaption { color: var(--gd-rim); }
 
 /* ============================================================
-   CHALK — the family half, shared with FHCWiz
+   BOARD — the WIZ half: a coach's magnetic tactics board.
+   Cool where the game is warm: blue-green grass, aluminium, one bib.
    ============================================================ */
 :root {
-  --board:     #0D1410;
-  --board-rim: #2C3A30;
-  --chalk:     #E8F3EA;
-  --chalk-2:   #9BB0A2;
-  --pen:       #DE2424;
+  --grass-a:  #123A27;   /* mown stripe, dark */
+  --grass-b:  #164530;   /* mown stripe, light */
+  --frame:    #9AA6B0;   /* brushed aluminium */
+  --frame-hi: #D3DBE1;   /* aluminium edge light */
+  --paint:    #EEF3EC;   /* pitch line paint */
+  --marker:   #FFFFFF;   /* dry-wipe marker, our magnets */
+  --them:     #0C1712;   /* opponent magnet */
+  --bib:      #FF6B1A;   /* the training bib, UFMWiz's own colour */
 }
-.board { background: var(--board); border: 2px solid var(--board-rim); border-radius: 9px; overflow: hidden; }
+.board {
+  background: repeating-linear-gradient(90deg, var(--grass-a) 0 12.5%, var(--grass-b) 12.5% 25%);
+  border: 3px solid var(--frame); border-radius: 8px; overflow: hidden;
+  box-shadow: inset 0 1px 0 var(--frame-hi), inset 0 0 0 1px rgba(0,0,0,.35), 0 0 0 1px #000;
+}
 .board svg { display: block; width: 100%; height: auto; }
-figure.chalkfig { margin: 0; max-width: 460px; }
-figure.chalkfig figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+figure.boardfig { margin: 0; max-width: 480px; }
+figure.boardfig figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
 .vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 12px; }
 .vocab figure { margin: 0; }
 .vocab figcaption { margin-top: 8px; font-family: var(--display); font-size: 18px; letter-spacing: .05em; color: var(--ink-gold); }
 .vocab b { display: block; color: var(--ink-2); font-family: var(--ui); font-weight: 500; font-size: 13px; letter-spacing: 0; margin-top: 2px; }
 .emptydemo { border: 1px solid #1c1a13; background: var(--ground-2); padding: 46px 20px; text-align: center; }
-.emptydemo .board { max-width: 240px; margin: 0 auto 22px; }
+.emptydemo .board { max-width: 260px; margin: 0 auto 22px; }
 .emptydemo h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: .04em; }
 .emptydemo p { margin: 0 auto; max-width: 46ch; color: var(--ink-2); font-size: 15px; }
+.temps { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 640px; margin-top: 16px; }
+.temps div { padding: 16px 18px; min-height: 110px; display: flex; flex-direction: column; justify-content: flex-end; }
+.temps b { font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: .04em; line-height: 1; }
+.temps span { font-size: 13.5px; }
+.temps .warm { background: var(--band); border: 1px solid var(--gd-rim); }
+.temps .warm b { color: var(--gd-rim); } .temps .warm span { color: var(--ink-gold); }
+.temps .cool { background: repeating-linear-gradient(90deg, var(--grass-a) 0 12.5%, var(--grass-b) 12.5% 25%); border: 3px solid var(--frame); }
+.temps .cool b { color: var(--paint); } .temps .cool span { color: #CFE0D3; }
 
 .lockup { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .lockup__mark { width: 78px; height: 69px; flex: none; }
 .wordmark {
   font-family: var(--display); font-size: 58px; line-height: .9;
   letter-spacing: .02em; color: var(--ink);
-  border-bottom: 5px solid var(--gd-rim); padding-bottom: 4px;
+  border-bottom: 5px solid var(--bib); padding-bottom: 4px;
 }
+.lockup__mark { width: 88px; height: 77px; }
 .wordmark i { font-style: normal; color: var(--ink-3); }
 
 .family { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 18px; }
@@ -724,7 +745,7 @@ figure.chalkfig figcaption { margin-top: 10px; font-size: 14px; color: var(--ink
 .rule { background: var(--void); border: 1px solid #1c1a13; padding: 18px 20px 20px; }
 .rule h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: .05em; color: var(--gd-rim); }
 .rule p { margin: 0; font-size: 14.5px; color: var(--ink-2); max-width: none; }
-.rule.is-chalk h4 { color: var(--chalk); }
+.rule.is-board h4 { color: var(--bib); }
 .rule.is-cy h4 { color: var(--cy-rim); }
 .rule.is-pos h4 { color: var(--pos); }
 
@@ -771,6 +792,7 @@ footer b { color: var(--ink-2); font-weight: 700; }
     <symbol id="i-down2" viewBox="0 0 24 24"><path d="M4 4 L12 12 L20 4 M4 12 L12 20 L20 12" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-glass" viewBox="0 0 24 24"><path d="M6 3 H18 L12 12 L18 21 H6 L12 12 Z" fill="currentColor"/></symbol>
     <symbol id="i-bolt" viewBox="0 0 10 14"><path d="M6.5 0 L0 8 H4 L3 14 L10 5.5 H6 Z" fill="currentColor"/></symbol>
+<marker id="ah" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#FFFFFF"/></marker><marker id="ah-bib" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#FF6B1A"/></marker><symbol id="mark-ufm" viewBox="0 0 100 88"><clipPath id="mk-clip"><rect x="3" y="3" width="94" height="82" rx="7"/></clipPath><g clip-path="url(#mk-clip)"><rect width="100" height="88" fill="#123A27"/><rect x="12.5" y="0" width="12.5" height="88" fill="#164530"/><rect x="37.5" y="0" width="12.5" height="88" fill="#164530"/><rect x="62.5" y="0" width="12.5" height="88" fill="#164530"/><rect x="87.5" y="0" width="12.5" height="88" fill="#164530"/></g><rect x="3" y="3" width="94" height="82" rx="7" fill="none" stroke="#9AA6B0" stroke-width="3"/><polyline points="20,26 35,60 50,32 65,60 80,26" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="21.3" cy="28.0" r="7.0" fill="#000" opacity=".4"/><circle cx="20.0" cy="26.0" r="7.0" fill="#FFFFFF"/><circle cx="36.3" cy="62.0" r="7.0" fill="#000" opacity=".4"/><circle cx="35.0" cy="60.0" r="7.0" fill="#FFFFFF"/><circle cx="51.3" cy="34.0" r="7.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="32.0" r="7.0" fill="#FFFFFF"/><circle cx="66.3" cy="62.0" r="7.0" fill="#000" opacity=".4"/><circle cx="65.0" cy="60.0" r="7.0" fill="#FFFFFF"/><circle cx="81.3" cy="28.0" r="7.0" fill="#000" opacity=".4"/><circle cx="80.0" cy="26.0" r="7.0" fill="#FF6B1A"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="M8 4 L16 12 L8 20" fill="none" stroke="#2B2414" stroke-width="4.5" stroke-linejoin="round"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 3 V21 M3 12 H21" stroke="#3B3420" stroke-width="5"/></symbol>
   </defs>
@@ -787,7 +809,7 @@ footer b { color: var(--ink-2); font-weight: 700; }
     <a href="#texture">Texture</a>
     <a href="#components">Components</a>
     <a href="#rarities">Rarities</a>
-    <a href="#chalk">Chalk</a>
+    <a href="#board">Board</a>
     <a href="#rules">Rules</a>
     <a href="#build">Build</a>
     <a href="#limits">Limits</a>
@@ -798,11 +820,11 @@ footer b { color: var(--ink-2); font-weight: 700; }
     <header class="masthead">
       <div class="masthead__body">
         <div class="wrap">
-          <h1>Their <em>gold</em>.<br>Our chalk.</h1>
+          <h1>Their <em>gold</em>.<br>Our <span class="grass">grass</span>.</h1>
           <p>The visual system for UFMWiz, the companion to Ultimate Football Manager&nbsp;27.
             Everything that shows the game's data is measured: from 265 screenshots of the game,
-            and from the values authored into the 27.4.0 build itself. The identity and the chalk
-            language are ours, and they are shared with FHCWiz.</p>
+            and from the values authored into the 27.4.0 build itself. The identity and the tactics
+            board it is drawn on are ours, and owe nothing to the game or to FHCWiz.</p>
           <ul class="stats">
             <li><b>265</b> Screenshots</li>
             <li><b>2,400</b> Sprites read</li>
@@ -823,44 +845,41 @@ footer b { color: var(--ink-2); font-weight: 700; }
       <div class="wrap sec-body">
 
         <div class="lockup" style="margin-bottom:28px">
-          <svg class="lockup__mark" viewBox="0 0 100 88" role="img" aria-label="UFMWiz mark">
-            <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
-            <path d="M24 26 L37 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-            <path d="M37 62 L50 40" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
-            <path d="M50 40 L63 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-            <path d="M63 62 L72.5 35.5" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
-            <circle cx="24" cy="26" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
-            <polygon points="78.7,18.5 81.2,27.9 70.8,24.1" fill="#DE2424"/>
-          </svg>
+          <svg class="lockup__mark" viewBox="0 0 100 88" role="img" aria-label="UFMWiz mark"><use href="#mark-ufm"/></svg>
           <span class="wordmark"><i>UFM</i>WIZ</span>
         </div>
 
-        <p class="lede">The site is <strong>UFMWiz</strong>. The name splits in two, and so does the design,
-          exactly as it does for FHCWiz:</p>
+        <p class="lede">The site is <strong>UFMWiz</strong>. The name splits in two, and so does the design:</p>
         <ul class="clean">
           <li><b>UFM is the game's world.</b> Anything that shows the game's own data — cards, ratings,
             rarities, challenges, packs, the market — is drawn in the measured system in Foundation through Rarities.</li>
-          <li><b>WIZ is ours.</b> Our analysis, our diagrams and our teaching material are drawn in chalk.</li>
+          <li><b>WIZ is ours.</b> Our analysis, our diagrams and our teaching material go on the tactics board.</li>
         </ul>
-        <div class="note"><p>The rule is the family rule: <strong>their data wears metal, our thinking wears chalk.</strong>
-          In UFM the metal is gold.</p></div>
+        <div class="note"><p>One rule settles which: <strong>their data wears gold, our thinking goes on the board.</strong></p></div>
 
         <h3>The mark</h3>
-        <p>The same board and the same hand as FHCWiz, on a different pitch. FHCWiz draws its W as one
-          receiver's route. UFMWiz draws it as a <strong>one-two</strong>: the ball starts at the O, a pass
-          (solid), a run (dashed), a pass (solid), a run (dashed), and the red arrowhead is the finish.
-          That is real football notation, so the W reads as a move to anyone who has seen a tactics board.</p>
+        <p><strong>The W of the WM.</strong> Herbert Chapman's Arsenal played a 3-2-2-3 from 1925, and coaches have drawn
+          it as two letters ever since: the defence makes an M and the five forwards make a W. The mark is that W in
+          magnets on a tactics board. Five forwards, four passes, and the right winger in the bib, because that is where
+          the move ends.</p>
+        <figure class="boardfig" style="margin:18px 0 6px">
+          <div class="board"><svg viewBox="0 0 100 76" role="img" aria-label="The WM formation: the defence makes an M, the five forwards make a W"><path d="M4 4 H96 V72 H4 Z" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M4 38 H96" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><circle cx="50" cy="38" r="8" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M32 4 V15 H68 V4" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M32 72 V61 H68 V72" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><polyline points="24,56 37,45 50,56 63,45 76,56" fill="none" stroke="#EEF3EC" stroke-width="2" stroke-dasharray="3 3" opacity=".7"/><polyline points="20,13 35,28 50,15 65,28 80,13" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="50.8" cy="68.2" r="4.4" fill="#000" opacity=".4"/><circle cx="50.0" cy="67.0" r="4.4" fill="#FFFFFF"/><circle cx="24.8" cy="57.2" r="4.4" fill="#000" opacity=".4"/><circle cx="24.0" cy="56.0" r="4.4" fill="#FFFFFF"/><circle cx="37.8" cy="46.2" r="4.4" fill="#000" opacity=".4"/><circle cx="37.0" cy="45.0" r="4.4" fill="#FFFFFF"/><circle cx="50.8" cy="57.2" r="4.4" fill="#000" opacity=".4"/><circle cx="50.0" cy="56.0" r="4.4" fill="#FFFFFF"/><circle cx="63.8" cy="46.2" r="4.4" fill="#000" opacity=".4"/><circle cx="63.0" cy="45.0" r="4.4" fill="#FFFFFF"/><circle cx="76.8" cy="57.2" r="4.4" fill="#000" opacity=".4"/><circle cx="76.0" cy="56.0" r="4.4" fill="#FFFFFF"/><circle cx="20.8" cy="14.2" r="4.4" fill="#000" opacity=".4"/><circle cx="20.0" cy="13.0" r="4.4" fill="#FFFFFF"/><circle cx="35.8" cy="29.2" r="4.4" fill="#000" opacity=".4"/><circle cx="35.0" cy="28.0" r="4.4" fill="#FFFFFF"/><circle cx="50.8" cy="16.2" r="4.4" fill="#000" opacity=".4"/><circle cx="50.0" cy="15.0" r="4.4" fill="#FFFFFF"/><circle cx="65.8" cy="29.2" r="4.4" fill="#000" opacity=".4"/><circle cx="65.0" cy="28.0" r="4.4" fill="#FFFFFF"/><circle cx="80.8" cy="14.2" r="4.4" fill="#000" opacity=".4"/><circle cx="80.0" cy="13.0" r="4.4" fill="#FF6B1A"/></svg></div>
+          <figcaption>The whole formation. The M stays in faint line paint; the W is drawn in marker, and it is the mark.</figcaption>
+        </figure>
+        <p>It is the one piece of the identity that owes nothing to the game, and it survives intact if the acronym ever
+          has to go.</p>
 
         <h3>The wordmark</h3>
         <p><strong>UFMWIZ</strong> in Bebas Neue, one line, with a rule beneath the full width.
           UFM sits in <code>#867D61</code>, WIZ in <code>#FFFFFF</code>. The acronym names the subject and the
           brand is the lit half. That is the trademark position made visible.</p>
-        <p>The rule takes the game's identity colour. FHC's is red, so FHCWiz carries a red rule. UFM's is
-          gold, so UFMWiz carries <code>#E9D38D</code>, the gold hairline that rims every panel in the game.</p>
+        <p>The rule is the <strong>bib</strong>, <code>#FF6B1A</code>: the fluorescent orange of a training bib, and UFMWiz's
+          own colour. Nothing in the game uses it, so the lockup reads as ours even when it sits on the game's warm black.</p>
         <ul class="clean no">
           <li>Never set UFM alone, in any face, at any size.</li>
           <li>Never set UFMWIZ in one flat colour. The halves always differ in value.</li>
-          <li>Never fill the wordmark with the gold foil. Foil is a button surface, not a brand surface.</li>
+          <li>Never fill the wordmark with the gold foil, and never set the rule in gold. Gold is theirs.</li>
+          <li>The bib rule belongs to the wordmark. It is not a divider to reuse.</li>
         </ul>
 
         <h3>The family</h3>
@@ -868,10 +887,9 @@ footer b { color: var(--ink-2); font-weight: 700; }
           <div>
             <h4>Shared with FHCWiz</h4>
             <ul>
-              <li>The board, the chalk, the stroke and the red pen</li>
-              <li>The five marks, and the rule against a sixth</li>
-              <li>Lockup structure: acronym muted, WIZ lit, rule beneath</li>
-              <li>"Metal reports, chalk explains"</li>
+              <li>The naming pattern: the game's acronym, then Wiz</li>
+              <li>The split: the game's data measured, our thinking drawn on a surface of our own</li>
+              <li>The lockup logic: acronym muted, Wiz lit, a rule beneath</li>
               <li>Zero image assets; every texture inline</li>
             </ul>
           </div>
@@ -879,12 +897,14 @@ footer b { color: var(--ink-2); font-weight: 700; }
             <h4>Owned by UFMWiz</h4>
             <ul>
               <li>The whole measured half: grounds, ramps, type, textures</li>
-              <li>The rule colour: gold, not red</li>
-              <li>The route inside the W: a one-two, not a receiver route</li>
-              <li>The card silhouette, the hexagon chips, the rarity palette</li>
+              <li>The tactics board, its six marks and the bib</li>
+              <li>The mark: the W of the WM</li>
+              <li>The bib-orange rule</li>
             </ul>
           </div>
         </div>
+        <p style="margin-top:16px">Nothing on the board comes from FHCWiz's chalkboard: a different material, a different
+          temperature and football's own notation.</p>
       </div>
     </section>
 
@@ -1523,89 +1543,98 @@ footer b { color: var(--ink-2); font-weight: 700; }
       </div>
     </section>
 
-    <!-- ============ CHALK ============ -->
-    <section id="chalk">
+    <!-- ============ BOARD ============ -->
+    <section id="board">
       <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
-        <h2>Chalk</h2><p>The WIZ half, shared with FHCWiz</p>
+        <h2>Board</h2><p>The WIZ half: a coach's tactics board, and ours alone</p>
       </div></div></div>
       <div class="wrap sec-body">
-        <p class="lede">Everything above lets the site show the game's data faithfully. Chalk is how a reader knows when
-          <em>we</em> are talking. It is the same board, stroke and pen as FHCWiz, so a reader of one site can read the
-          other.</p>
+        <p class="lede">Everything above lets the site show the game's data faithfully. The board is how a reader knows when
+          <em>we</em> are talking. It is the magnetic tactics board a football coach carries to the touchline: a mown
+          pitch in an aluminium frame, magnets for the players, a dry-wipe marker, and one training bib.</p>
 
-        <h3>The board</h3>
-        <div class="grounds" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
-          <div style="background:#0D1410"><code>#0D1410</code><span style="color:#6f8576">Board ground</span></div>
-          <div style="background:#2C3A30"><code>#2C3A30</code><span style="color:#9bb0a2">Board rim · 2 units</span></div>
-          <div style="background:#E8F3EA"><code style="color:#0D1410">#E8F3EA</code><span style="color:#4a5b50">Chalk</span></div>
-          <div style="background:#9BB0A2"><code style="color:#0D1410">#9BB0A2</code><span style="color:#2f3b33">Chalk 2 · pitch lines</span></div>
-          <div style="background:#DE2424"><code>#DE2424</code><span style="color:#ffd2d2">The red pen</span></div>
+        <h3>Warm and cool</h3>
+        <p>UFM's world is warm: olive-umber black, gold hairlines, foil. The board is cool: blue-green grass at hue 150°,
+          brushed aluminium at 207°. The temperature tells a reader who is talking before they read a word.</p>
+        <div class="temps">
+          <div class="warm"><b>Theirs</b><span>Warm black, gold, foil. The game's data.</span></div>
+          <div class="cool"><b>Ours</b><span>Grass, aluminium, marker, one bib. Our analysis.</span></div>
         </div>
-        <p style="margin-top:16px">The pen stays the family's red, not UFM's gold. Gold belongs to the game's metal, and a
-          gold arrowhead would put their colour on our thinking. The board takes no grain, no hairline, no streak. It is a
-          figure, not a panel.</p>
 
-        <h3>The vocabulary — five marks, read as football</h3>
-        <p>The five marks are the family's and they don't change. On a football board they mean what a coach already means
-          by them: a solid line is the ball's path, a dashed line is a player's run off the ball.</p>
+        <h3>The materials</h3>
+        <div class="grounds" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">
+          <div style="background:#123A27"><code>#123A27</code><span style="color:#8fb59d">Grass, dark stripe</span></div>
+          <div style="background:#164530"><code>#164530</code><span style="color:#8fb59d">Grass, light stripe</span></div>
+          <div style="background:#9AA6B0"><code style="color:#0C1712">#9AA6B0</code><span style="color:#2c343a">Aluminium frame</span></div>
+          <div style="background:#EEF3EC"><code style="color:#0C1712">#EEF3EC</code><span style="color:#4a5b50">Line paint</span></div>
+          <div style="background:#FFFFFF"><code style="color:#0C1712">#FFFFFF</code><span style="color:#4a5b50">Marker · our magnets</span></div>
+          <div style="background:#0C1712"><code>#0C1712</code><span style="color:#8fa396">Opponent magnet</span></div>
+          <div style="background:#FF6B1A"><code style="color:#2a1004">#FF6B1A</code><span style="color:#4a1c05">The bib</span></div>
+        </div>
+        <p style="margin-top:16px">The pitch is mown in eight equal stripes. The frame is a 3-unit aluminium rim with a light top
+          edge. The board takes no grain, no hairline, no streak and nothing gold. It is a figure, not a panel: it holds a
+          drawing, and body copy goes outside it.</p>
+
+        <h3>The stroke</h3>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Property</th><th>Value</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Marker</td><td><code>4.5</code> per 100 units, white</td><td>Scales with the board; never a fixed px</td></tr>
+            <tr><td>Caps · joins</td><td><code>round</code></td><td>The game's UI is cut sharp. A marker is held in a hand</td></tr>
+            <tr><td>Run</td><td>dash <code>9 6</code></td><td>Movement off the ball</td></tr>
+            <tr><td>Dribble</td><td>zigzag, 8-unit teeth, 12 units tall</td><td>Regular teeth read as a deliberate carry, not a shaky line</td></tr>
+            <tr><td>Arrowhead</td><td>solid triangle, 2.6× the stroke</td><td>Every pass and run ends in one</td></tr>
+            <tr><td>Magnet</td><td>disc with a soft shadow down and right</td><td>It sits on the board; it isn't printed on it</td></tr>
+            <tr><td>Line paint</td><td><code>1.6</code> units at 55%</td><td>The ground, never the subject</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>The vocabulary — six marks</h3>
+        <p>This is how football coaches already draw: a solid line is the ball, a dashed line is a player moving without it,
+          and a zigzag is a player carrying it. Adding a seventh mark means adding it here first.</p>
         <div class="vocab">
-          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="50" cy="35" r="15" fill="none" stroke="#E8F3EA" stroke-width="5.5"/></svg></div>
-            <figcaption>O<b>Our player, or the ball</b></figcaption></figure>
-          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M37 22 L63 48 M63 22 L37 48" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/></svg></div>
-            <figcaption>X<b>An opponent in the way</b></figcaption></figure>
-          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L84 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/></svg></div>
-            <figcaption>Dashed<b>A run, not made yet</b></figcaption></figure>
-          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L84 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/></svg></div>
-            <figcaption>Solid<b>A pass, already played</b></figcaption></figure>
-          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L62 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/><polygon points="86,35 62,25 62,45" fill="#DE2424"/></svg></div>
-            <figcaption>Arrowhead<b>The finish</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="52.0" cy="38.1" r="11.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="35.0" r="11.0" fill="#FFFFFF"/></svg></div><figcaption>Magnet<b>Our player</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="52.0" cy="38.1" r="11.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="35.0" r="11.0" fill="#0C1712" stroke="#FFFFFF" stroke-width="3.3"/></svg></div><figcaption>Opponent<b>In the way</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M14 35 L72 35" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/></svg></div><figcaption>Pass<b>The ball's path</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M14 35 L72 35" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#ah)"/></svg></div><figcaption>Run<b>Off the ball</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M14 35 L20 29 L28 41 L36 29 L44 41 L52 29 L60 41 L66 35 L72 35" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/></svg></div><figcaption>Dribble<b>A carry with the ball</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="52.0" cy="38.1" r="11.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="35.0" r="11.0" fill="#FF6B1A"/></svg></div><figcaption>Bib<b>The one the figure is about</b></figcaption></figure>
         </div>
-        <div class="note"><p><strong>The dribble stays out.</strong> Football notation has a sixth mark, the wavy line for a
-          dribble. The family rule says a sixth mark gets added here first, and the stroke rule says chalk never wobbles.
-          A carry is drawn as a dashed run.</p></div>
+        <div class="note"><p><strong>One bib per figure.</strong> The bib marks the player the figure is about, or the
+          arrow that finishes the move. Two bibs means the figure is saying two things, and it should be two figures.</p></div>
 
         <h3>Pitch lines</h3>
-        <p>A football board may draw the ground it stands on: the halfway line, a box, the centre circle. Pitch lines are
-          <code>#9BB0A2</code> at 2.5 units, never more than three per figure, and never carry an arrowhead.</p>
+        <p>The board may show the ground it stands on: the halfway line, the centre circle, a box, a penalty spot. Pitch lines
+          are line paint at 1.6 units and 55%, never more than three per figure, and never carry an arrowhead.</p>
 
-        <h3>Component · chalk figure</h3>
-        <figure class="chalkfig">
-          <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true">
-            <path d="M58 4 V24 H96 M58 24" fill="none" stroke="#9BB0A2" stroke-width="2.5"/>
-            <circle cx="14" cy="46" r="5.5" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
-            <circle cx="44" cy="30" r="5.5" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
-            <path d="M19 43 L39 32" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-            <path d="M14 52 L58 52 L66 34" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="14 7"/>
-            <path d="M48 27 L63 23" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-            <path d="M48 40 L58 50 M58 40 L48 50" fill="none" stroke="#9BB0A2" stroke-width="4.5" stroke-linecap="round"/>
-            <path d="M66 30 L78 14" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-            <polygon points="84,6 79.5,20 72,13.5" fill="#DE2424"/>
-          </svg></div>
-          <figcaption>The one-two in the mark, drawn out: pass inside, run round the defender, return pass,
-            finish. One arrowhead, one conclusion.</figcaption>
+        <h3>Component · board figure</h3>
+        <figure class="boardfig">
+          <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true"><path d="M100 12 H78 V50 H100" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M100 22 H92 V40 H100" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><circle cx="86" cy="31" r="1" fill="#EEF3EC" opacity=".55"/><path d="M16 41 L33 26" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/><path d="M43 25 L68 39" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/><path d="M37 53 L68 46" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#ah)"/><circle cx="60.9" cy="26.4" r="5.0" fill="#000" opacity=".4"/><circle cx="60.0" cy="25.0" r="5.0" fill="#0C1712" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="50.9" cy="41.4" r="5.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="40.0" r="5.0" fill="#0C1712" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="12.9" cy="45.4" r="5.0" fill="#000" opacity=".4"/><circle cx="12.0" cy="44.0" r="5.0" fill="#FFFFFF"/><circle cx="38.9" cy="23.4" r="5.0" fill="#000" opacity=".4"/><circle cx="38.0" cy="22.0" r="5.0" fill="#FFFFFF"/><circle cx="32.9" cy="55.4" r="5.0" fill="#000" opacity=".4"/><circle cx="32.0" cy="54.0" r="5.0" fill="#FF6B1A"/></svg></div>
+          <figcaption>The third-man run. A finds B; while the defence watches the ball, C runs in behind and B plays C
+            through. The bib is on C, the player the move is built for.</figcaption>
         </figure>
 
-        <h3>Component · chalk empty state</h3>
+        <h3>Component · board empty state</h3>
         <div class="emptydemo">
-          <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true">
-            <path d="M50 4 V58" fill="none" stroke="#9BB0A2" stroke-width="2.5"/>
-            <circle cx="50" cy="31" r="10" fill="none" stroke="#9BB0A2" stroke-width="2.5"/>
-            <circle cx="22" cy="44" r="5.5" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
-            <path d="M27 42 L44 34 L60 40 L72 26" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="14 7"/>
-            <polygon points="81,16 77,30 69,22" fill="#DE2424"/>
-          </svg></div>
+          <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true"><path d="M50 2 V60" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M100 16 H86 V46 H100" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M0 16 H14 V46 H0" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><circle cx="7.0" cy="31.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="26.0" cy="10.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="26.0" cy="24.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="26.0" cy="38.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="26.0" cy="52.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="48.0" cy="15.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="48.0" cy="31.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="48.0" cy="47.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="72.0" cy="12.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="72.0" cy="50.0" r="4.6" fill="none" stroke="#EEF3EC" stroke-width="1.8" stroke-dasharray="3 2.4" opacity=".8"/><circle cx="76.0" cy="31.0" r="4.6" fill="none" stroke="#FF6B1A" stroke-width="2.4"/><path d="M76 28 V34 M73 31 H79" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <h4>No squad yet</h4>
-          <p>Pick a formation and drop in the cards you own. The builder will show your Chemistry before you spend a coin on the market.</p>
+          <p>Pick a formation and drop in the cards you own. The builder shows your Chemistry before you spend a coin on the market.</p>
         </div>
+        <p style="margin-top:14px">Empty slots are dashed rings in line paint. The one slot to fill first wears the bib.</p>
 
-        <h3>What chalk refuses</h3>
+        <h3>What the board refuses</h3>
         <div class="nope">
           <div><b>Never on a card</b><span>Cards, chips, rarities and foil are the game's objects.</span></div>
           <div><b>Never a number the game owns</b><span>No OVR, price or requirement count on a board.</span></div>
-          <div><b>Never gold</b><span>Not the pen, not the board rim, not a highlight.</span></div>
-          <div><b>Never chrome</b><span>No chalk nav, buttons, headers or rules.</span></div>
+          <div><b>Never gold</b><span>Not on the frame, not on a magnet, not as a highlight. Gold is theirs.</span></div>
+          <div><b>One bib per figure</b><span>A second bib is a second idea. Draw a second figure.</span></div>
+          <div><b>Never chrome</b><span>No board-styled nav, buttons, headers or rules.</span></div>
           <div><b>One board per screen</b><span>A second competes with the first and neither reads.</span></div>
         </div>
+
+        <h3>Construction</h3>
+        <p>Inline SVG on a viewBox 100 units wide, height set by the figure, on a CSS-striped board. No image files, no icon
+          font, no drawing library, which keeps a board crisp from a 32px favicon to a full-width diagram.</p>
       </div>
     </section>
 
@@ -1628,9 +1657,10 @@ footer b { color: var(--ink-2); font-weight: 700; }
           <div class="rule"><h4>Dense surfaces go flat</h4><p>Lists, tables and the market are olive rows on black with no
             foil, no brush and no hairline inside. Texture belongs to headers and hero surfaces.</p></div>
           <div class="rule is-pos"><h4>Advice inverts</h4><p>Tooltips, hints and the help overlay are white boxes with dark
-            text. Everything persistent stays dark. A full-page empty state is chalk.</p></div>
-          <div class="rule is-chalk"><h4>Metal reports, chalk explains</h4><p>A surface showing the game's numbers takes the
-            measured system. A surface carrying our analysis takes the board. Never mix the two on one object.</p></div>
+            text. Everything persistent stays dark. A full-page empty state goes on the board.</p></div>
+          <div class="rule is-board"><h4>Gold reports, the board explains</h4><p>A surface showing the game's numbers takes
+            the measured system. A surface carrying our analysis goes on the board. Never mix the two: a board with an OVR on
+            it is a fake game asset.</p></div>
         </div>
       </div>
     </section>
@@ -1650,10 +1680,10 @@ footer b { color: var(--ink-2); font-weight: 700; }
             <tr><td>Card database</td><td>Card grid and the standings list side by side. Rarity chips in every row. Filters as olive tabs that fill gold when on.</td></tr>
             <tr><td>Squad builder</td><td>Pitch view of shirt cards, Chemistry pips per card, the team OVR hex, ATT/MID/DEF chips, the CHM badge. Position-fit glows only where the fit is known.</td></tr>
             <tr><td>Packs</td><td>Pack tiles with the slash-band banner. Odds in a dense list. Rarity chips for each tier.</td></tr>
-            <tr><td>Weekend League planner</td><td>The lime mode tile, a gold progress meter for QP, the 4-points-a-win table in a dense list, a chalk figure for "what rank 1 needs".</td></tr>
+            <tr><td>Weekend League planner</td><td>The lime mode tile, a gold progress meter for QP, the 4-points-a-win table in a dense list, a board figure for "what rank 1 needs".</td></tr>
             <tr><td>Home and event calendar</td><td>Hub tiles for League, Quick Match, Weekend League and Challenge Match, each in its mode colour, with red badges for anything claimable. Skewed status badges for New, Limited and Claimable.</td></tr>
             <tr><td>Player pages</td><td>Shirt card on the left, the six sub-stats as honeycomb-ground tiles with banded values, the position pitch on the right.</td></tr>
-            <tr><td>Blog</td><td>Hub tiles with the brush corner, a band label, a gold hairline. Chalk figures inside articles. Never a screenshot.</td></tr>
+            <tr><td>Blog</td><td>Hub tiles with the brush corner, a band label, a gold hairline. Board figures inside articles. Never a screenshot.</td></tr>
             <tr><td>Help overlay</td><td>White tooltip boxes with dark text. The tour keeps the dark scrim.</td></tr>
           </tbody>
         </table></div>

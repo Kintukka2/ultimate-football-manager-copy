@@ -160,12 +160,17 @@
   --ufm-hex-shape: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   --ufm-skew: -14deg;
 
-  /* ---- chalk: the WIZ half, shared with FHCWiz ---- */
-  --wiz-board:       #0D1410;
-  --wiz-board-rim:   #2C3A30;
-  --wiz-chalk:       #E8F3EA;
-  --wiz-chalk-2:     #9BB0A2;
-  --wiz-pen:         #DE2424;
+  /* ---- the board: the WIZ half, UFMWiz's own ----
+     A football tactics board. Cool where the game is warm. */
+  --wiz-grass-a:     #123A27;  /* mown stripe, dark */
+  --wiz-grass-b:     #164530;  /* mown stripe, light */
+  --wiz-grass:       repeating-linear-gradient(90deg, #123A27 0 12.5%, #164530 12.5% 25%);
+  --wiz-frame:       #9AA6B0;  /* brushed aluminium rim, 3 units */
+  --wiz-frame-hi:    #D3DBE1;  /* rim top edge */
+  --wiz-paint:       #EEF3EC;  /* pitch line paint, 1.6 units at 55% */
+  --wiz-marker:      #FFFFFF;  /* dry-wipe marker and our magnets, 4.5 units */
+  --wiz-them:        #0C1712;  /* opponent magnet, white ring */
+  --wiz-bib:         #FF6B1A;  /* the training bib: one per figure, and the wordmark rule */
 
   /* ---- type ---- */
   --ufm-display: 'Bebas Neue', 'Bebas Neue Pro', 'Arial Narrow', Impact, sans-serif;           /* caps only */
