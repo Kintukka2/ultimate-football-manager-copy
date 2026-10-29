@@ -7,7 +7,7 @@
 <style>
 /* ============================================================
    UFMWiz Visual System
-   Derived from 24 screenshots of Ultimate Football Manager 27 and from
+   Derived from 265 screenshots of Ultimate Football Manager 27 and from
    the values authored into the 27.4.0 build: 2,400 UI sprites, 52 rarity
    frames, 4 shipped fonts and their TextMeshPro materials.
    Single-theme by commitment, like FHCWiz: UFM has no light mode.
@@ -157,7 +157,7 @@ body {
   padding: 8px 14px 7px;
 }
 .rail a:hover { color: var(--ink); background: rgba(233,211,141,.06); }
-.rail a.is-active { color: var(--ink-on-gold); background: var(--gd-tab); }
+.rail a.is-active { color: var(--ink); background: #49412B; }
 .rail a:focus-visible { outline: 2px solid var(--cy-rim); outline-offset: -2px; }
 
 .main { flex: 1 1 auto; min-width: 0; }
@@ -608,6 +608,8 @@ code {
 .mtile--wl     { background: linear-gradient(180deg, #79861B, #475316 50%, #2A3611); }
 .mtile--wl b { color: #C6F704; }
 .mtile--wl span { color: #EAF5C0; }
+.mtile--challenge { background: linear-gradient(225deg, #02D5E2 0 13%, rgba(2,213,226,0) 13%), linear-gradient(180deg, #191E1C, #0E1312); }
+.mtile--challenge b { color: #02D5E2; }
 
 .field-demo { display: flex; flex-direction: column; gap: 12px; max-width: 420px; }
 .field {
@@ -632,6 +634,41 @@ code {
 .modal__msg { padding: 28px 22px; text-align: center; font-weight: 700; font-size: 16px; }
 .modal__msg span { display: block; font-weight: 500; color: var(--ink-2); font-size: 14.5px; margin-top: 8px; }
 .modal__foot { display: flex; justify-content: flex-end; gap: 12px; padding: 14px 18px; background: var(--band); border-top: 1px solid rgba(233,211,141,.35); }
+
+/* hub tile — art area, black label band, gold chevron */
+.hubtiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.hub { position: relative; display: flex; flex-direction: column; border: 1px solid #000; background: var(--void); overflow: hidden; }
+.hub__art { height: 120px; position: relative; }
+.hub__band { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #030200; padding: 9px 10px 8px 14px; }
+.hub__band b { font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: .03em; line-height: 1; padding-top: 3px; }
+.chev { flex: none; width: 30px; height: 30px; display: grid; place-items: center; background: linear-gradient(180deg, #E4C77A, #D0AB50 55%, #B8913B); box-shadow: inset 0 1px 0 rgba(255,255,255,.3); }
+.chev svg { width: 14px; height: 14px; }
+.hub__art--league { background: linear-gradient(180deg, #4C3E26, #75613B 50%, #A08451); }
+.hub__art--league::after { content: ""; position: absolute; inset: 0; background: var(--streak) no-repeat left bottom / 165px 110px; transform: scaleX(-1); opacity: .7; }
+.hub__art--wl { background: linear-gradient(180deg, #79861B, #475316 50%, #2A3611); }
+.hub__art--quick { background: linear-gradient(180deg, #291839, #3F2959 50%, #56397A); }
+.hub__art--challenge { background: linear-gradient(225deg, #02D5E2 0 15%, rgba(2,213,226,0) 15%), #191E1C; }
+.hub__note { position: absolute; left: 14px; bottom: 10px; font-family: var(--display); font-size: 21px; letter-spacing: .03em; }
+.badge { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: #D42422; box-shadow: 0 0 0 2px #000; font-family: var(--display); font-size: 16px; color: #fff; padding-top: 2px; }
+
+/* scoreboard + event ticker — match view */
+.matchbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; background: var(--ground-3); padding: 16px 18px; border: 1px solid #000; }
+.score { display: flex; align-items: center; height: 40px; background: var(--void); padding: 0 6px; }
+.score span { font-family: var(--display); font-size: 21px; letter-spacing: .04em; padding: 4px 12px 0; }
+.score i { font-style: normal; display: grid; place-items: center; min-width: 32px; height: 32px; padding-top: 3px; font-family: var(--display); font-size: 25px; }
+.score .h { background: #02C6D8; color: #03232A; }
+.score .a { background: #DE3132; color: #fff; }
+.clock { height: 40px; display: grid; place-items: center; padding: 4px 16px 0; background: var(--void); border: 1px solid var(--gd-rim); font-family: var(--display); font-size: 23px; font-variant-numeric: tabular-nums; }
+.ticker { display: inline-flex; align-items: center; height: 40px; padding: 3px 26px 0 16px; background: var(--void); border-left: 5px solid #038390;
+  font-family: var(--display); font-size: 25px; letter-spacing: .03em; font-style: italic; transform: skewX(-8deg); }
+
+/* stat value scale — player profile tiles */
+.stattiles { display: grid; grid-template-columns: repeat(3, minmax(92px, 1fr)); gap: 6px; max-width: 420px; }
+.stattile { background: #49422C; padding: 12px 8px 10px; text-align: center; line-height: 1; }
+.stattile b { display: block; font-family: var(--display); font-weight: 400; font-size: 30px; }
+.stattile span { font-family: var(--ui); font-weight: 700; font-size: 12px; color: var(--ink); }
+.st-low b { color: #D23C50; } .st-mid b { color: #F07D27; } .st-high b { color: #81AD5A; }
 
 /* ============================================================
    RARITIES
@@ -734,6 +771,7 @@ footer b { color: var(--ink-2); font-weight: 700; }
     <symbol id="i-down2" viewBox="0 0 24 24"><path d="M4 4 L12 12 L20 4 M4 12 L12 20 L20 12" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-glass" viewBox="0 0 24 24"><path d="M6 3 H18 L12 12 L18 21 H6 L12 12 Z" fill="currentColor"/></symbol>
     <symbol id="i-bolt" viewBox="0 0 10 14"><path d="M6.5 0 L0 8 H4 L3 14 L10 5.5 H6 Z" fill="currentColor"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M8 4 L16 12 L8 20" fill="none" stroke="#2B2414" stroke-width="4.5" stroke-linejoin="round"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 3 V21 M3 12 H21" stroke="#3B3420" stroke-width="5"/></symbol>
   </defs>
 </svg>
@@ -762,11 +800,11 @@ footer b { color: var(--ink-2); font-weight: 700; }
         <div class="wrap">
           <h1>Their <em>gold</em>.<br>Our chalk.</h1>
           <p>The visual system for UFMWiz, the companion to Ultimate Football Manager&nbsp;27.
-            Everything that shows the game's data is measured: from 24 screenshots of the game,
+            Everything that shows the game's data is measured: from 265 screenshots of the game,
             and from the values authored into the 27.4.0 build itself. The identity and the chalk
             language are ours, and they are shared with FHCWiz.</p>
           <ul class="stats">
-            <li><b>24</b> Screenshots</li>
+            <li><b>265</b> Screenshots</li>
             <li><b>2,400</b> Sprites read</li>
             <li><b>52</b> Rarities</li>
             <li><b>4</b> Shipped fonts</li>
@@ -920,7 +958,7 @@ footer b { color: var(--ink-2); font-weight: 700; }
         </div>
         <div class="ramp">
           <div class="ramp__label"><span class="ramp__name" style="color:#00DFED">Cyan</span>
-            <span class="ramp__role">Guidance · tap focus · chemistry · home team</span></div>
+            <span class="ramp__role">Guidance · tap focus · chemistry · home team · Challenge Match</span></div>
           <div class="ramp__bar">
             <div class="sw on-dark" style="background:#0E4543"><code>#0E4543</code></div>
             <div class="sw on-dark" style="background:#038390"><code>#038390</code></div>
@@ -1001,7 +1039,9 @@ footer b { color: var(--ink-2); font-weight: 700; }
             <tr><td>Feedback</td><td><code style="color:#50F99D">Positives #50F99D</code> <code style="color:#FEF750">Suggestions #FEF750</code></td><td>Rendered match report</td></tr>
             <tr><td>Tiers</td><td><code style="color:#D3AD8D">Amateur #D3AD8D</code> <code style="color:#A9C4C4">Semi-Pro #A9C4C4</code> <code style="color:#F7CF5C">Pro #F7CF5C</code> <code style="color:#DDCFC8">Legendary #DDCFC8</code></td><td>Tier badges</td></tr>
             <tr><td>Currencies</td><td><code style="color:#1DE994">Money #1DE994</code> <code style="color:#EB2B44">Gems #EB2B44</code> <code style="color:#AB40E8">Energy #AB40E8</code></td><td>Currency icons</td></tr>
-            <tr><td>Modes</td><td><code style="color:#C9A86A">League #4C3E26→#A08451</code> <code style="color:#C27DF0">Quick Match #291839→#56397A</code> <code style="color:#C6F704">Weekend League #79861B→#2A3611</code></td><td>Mode frame backgrounds</td></tr>
+            <tr><td>Modes</td><td><code style="color:#C9A86A">League #4C3E26→#A08451</code> <code style="color:#C27DF0">Quick Match #291839→#56397A</code> <code style="color:#C6F704">Weekend League #79861B→#2A3611</code> <code style="color:#02D5E2">Challenge Match #02D5E2</code></td><td>Mode frames; Challenge Match from the home hub</td></tr>
+            <tr><td>Stat value</td><td><code style="color:#D23C50">low #D23C50</code> <code style="color:#F07D27">mid #F07D27</code> <code style="color:#81AD5A">high #81AD5A</code></td><td>Player profile. Observed: 49 and 59 low, 72 and 73 mid, 78 and 79 high</td></tr>
+            <tr><td>Scoreboard</td><td><code style="color:#02C6D8">home #02C6D8</code> <code style="color:#DE3132">away #DE3132</code> <code style="color:#06BADA">event accent #038390</code></td><td>Match view</td></tr>
           </tbody>
         </table></div>
 
@@ -1143,7 +1183,9 @@ footer b { color: var(--ink-2); font-weight: 700; }
         <p>This is the second place UFM inverts FHC. FHC selects with a bright rim and leaves the fill alone. UFM
           selects with the <strong>fill</strong>: olive turns pale gold and the gold label turns dark. Measured on the
           match report tabs: <code>#54452E</code> with <code>#E1CA95</code> text, then <code>#F3D87F</code> with
-          <code>#444230</code> text.</p>
+          <code>#444230</code> text. The formation picker does the same: the chosen formation fills <code>#FCDF6E</code>.</p>
+        <p>The game's own nav rail is the one place the lift is olive rather than gold. The active item becomes an
+          <code>#49412B</code> tile with a white icon and label, which is what the rail on this page does.</p>
         <div class="tabs" role="tablist" aria-label="Match report">
           <button type="button" class="tab is-on" role="tab" aria-selected="true">Summary</button>
           <button type="button" class="tab" role="tab" aria-selected="false">Events</button>
@@ -1325,6 +1367,42 @@ footer b { color: var(--ink-2); font-weight: 700; }
           <div class="fb fb--sug"><h5>Suggestions</h5><p>Check your players' preferred positions</p></div>
         </div>
 
+        <h3>Match view</h3>
+        <p>Black scoreboard, home score in cyan and away in red, the clock in a gold-rimmed box. Events slide in as a
+          black ticker with a teal edge.</p>
+        <div class="matchbar">
+          <span class="score"><span>Lions</span><i class="h">1</i><i class="a">0</i><span>SNSS</span></span>
+          <span class="clock">21:00</span>
+          <span class="ticker">Goal</span>
+        </div>
+
+        <h3>Player profile stats</h3>
+        <p>Each sub-stat sits on the honeycomb ground <code>#49422C</code>, its value coloured by band. The game's exact
+          cut-offs aren't in the client, so treat the bands as observed: low below 60, mid in the low 70s, high from 78.</p>
+        <div class="stattiles">
+          <div class="stattile st-mid"><b>72</b><span>Pace</span></div>
+          <div class="stattile st-high"><b>79</b><span>Dribbling</span></div>
+          <div class="stattile st-mid"><b>73</b><span>Shooting</span></div>
+          <div class="stattile st-low"><b>49</b><span>Defense</span></div>
+          <div class="stattile st-high"><b>78</b><span>Passing</span></div>
+          <div class="stattile st-low"><b>59</b><span>Physical</span></div>
+        </div>
+
+        <h3>Hub tiles</h3>
+        <p>The home screen's pattern. An art area, then a black label band with the mode's name in Bebas and a gold chevron
+          square at the right. Where the game paints illustration, we paint the mode's own gradient. Red badges mark
+          something to claim.</p>
+        <div class="hubtiles">
+          <div class="hub"><div class="hub__art hub__art--league"><span class="hub__note">League start: 4H 49M</span></div>
+            <div class="hub__band"><b>League</b><span class="chev"><svg aria-hidden="true"><use href="#i-chev"/></svg></span></div></div>
+          <div class="hub"><div class="hub__art hub__art--quick"><span class="badge">!</span><span class="hub__note">0/1 Wins</span></div>
+            <div class="hub__band"><b>Quick Match</b><span class="chev"><svg aria-hidden="true"><use href="#i-chev"/></svg></span></div></div>
+          <div class="hub"><div class="hub__art hub__art--wl"><span class="hub__note" style="color:#C6F704">Unlocks at tier 2</span></div>
+            <div class="hub__band"><b>Weekend League</b><span class="chev"><svg aria-hidden="true"><use href="#i-chev"/></svg></span></div></div>
+          <div class="hub"><div class="hub__art hub__art--challenge"><span class="hub__note">Coming soon</span></div>
+            <div class="hub__band"><b>Challenge Match</b><span class="chev"><svg aria-hidden="true"><use href="#i-chev"/></svg></span></div></div>
+        </div>
+
         <h3>Status badges and mode tiles</h3>
         <div class="badges" style="margin-bottom:18px">
           <span class="skew" style="background:#3BDD9E"><span>New</span></span>
@@ -1337,6 +1415,7 @@ footer b { color: var(--ink-2); font-weight: 700; }
           <div class="mtile mtile--league"><span>1 match a day</span><b>League</b></div>
           <div class="mtile mtile--quick"><span>1 energy a match</span><b>Quick Match</b></div>
           <div class="mtile mtile--wl"><span>15 games · rank 1 at 55 points</span><b>Weekend League</b></div>
+          <div class="mtile mtile--challenge"><span>100 a win · 30 a loss</span><b>Challenge Match</b></div>
         </div>
 
         <h3>Requirement rows</h3>
@@ -1572,7 +1651,8 @@ footer b { color: var(--ink-2); font-weight: 700; }
             <tr><td>Squad builder</td><td>Pitch view of shirt cards, Chemistry pips per card, the team OVR hex, ATT/MID/DEF chips, the CHM badge. Position-fit glows only where the fit is known.</td></tr>
             <tr><td>Packs</td><td>Pack tiles with the slash-band banner. Odds in a dense list. Rarity chips for each tier.</td></tr>
             <tr><td>Weekend League planner</td><td>The lime mode tile, a gold progress meter for QP, the 4-points-a-win table in a dense list, a chalk figure for "what rank 1 needs".</td></tr>
-            <tr><td>Event calendar</td><td>Mode tiles for League, Quick Match and Weekend League. Skewed status badges for New, Limited and Claimable.</td></tr>
+            <tr><td>Home and event calendar</td><td>Hub tiles for League, Quick Match, Weekend League and Challenge Match, each in its mode colour, with red badges for anything claimable. Skewed status badges for New, Limited and Claimable.</td></tr>
+            <tr><td>Player pages</td><td>Shirt card on the left, the six sub-stats as honeycomb-ground tiles with banded values, the position pitch on the right.</td></tr>
             <tr><td>Blog</td><td>Hub tiles with the brush corner, a band label, a gold hairline. Chalk figures inside articles. Never a screenshot.</td></tr>
             <tr><td>Help overlay</td><td>White tooltip boxes with dark text. The tour keeps the dark scrim.</td></tr>
           </tbody>
@@ -1604,8 +1684,9 @@ footer b { color: var(--ink-2); font-weight: 700; }
 
     <footer>
       <div class="wrap">
-        <p style="margin:0;max-width:78ch">24 screenshots were collected. Rendered values were measured from the
-          native-resolution store set (2796×1290 and 2732×2048) by region sampling and median-cut clustering. Authored values were read from the Ultimate Football Manager 27.4.0 Android build: sprite
+        <p style="margin:0;max-width:78ch">265 unique screenshots were collected, 91 of them from UFM 27. Rendered values
+          were measured from the native-resolution store set (2796×1290 and 2732×2048) and from UFM 27 device captures at
+          2400×1080, by region sampling and median-cut clustering. Authored values were read from the Ultimate Football Manager 27.4.0 Android build: sprite
           gradients, rarity chips, the card outline, font names and TextMeshPro materials. Font substitutes were chosen by
           glyph overlap. <b>Ultimate Football Manager 27</b> is a product of Gamebasics BV, part of Miniclip. UFMWiz is a
           third-party companion and claims no association with it.</p>

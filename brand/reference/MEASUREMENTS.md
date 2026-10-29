@@ -8,7 +8,7 @@ Raw values behind `UFMWiz_Visual_System.html` and `ufmwiz-tokens.css`. Taken on 
 |---|---|---|
 | Store screenshots, native resolution (8 × 2796×1290 iPhone, 8 × 2732×2048 iPad, 15 Google Play) | Values as rendered on screen | Region sampling (median of a box; top-decile luminance for text) and median-cut clustering (24 colours per image) |
 | Android build 27.4.0 (`com.gamebasics.ufm`, versionCode 1792503486), Google Play-signed | Values as authored | Unity Addressables bundles read with UnityPy: 2,400 sprites from 29 atlases, 52 rarity frames, 4 fonts, TextMeshPro materials |
-| Additional screenshots (archives, localised sets, YouTube frames) | Coverage of screens the store set doesn't show | See `SCREENSHOTS.md` |
+| 241 additional screenshots (Malavida device captures, BlueStacks, Uptodown, gamebasics.nl, YouTube frames) | Coverage of screens the store set doesn't show; UFM 26 and UFM 25 history | See `SCREENSHOTS.md` |
 
 The extracted sprites, fonts and frames were used only to take measurements. None of them are in this repository.
 
@@ -168,6 +168,25 @@ Rendered: active tab `#F3D87F` with text `#444230`; inactive tab `#54452E` with 
 | `RobotoCondensed-Bold SDF Material` | white, dilate 0.02 | — | black α 0.25, offset Y −0.2, dilate 0.03, softness 0.2 |
 | `RobotoCondensed-Bold SDF Material_Pack` | white | black α 0.7, width 0.02 | black α 0.25, offset Y −0.97, softness 0.2 |
 | `Downstairs Atlas Material` | white, dilate 0.02 | black α 1, width 0.048 | black α 1, offset Y −0.167, dilate 0.106 |
+
+## UFM 27 device captures (2400×1080, Malavida)
+
+Real device screenshots of the new UI, used to check the store-art values and to measure screens the store set doesn't show.
+
+| Element | Value |
+|---|---|
+| Nav rail ground | `#0E0F0A` (matches `#0E0E0B`) |
+| Nav rail active item | `#49412B` tile, white icon and label |
+| Notification badge | red disc with white "!" (sampled `#A02F1F` at JPEG edge; use the red ramp) |
+| Hub tile label band | `#030200`, label `#FFFFFF` Bebas, chevron square `#D0AB50` |
+| Hub timer text | `#C3B939` ("League start: 4H 49M") |
+| Weekend League tile | lime `#84A65B`, logo `#A5D36A` |
+| Challenge Match tile | `#191E1C` with cyan accent `#02D5E2` |
+| Scoreboard | home score box `#02C6D8`, away `#DE3132`, clock box black with gold rim |
+| Event ticker | black band, left edge `#038390` |
+| Player profile stat tile | `#49422C`; values 49/59 `#D23C50`, 72/73 `#F07D27`, 78/79 `#81AD5A` |
+| Formation picker, selected | `#FCDF6E` |
+| Tooltip | white box, dark text ("Welcome to UFM / Start here") |
 
 ## Naming note
 

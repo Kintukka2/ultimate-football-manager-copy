@@ -128,6 +128,20 @@
   --ufm-mode-league: linear-gradient(180deg, #4C3E26 0%, #75613B 50%, #A08451 100%);
   --ufm-mode-quick:  linear-gradient(180deg, #291839 0%, #3F2959 50%, #56397A 100%);
   --ufm-mode-wl:     linear-gradient(180deg, #79861B 0%, #475316 50%, #2A3611 100%);
+  --ufm-mode-challenge: #02D5E2;  /* corner accent on #191E1C */
+
+  /* ---- match view, profile, hub (UFM 27 device captures) ---- */
+  --ufm-nav-on:      #49412B;  /* active nav rail item */
+  --ufm-score-home:  #02C6D8;
+  --ufm-score-away:  #DE3132;
+  --ufm-ticker-edge: #038390;
+  --ufm-stat-low:    #D23C50;  /* observed at 49, 59 */
+  --ufm-stat-mid:    #F07D27;  /* observed at 72, 73 */
+  --ufm-stat-high:   #81AD5A;  /* observed at 78, 79 */
+  --ufm-stat-tile:   #49422C;
+  --ufm-hub-band:    #030200;
+  --ufm-chevron:     #D0AB50;
+  --ufm-pick-on:     #FCDF6E;  /* selected formation */
 
   /* ---- card metals (top → bottom) and rims ---- */
   --ufm-card-bronze: linear-gradient(180deg, #C18A60 0%, #E6B58C 20%, #E6B58C 35%, #CD986E 50%, #C69066 65%, #B3794F 80%, #9E5A35 100%);
