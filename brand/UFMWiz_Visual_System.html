@@ -1,0 +1,1646 @@
+<title>UFMWiz Visual System</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,400;0,500;0,700;1,700&family=Sofia+Sans+Extra+Condensed:wght@600;700;800&display=swap">
+
+<style>
+/* ============================================================
+   UFMWiz Visual System
+   Derived from 24 screenshots of Ultimate Football Manager 27 and from
+   the values authored into the 27.4.0 build: 2,400 UI sprites, 52 rarity
+   frames, 4 shipped fonts and their TextMeshPro materials.
+   Single-theme by commitment, like FHCWiz: UFM has no light mode.
+   Every colour is painted explicitly so the page holds on either host ground.
+   Layout: the game's left rail, gold-hairline header bands, warm-black panels.
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+
+  /* grounds — warm olive-umber, never neutral */
+  --void:      #000000;   /* panel bodies, list bodies */
+  --ground:    #060606;   /* page body behind brackets */
+  --ground-2:  #0E0E0B;   /* HUD bar, side panels, nav rail */
+  --ground-3:  #171813;   /* rendered page ground outside panels */
+  --band:      #22221B;   /* header band, list header, input, footer */
+  --tile:      #191815;   /* hub tile body */
+  --row:       #3C3521;   /* dense list row */
+  --row-2:     #423C27;   /* dense list row, light */
+  --row-rim:   #564E36;   /* row edge */
+  --row-on:    #746A4C;   /* selected row */
+  --row-on-rim:#867D61;   /* selected row edge */
+
+  /* gold — identity, elevation, primary commit */
+  --gd-deep:   #533C19;
+  --gd-body:   #8A7333;
+  --gd-mid:    #C2A473;
+  --gd-rim:    #E9D38D;
+  --gd-peak:   #F8E9B0;
+  --gd-tab:    #F3D87F;   /* selected tab fill, as rendered */
+
+  /* olive — secondary, unselected, cancel */
+  --ol-deep:   #3C3521;
+  --ol-body:   #423624;
+  --ol-mid:    #4D3F2A;
+  --ol-rim:    #574830;
+  --ol-peak:   #887766;
+
+  /* cyan — guidance, tap focus, chemistry */
+  --cy-deep:   #0E4543;
+  --cy-body:   #038390;
+  --cy-mid:    #00C5D5;
+  --cy-rim:    #00DFED;
+  --cy-peak:   #2BF4FA;
+
+  /* lime — gain, speed-up, Weekend League */
+  --lm-deep:   #2A3611;
+  --lm-body:   #475316;
+  --lm-mid:    #97BF43;
+  --lm-rim:    #BFE557;
+  --lm-peak:   #C6F704;
+
+  /* red — destructive, loss, gems */
+  --rd-deep:   #5A0A06;
+  --rd-body:   #A00000;
+  --rd-mid:    #D42422;
+  --rd-rim:    #F62D2B;
+  --rd-peak:   #FB6160;
+
+  /* purple — Quick Match, energy */
+  --pu-deep:   #291839;
+  --pu-body:   #3F2959;
+  --pu-mid:    #5A2D9C;
+  --pu-rim:    #793BC5;
+  --pu-peak:   #C27DF0;
+
+  /* grey — disabled; the only neutral in the game */
+  --dis-body:  #3E3E3E;
+  --dis-mid:   #494949;
+  --dis-rim:   #727272;
+  --dis-peak:  #C1C2C2;
+
+  /* text */
+  --ink:       #FFFFFF;
+  --ink-2:     #CECBCA;   /* secondary label ("Inactive") */
+  --ink-3:     #867D61;   /* muted, warm */
+  --ink-gold:  #E1CA94;   /* every header subtitle, inactive tab label */
+  --ink-label: #FCE684;   /* stat labels, timers */
+  --ink-on-gold:#444230;  /* text on a gold fill */
+  --ink-card:  #362614;   /* text on card metal */
+
+  /* status (text only) */
+  --pos:       #50F99D;   /* Positives, met */
+  --sug:       #FEF750;   /* Suggestions */
+
+  /* type */
+  --display:   'Bebas Neue', 'Bebas Neue Pro', 'Arial Narrow', Impact, sans-serif;
+  --mixed:     'Sofia Sans Extra Condensed', 'Bebas Neue Pro', 'Arial Narrow', sans-serif;
+  --ui:        'Roboto Condensed', 'Arial Narrow', Roboto, sans-serif;
+
+  --rail-w: 176px;
+  --maxw: 1120px;
+
+  /* the gold foil — eleven stops measured across button_large_yellow */
+  --foil: linear-gradient(100deg,
+    #DBC59E 0%, #CBA76D 10%, #C69429 20%, #D6B736 30%, #ECDD6C 40%,
+    #FEFBCA 50%, #F9F4B2 60%, #E5D04A 70%, #D1AE31 80%, #BE8826 90%, #C9A971 100%);
+
+  /* the TextMeshPro default underlay: black 25%, offset down, soft */
+  --tmp-shadow: 0 .06em .08em rgba(0,0,0,.25);
+
+  /* textures — inline, no files */
+  --streak: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160' preserveAspectRatio='xMinYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%239C6F2D'/%3E%3Cstop offset='.55' stop-color='%23EEDCA8'/%3E%3Cstop offset='1' stop-color='%23C2A473'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='url(%23g)'%3E%3Cpolygon points='37,169 68,110 63,107 29,164'/%3E%3Cpolygon points='74,111 106,50 101,46 65,106'/%3E%3Cpolygon points='109,50 137,1 131,-3 104,46'/%3E%3Cpolygon points='-22,170 32,70 29,69 -32,164'/%3E%3Cpolygon points='36,72 86,-16 83,-18 29,68'/%3E%3Cpolygon points='-26,168 29,75 26,73 -31,165'/%3E%3Cpolygon points='34,72 81,-10 79,-11 29,68'/%3E%3Cpolygon points='190,167 202,145 201,144 187,165'/%3E%3Cpolygon points='204,145 223,112 221,110 201,143'/%3E%3Cpolygon points='176,166 189,145 188,145 175,166'/%3E%3Cpolygon points='191,141 208,115 207,114 191,141'/%3E%3Cpolygon points='210,112 224,89 223,89 209,112'/%3E%3Cpolygon points='112,167 125,145 123,144 111,166'/%3E%3Cpolygon points='126,145 147,109 147,108 124,143'/%3E%3Cpolygon points='151,106 163,83 162,83 148,105'/%3E%3Cpolygon points='-7,169 39,89 31,85 -14,164'/%3E%3Cpolygon points='45,91 74,33 68,29 34,84'/%3E%3Cpolygon points='187,167 203,140 202,140 186,166'/%3E%3Cpolygon points='204,140 211,127 210,126 202,139'/%3E%3Cpolygon points='213,126 224,107 222,106 211,125'/%3E%3Cpolygon points='63,167 86,127 84,126 59,165'/%3E%3Cpolygon points='88,126 113,84 110,83 85,124'/%3E%3Cpolygon points='115,83 165,-1 164,-2 112,81'/%3E%3Cpolygon points='-17,170 3,124 -0,122 -28,163'/%3E%3Cpolygon points='11,121 45,56 42,55 3,116'/%3E%3Cpolygon points='53,54 70,18 64,15 45,49'/%3E%3Cpolygon points='74,168 91,135 89,133 69,165'/%3E%3Cpolygon points='96,133 109,106 106,104 91,130'/%3E%3Cpolygon points='115,105 130,74 124,71 108,101'/%3E%3Cpolygon points='84,167 103,133 102,133 81,165'/%3E%3Cpolygon points='110,130 143,69 142,68 104,126'/%3E%3Cpolygon points='149,67 177,16 175,15 144,63'/%3E%3Cpolygon points='-21,169 36,69 31,66 -30,164'/%3E%3Cpolygon points='43,63 102,-37 97,-41 37,59'/%3E%3Cpolygon points='149,168 173,125 170,123 145,165'/%3E%3Cpolygon points='177,124 195,89 194,89 172,121'/%3E%3Cpolygon points='190,168 203,143 201,141 186,165'/%3E%3Cpolygon points='205,141 226,106 224,104 203,140'/%3E%3Cpolygon points='69,167 104,108 102,107 66,165'/%3E%3Cpolygon points='108,103 131,65 130,64 107,102'/%3E%3Cpolygon points='-8,169 30,100 23,96 -16,164'/%3E%3Cpolygon points='35,99 73,30 69,27 28,95'/%3E%3Cpolygon points='162,167 183,130 183,130 160,165'/%3E%3Cpolygon points='186,129 212,84 211,83 183,127'/%3E%3Cpolygon points='1,168 26,122 24,121 -3,165'/%3E%3Cpolygon points='31,119 64,63 60,60 27,116'/%3E%3Cpolygon points='70,56 101,2 100,1 66,54'/%3E%3Cpolygon points='-24,169 11,104 9,103 -32,164'/%3E%3Cpolygon points='14,104 58,30 53,27 10,101'/%3E%3Cpolygon points='61,28 91,-23 87,-26 57,26'/%3E%3Cpolygon points='79,169 121,94 119,92 72,164'/%3E%3Cpolygon points='125,92 145,56 142,53 121,89'/%3E%3Cpolygon points='-13,168 30,94 27,92 -18,165'/%3E%3Cpolygon points='36,89 68,33 65,30 31,86'/%3E%3Cpolygon points='168,167 185,137 184,137 166,166'/%3E%3Cpolygon points='187,136 206,104 205,103 185,135'/%3E%3Cpolygon points='36,167 80,94 78,93 33,165'/%3E%3Cpolygon points='85,89 111,45 108,43 82,87'/%3E%3Cpolygon points='54,168 103,84 101,83 50,165'/%3E%3Cpolygon points='105,85 138,28 136,26 102,82'/%3E%3Cpolygon points='-28,167 34,65 33,64 -30,166'/%3E%3Cpolygon points='40,57 72,5 71,4 39,56'/%3E%3C/g%3E%3C/svg%3E");
+  --honey:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15.59' height='27.00' viewBox='0 0 15.59 27.00'%3E%3Cpath d='M7.79 0.00 L15.59 4.50 L15.59 13.50 L7.79 18.00 L-0.00 13.50 L0.00 4.50ZM0.00 13.50 L7.79 18.00 L7.79 27.00 L0.00 31.50 L-7.79 27.00 L-7.79 18.00ZM15.59 13.50 L23.38 18.00 L23.38 27.00 L15.59 31.50 L7.79 27.00 L7.79 18.00ZM7.79 27.00 L15.59 31.50 L15.59 40.50 L7.79 45.00 L-0.00 40.50 L0.00 31.50Z' fill='none' stroke='%23C2A473' stroke-opacity='.38' stroke-width='1.1'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground-2);
+  background-image: radial-gradient(120% 70% at 50% -10%, rgba(233,211,141,.07), rgba(0,0,0,0) 60%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   SHELL — the game's left rail
+   ============================================================ */
+.shell { display: flex; align-items: flex-start; min-height: 100vh; }
+.rail {
+  position: sticky; top: env(safe-area-inset-top, 0px);
+  flex: 0 0 var(--rail-w);
+  align-self: stretch; min-height: 100vh;
+  background: var(--ground-2);
+  border-right: 1px solid rgba(233,211,141,.35);
+  padding-block: 18px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.rail__mark { padding: 0 14px 16px; line-height: 1.05; }
+.rail__mark span { display: block; font-family: var(--ui); font-weight: 700; font-size: 11px;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin-top: 7px; }
+.rail__wm {
+  display: inline-block; font-family: var(--display); font-weight: 400;
+  font-size: 24px; letter-spacing: .03em; color: var(--ink);
+  border-bottom: 3px solid var(--gd-rim); padding-bottom: 2px;
+}
+.rail__wm i { font-style: normal; color: var(--ink-3); }
+.rail a {
+  display: block;
+  font-family: var(--display); font-size: 19px; letter-spacing: .06em;
+  color: var(--ink-gold); text-decoration: none;
+  padding: 8px 14px 7px;
+}
+.rail a:hover { color: var(--ink); background: rgba(233,211,141,.06); }
+.rail a.is-active { color: var(--ink-on-gold); background: var(--gd-tab); }
+.rail a:focus-visible { outline: 2px solid var(--cy-rim); outline-offset: -2px; }
+
+.main { flex: 1 1 auto; min-width: 0; }
+.wrap {
+  max-width: var(--maxw); margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+
+/* ============================================================
+   MASTHEAD — black, gold brush sweep, gold hairline
+   ============================================================ */
+.masthead { position: relative; background: var(--void); border-bottom: 1px solid var(--gd-rim); overflow: hidden; }
+.masthead::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--streak) no-repeat left bottom / 560px 373px;
+  transform: scaleX(-1); opacity: .9; pointer-events: none;
+}
+.masthead__body { position: relative; z-index: 1; padding-block: 64px 40px; }
+.masthead h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(48px, 8.6vw, 104px);
+  line-height: .9; letter-spacing: .01em;
+  margin: 0; text-wrap: balance; color: var(--ink);
+  text-shadow: var(--tmp-shadow);
+}
+.masthead h1 em {
+  font-style: normal;
+  background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.masthead p { margin: 16px 0 0; max-width: 62ch; color: var(--ink-2); font-size: 16.5px; font-weight: 500; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; list-style: none; padding: 0; }
+.stats li {
+  background: var(--ground-2); border: 1px solid rgba(233,211,141,.4);
+  padding: 6px 13px 5px;
+  font-family: var(--display); font-size: 17px; letter-spacing: .06em; color: var(--ink-gold);
+}
+.stats b { font-weight: 400; color: var(--ink); margin-right: 7px; font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   SECTION HEADER — the game's band, exactly:
+   warm band · gold hairline · brush corner · white caps + gold subtitle
+   ============================================================ */
+section { padding-block: 0 8px; }
+.sec-head {
+  position: relative; overflow: hidden;
+  background: var(--band);
+  border-block: 1px solid var(--gd-rim);
+  padding-block: 18px 15px;
+  margin-top: 52px;
+}
+.sec-head::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 150px; height: 100px;
+  background: var(--streak) no-repeat left bottom / 150px 100px;
+  transform: scaleY(-1); opacity: .45; pointer-events: none;
+}
+section:first-of-type .sec-head { margin-top: 0; }
+.sec-head__inner { position: relative; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.sec-head h2 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(30px, 4.6vw, 44px); line-height: 1;
+  letter-spacing: .02em; margin: 0; color: var(--ink);
+  text-shadow: var(--tmp-shadow);
+}
+.sec-head p {
+  margin: 0; font-family: var(--mixed); font-weight: 700;
+  font-size: clamp(19px, 2.5vw, 24px); line-height: 1.1; color: var(--ink-gold);
+}
+.sec-body { padding-block: 28px 8px; }
+
+h3 {
+  font-family: var(--display); font-weight: 400; font-size: 24px;
+  letter-spacing: .05em; color: var(--ink-gold); margin: 38px 0 12px;
+}
+h3:first-child { margin-top: 0; }
+p { max-width: 68ch; }
+.lede { color: var(--ink-2); font-size: 16.5px; font-weight: 500; }
+strong { font-weight: 700; color: var(--ink); }
+code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: .86em; background: var(--void);
+  border: 1px solid #2a271c; border-radius: 2px;
+  padding: 1px 5px; color: var(--gd-peak);
+}
+.note {
+  border: 1px solid rgba(233,211,141,.45); border-left: 3px solid var(--gd-rim);
+  background: var(--void);
+  padding: 13px 16px; margin: 20px 0; max-width: 74ch;
+}
+.note p { margin: 0; }
+
+/* ============================================================
+   COLOUR
+   ============================================================ */
+.ramp { margin-bottom: 22px; }
+.ramp__label { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.ramp__name { font-family: var(--display); font-size: 22px; letter-spacing: .06em; }
+.ramp__role { color: var(--ink-2); font-size: 14.5px; }
+.ramp__bar { display: flex; border: 1px solid #000; overflow: hidden; border-radius: 2px; }
+.sw { flex: 1 1 0; min-width: 0; padding: 18px 8px 9px; }
+.sw code { display: block; background: none; border: 0; padding: 0; font-size: 10.5px; letter-spacing: .02em; }
+.sw.on-dark code { color: rgba(255,255,255,.92); text-shadow: 0 1px 2px rgba(0,0,0,.8); }
+.sw.on-light code { color: rgba(0,0,0,.78); }
+
+.grounds { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 2px; }
+.grounds div { padding: 30px 10px 11px; border: 1px solid #000; }
+.grounds code { background: none; border: 0; padding: 0; font-size: 11px; color: var(--ink-2); }
+.grounds span { display: block; font-family: var(--ui); font-size: 11.5px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-top: 3px; }
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.swatch { display: flex; align-items: center; gap: 10px; background: var(--void); border: 1px solid #1d1b14; padding: 9px 11px; }
+.swatch i { flex: none; width: 26px; height: 26px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.swatch b { display: block; font-size: 13.5px; line-height: 1.2; }
+.swatch code { background: none; border: 0; padding: 0; font-size: 11px; color: var(--ink-2); }
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+.spec { border: 1px solid #24211a; background: var(--void); padding: 20px 22px; margin-bottom: 14px; }
+.spec__meta {
+  font-family: var(--ui); font-weight: 700; font-size: 12px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+  margin-bottom: 12px; display: flex; gap: 12px; flex-wrap: wrap;
+}
+.spec__meta b { color: var(--gd-rim); font-weight: 700; }
+.spec--display p { font-family: var(--display); font-size: clamp(40px, 7.2vw, 72px);
+  line-height: .95; margin: 0; letter-spacing: .01em; text-shadow: var(--tmp-shadow); }
+.spec--mixed p { font-family: var(--mixed); font-weight: 700; font-size: clamp(24px, 3.8vw, 34px);
+  line-height: 1.05; margin: 0; color: var(--ink-gold); }
+.spec--ui p { font-family: var(--ui); font-weight: 700; font-size: 18px; margin: 0; max-width: 62ch; }
+.spec--num p { font-family: var(--display); font-size: clamp(44px, 8vw, 76px); margin: 0;
+  font-variant-numeric: tabular-nums; line-height: .95; }
+
+.tbl, .scale { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 540px; }
+.tbl th, .tbl td, .scale th, .scale td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid #24211a; vertical-align: top; }
+.tbl th, .scale th {
+  font-family: var(--ui); font-weight: 700; font-size: 12px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-gold);
+  border-bottom-color: rgba(233,211,141,.35);
+}
+.tbl td:first-child { font-weight: 700; white-space: nowrap; padding-right: 22px; }
+.tbl td:last-child, .scale td:last-child { color: var(--ink-2); }
+.tblwrap { overflow-x: auto; }
+
+/* ============================================================
+   TEXTURE demos
+   ============================================================ */
+.tex { height: 96px; border: 1px solid #000; }
+.tex--hairline { background: var(--void); border: 1px solid var(--gd-rim); }
+.tex--streak { background: var(--band) var(--streak) no-repeat left bottom / 240px 160px; }
+.tex--foil { background: var(--foil); }
+.tex--honey { background-color: #49422C; background-image: var(--honey); }
+.tex--slash {
+  background:
+    linear-gradient(-8deg, transparent 0 30%, #C8A251 30% 34%, transparent 34% 64%, #C8A251 64% 67%, transparent 67%),
+    var(--void);
+}
+.tex--skew { display: flex; gap: 14px; align-items: center; padding: 18px; background: var(--ground-2); }
+.tex--skew span { width: 120px; height: 40px; transform: skewX(-14deg); background: var(--void); border: 1px solid rgba(233,211,141,.25); }
+.texrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.texrow figure { margin: 0; }
+.texrow figcaption { margin-top: 8px; font-size: 13.5px; color: var(--ink-2); }
+.texrow figcaption b { display: block; font-family: var(--display); font-weight: 400; font-size: 18px; letter-spacing: .05em; color: var(--ink-gold); }
+
+/* ============================================================
+   BUTTONS — flat metal with a soft vertical fall-off. No gloss band.
+   ============================================================ */
+.btn {
+  --b-top: var(--gd-peak); --b-mid: var(--gd-tab); --b-bot: #D7B664; --b-ink: var(--ink-on-gold);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 4px 26px 0;
+  font-family: var(--display); font-weight: 400; font-size: 23px;
+  letter-spacing: .04em; color: var(--b-ink);
+  border: 0; border-radius: 5px;
+  background: linear-gradient(180deg, var(--b-top) 0%, var(--b-mid) 50%, var(--b-bot) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -2px 0 rgba(0,0,0,.18), 0 2px 0 rgba(0,0,0,.55);
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.btn--foil { background: var(--foil); --b-ink: #3B3420; }
+.btn--foil::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: var(--streak) no-repeat left bottom / 80px 53px; opacity: .35; mix-blend-mode: multiply;
+}
+.btn--olive  { --b-top: #574830; --b-mid: #4D3F2A; --b-bot: #423624; --b-ink: var(--ink-gold); }
+.btn--lime   { --b-top: #BFE557; --b-mid: #ADD34D; --b-bot: #97BF43; --b-ink: #1F2A07; }
+.btn--cyan   { --b-top: #00EAF7; --b-mid: #00DBE9; --b-bot: #00C5D5; --b-ink: #032B30; }
+.btn--red    { --b-top: #F62D2B; --b-mid: #E82927; --b-bot: #D42422; --b-ink: #FFFFFF; }
+.btn--purple { --b-top: #793BC5; --b-mid: #6934B2; --b-bot: #5A2D9C; --b-ink: #FFFFFF; }
+.btn--off    { --b-top: #5B5B5B; --b-mid: #4E4E4E; --b-bot: #444444; --b-ink: #C1C2C2; cursor: not-allowed; }
+.btn--off:hover { filter: none; }
+.btn svg { width: 20px; height: 20px; }
+
+.btnrow { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.btncase { display: flex; flex-direction: column; gap: 7px; align-items: flex-start; }
+.btncase small { font-family: var(--ui); font-weight: 700; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+
+/* tabs — selection is a fill */
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tab {
+  min-width: 132px; height: 46px; padding: 4px 18px 0;
+  font-family: var(--display); font-size: 21px; letter-spacing: .05em;
+  border: 0; border-radius: 3px; cursor: pointer;
+  color: var(--ink-gold);
+  background: linear-gradient(180deg, #574830, #4D3F2A 50%, #423624);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 2px 0 rgba(0,0,0,.5);
+}
+.tab.is-on { color: var(--ink-on-gold); background: linear-gradient(180deg, #F8DD84, #EACC75 50%, #D7B664); }
+.tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* ============================================================
+   CARD — the shirt silhouette, measured from the 640×854 frame
+   ============================================================ */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 16px; }
+.ucard {
+  --m: linear-gradient(180deg, #CDB96D 0%, #E9DF8F 20%, #EADF90 35%, #DDC674 50%, #D8BE67 65%, #C4A252 80%, #98763A 100%);
+  --rim: #FAF9BB; --cink: var(--ink-card);
+  position: relative; aspect-ratio: 640 / 854; max-width: 100%;
+  color: var(--cink);
+  clip-path: polygon(50% 5.3%, 55% 3%, 60% 1.2%, 65% 1.5%, 70% 2.1%, 75% 3%, 80% 4.2%, 85% 5.6%, 90% 7.5%, 95% 9.6%, 98% 11.4%, 98.4% 20%, 98.4% 72%, 95% 75.4%, 94.1% 80%, 93.9% 85%, 92.2% 88%, 90% 90%, 86.6% 92%, 75.6% 94%, 64.8% 96%, 54.4% 98%, 50% 98.7%, 45.6% 98%, 34.4% 96%, 24.1% 94%, 13.4% 92%, 9.5% 90%, 7.7% 88%, 6.1% 85%, 5.9% 80%, 5% 75.4%, 1.6% 72%, 1.6% 20%, 2% 11.4%, 5% 9.6%, 10% 7.5%, 15% 5.6%, 20% 4.2%, 25% 3%, 30% 2.1%, 35% 1.5%, 40% 1.2%, 45% 3%);
+  background: var(--rim);
+}
+.ucard__face {
+  position: absolute; inset: 1.6%;
+  clip-path: inherit;
+  background: var(--m);
+}
+.ucard__face::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(118deg, rgba(255,255,255,.28) 0 16%, rgba(255,255,255,0) 34%);
+}
+.ucard__ovr { position: absolute; left: 11%; top: 10%; line-height: .86; }
+.ucard__ovr b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 3.2vw, 44px); }
+.ucard__ovr span { font-family: var(--display); font-size: clamp(17px, 1.6vw, 21px); letter-spacing: .04em; }
+.ucard__name {
+  position: absolute; left: 6%; right: 6%; top: 63%;
+  text-align: center; font-family: var(--display); font-size: clamp(19px, 1.9vw, 24px); letter-spacing: .03em; line-height: 1;
+}
+.ucard__stats {
+  position: absolute; left: 14%; right: 14%; top: 72.5%;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 10%;
+  font-family: var(--ui); font-weight: 700; font-size: clamp(11px, 1.05vw, 13px); line-height: 1.18;
+  font-variant-numeric: tabular-nums;
+}
+.ucard__stats span { display: flex; justify-content: space-between; }
+.ucard__stats em { font-style: normal; opacity: .78; }
+
+.ucard--bronze { --m: linear-gradient(180deg, #C18A60 0%, #E6B58C 20%, #E6B58C 35%, #CD986E 50%, #C69066 65%, #B3794F 80%, #9E5A35 100%); --rim: #FFD6BD; }
+.ucard--silver { --m: linear-gradient(180deg, #9DAFBA 0%, #C3D4DD 20%, #C3D4DD 35%, #ACBDC8 50%, #A4B5C0 65%, #8A9BA6 80%, #5F727D 100%); --rim: #E2EFF7; }
+.ucard--rare   { --m: linear-gradient(180deg, #C8A958 0%, #E3C970 20%, #EBD27A 35%, #E4C76F 50%, #DAB862 65%, #C8A251 80%, #AE853F 100%); --rim: transparent; background: var(--foil); }
+.ucard--rare .ucard__face { inset: 3.4%; box-shadow: inset 0 0 0 2px rgba(126,82,35,.75); }
+/* New Season — the UFM 27 base design: black body, gold brush across the shoulder */
+.ucard--season { --m: linear-gradient(180deg, #343434 0%, #323030 35%, #222021 60%, #0D0B0B 85%, #42301C 100%); --rim: #FEF9E3; --cink: #FFFFFF; }
+.ucard--season .ucard__face::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: var(--streak) no-repeat left bottom / 100% 42%; transform: scaleY(-1); opacity: .9;
+}
+.ucard--season .ucard__ovr, .ucard--season .ucard__name, .ucard--season .ucard__stats { z-index: 1; }
+.ucard--special { --m: linear-gradient(165deg, #6E36B8 0%, #3B1A6B 45%, #1B0A36 100%); --rim: #B39EE9; --cink: #FFFFFF; }
+.ucard--empty { --m: linear-gradient(170deg, #1A1912 0%, #0E0E0B 60%, #080806 100%); --rim: #2A281D; }
+.ucard--empty .ucard__face { display: grid; place-items: center; align-content: center; gap: 10px; }
+.ucard--empty .ucard__face::before { background: none; }
+.ucard--empty svg { width: 34%; fill: #2C2A1F; }
+.ucard--empty em { font-style: normal; font-family: var(--display); font-size: 20px; letter-spacing: .05em; color: var(--ink-gold); }
+
+/* card state, outside the face: focus hex + fitness chip */
+.cardstate { position: relative; }
+.cardstate .focus, .cardstate .fit { position: absolute; right: -2%; z-index: 2; }
+.cardstate .focus { top: 4%; }
+.cardstate .fit { top: 17%; }
+
+/* ============================================================
+   HEXAGONS — pointy-top, 86×96 like the game's chips
+   ============================================================ */
+.hexchip {
+  --rim: #D8BA68; --fill: #E6D687; --chip-ink: #1B1609;
+  position: relative; display: inline-grid; place-items: center;
+  width: 46px; height: 51.4px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--rim);
+}
+.hexchip > i {
+  position: absolute; inset: 3px;
+  display: grid; place-items: center; padding-top: 3px;
+  clip-path: inherit; background: var(--fill);
+  font-style: normal; font-family: var(--display); font-size: 25px; color: var(--chip-ink);
+  font-variant-numeric: tabular-nums;
+}
+.hexchip--lg { width: 74px; height: 82.6px; }
+.hexchip--lg > i { inset: 4px; font-size: 34px; flex-direction: column; line-height: .9; }
+.hexchip--lg small { display: block; font-family: var(--ui); font-weight: 700; font-size: 11px; letter-spacing: .06em; }
+
+.focus { width: 34px; height: 38px; }
+.focus > i { inset: 2.5px; background: #0E0D0C; padding-top: 0; color: inherit; }
+.focus svg { width: 18px; height: 18px; }
+
+.fit {
+  display: inline-flex; align-items: center; gap: 2px;
+  font-family: var(--display); font-size: 16px; line-height: 1;
+  padding: 3px 5px 1px 3px; border-radius: 2px;
+}
+.fit svg { width: 10px; height: 13px; }
+.fit--good { background: #142A00; color: #76E055; }
+.fit--mid  { background: #281C00; color: #E09B03; }
+
+.focusrow, .chemrow, .tierrow, .strength { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; }
+.focusrow figure, .chemrow figure, .tierrow figure, .strength figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.focusrow figcaption, .chemrow figcaption, .tierrow figcaption, .strength figcaption {
+  font-family: var(--display); font-size: 17px; letter-spacing: .05em; color: var(--ink-gold); text-align: center; line-height: 1.05;
+}
+.focusrow figcaption code, .chemrow figcaption code, .tierrow figcaption code { display: block; background: none; border: 0; padding: 0; font-size: 10.5px; color: var(--ink-2); margin-top: 3px; }
+
+/* chemistry pips */
+.pips { display: flex; gap: 3px; }
+.pips i { width: 15px; height: 17px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: #1a1a1a; box-shadow: inset 0 0 0 1px #333; }
+.pips[data-l="1"] i:nth-child(-n+1) { background: #AFDE7E; }
+.pips[data-l="2"] i:nth-child(-n+2) { background: #46EF68; }
+.pips[data-l="3"] i { background: #1DFFE1; }
+
+/* team strength hex — the three metals */
+.str {
+  width: 96px; height: 108px; display: grid; place-items: center;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--m);
+}
+.str > i { width: 80%; height: 80%; display: grid; place-items: center; align-content: center;
+  clip-path: inherit; background: var(--f); font-style: normal; color: #1B1609; line-height: .88; text-align: center; }
+.str b { display: block; font-family: var(--display); font-weight: 400; font-size: 34px; }
+.str small { font-family: var(--ui); font-weight: 700; font-size: 11px; letter-spacing: .08em; }
+.str--bronze { --m: linear-gradient(170deg, #E06F36, #AB5524); --f: linear-gradient(170deg, #D7793F, #ED934D 50%, #AB5524); }
+.str--silver { --m: linear-gradient(170deg, #E2E2E3, #9A9A9A); --f: linear-gradient(170deg, #C9C9C9, #E2E2E3 50%, #9A9A9A); }
+.str--gold   { --m: linear-gradient(170deg, #F5CA71, #DAA848); --f: linear-gradient(170deg, #EDC76A, #FEE09B 50%, #DAA848); }
+
+/* tier roundel */
+.roundel {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; padding-top: 3px;
+  background: #0A0A08; box-shadow: inset 0 0 0 4px var(--t), inset 0 0 0 6px #000;
+  font-family: var(--display); font-size: 25px; color: var(--t);
+}
+
+/* ============================================================
+   HUD — skewed currency bars
+   ============================================================ */
+.hud { display: flex; flex-wrap: wrap; gap: 18px 26px; align-items: center; background: var(--ground-3); padding: 18px 20px; border: 1px solid #000; }
+.pill { position: relative; display: inline-flex; align-items: center; height: 40px; padding-left: 34px; }
+.pill__bar {
+  display: flex; align-items: center; justify-content: flex-end;
+  min-width: 132px; height: 34px; padding: 3px 14px 0 26px;
+  background: var(--ground-2); transform: skewX(-14deg);
+  border: 1px solid rgba(233,211,141,.14);
+}
+.pill__bar b { transform: skewX(14deg); font-family: var(--display); font-weight: 400; font-size: 26px; font-variant-numeric: tabular-nums; }
+.pill__icon { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 46px; height: 40px; }
+.pill__plus {
+  width: 34px; height: 34px; margin-left: 4px; display: grid; place-items: center;
+  background: linear-gradient(180deg, #E8CE8C, #E4C980 50%, #DFBF70); transform: skewX(-14deg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+.pill__plus svg { transform: skewX(14deg); width: 18px; height: 18px; }
+
+/* ============================================================
+   PANELS, ROWS, BARS
+   ============================================================ */
+.panel { background: var(--void); border: 1px solid var(--gd-rim); }
+.panel__head { position: relative; overflow: hidden; background: var(--band); border-bottom: 1px solid var(--gd-rim); padding: 12px 16px 9px;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.panel__head::before { content: ""; position: absolute; left: 0; top: 0; width: 90px; height: 60px;
+  background: var(--streak) no-repeat left bottom / 90px 60px; transform: scaleY(-1); opacity: .5; }
+.panel__head h4 { position: relative; margin: 0; font-family: var(--display); font-weight: 400; font-size: 28px; letter-spacing: .03em; }
+.panel__head span { position: relative; font-family: var(--mixed); font-weight: 700; font-size: 19px; color: var(--ink-gold); }
+.panel__body { padding: 20px 18px; }
+.box { background: var(--void); border: 2px solid var(--gd-rim); padding: 14px 16px; text-align: center; }
+.box b { display: block; font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: .04em; }
+.box span { font-family: var(--display); font-size: 24px; letter-spacing: .04em; color: #FDE57C; }
+
+.listwrap { overflow-x: auto; border: 1px solid #000; }
+.list { min-width: 560px; background: var(--void); }
+.list__head {
+  display: grid; grid-template-columns: 56px 1fr 70px 62px repeat(3, 56px);
+  align-items: end; background: var(--band); padding: 10px 12px 8px;
+  border-bottom: 1px solid rgba(233,211,141,.35);
+}
+.list__head span { font-family: var(--ui); font-weight: 700; font-size: 13.5px; color: var(--ink-gold); }
+.list__head span.n { text-align: center; }
+.list__rows { display: flex; flex-direction: column; gap: 4px; padding: 4px 0; }
+.lrow {
+  display: grid; grid-template-columns: 56px 1fr 70px 62px repeat(3, 56px);
+  align-items: center; min-height: 58px; padding-right: 12px;
+  background: var(--row); box-shadow: inset 0 1px 0 var(--row-rim);
+}
+.lrow.is-on { background: var(--row-on); box-shadow: inset 0 1px 0 var(--row-on-rim); }
+.lrow__crest { justify-self: center; width: 30px; height: 36px;
+  clip-path: polygon(0 0, 100% 0, 100% 58%, 50% 100%, 0 58%);
+  background: linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%); box-shadow: inset 0 0 0 2px rgba(0,0,0,.35); }
+.lrow__name { padding-left: 10px; line-height: 1.05; }
+.lrow__name small { display: block; font-family: var(--ui); font-weight: 700; font-size: 12.5px; color: var(--ink-gold); }
+.lrow__name b { font-family: var(--display); font-weight: 400; font-size: 23px; letter-spacing: .03em; }
+.lrow > .hexchip { justify-self: center; }
+.lrow__pos { text-align: center; font-family: var(--display); font-size: 22px; letter-spacing: .04em; }
+.lstat { text-align: center; line-height: 1; }
+.lstat span { display: block; font-family: var(--ui); font-weight: 700; font-size: 10.5px; letter-spacing: .08em; color: var(--ink-gold); }
+.lstat b { font-family: var(--ui); font-weight: 700; font-size: 17px; font-variant-numeric: tabular-nums; }
+
+.statbars { display: flex; flex-direction: column; gap: 12px; background: var(--void); padding: 16px 18px; border: 1px solid #000; max-width: 640px; }
+.sbar__lab { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--display); font-size: 20px; line-height: 1; margin-bottom: 4px; }
+.sbar__lab span { font-family: var(--mixed); font-weight: 700; font-size: 16px; color: var(--ink-label); }
+.sbar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sbar i { height: 7px; background: #494949; position: relative; }
+.sbar i::after { content: ""; position: absolute; top: 0; bottom: 0; width: var(--w); }
+.sbar i:first-child::after { right: 0; background: #038390; }
+.sbar i:last-child::after { left: 0; background: #A00000; }
+
+.feedback { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; max-width: 640px; }
+.fb { background: #3E3623; padding: 16px 18px; }
+.fb h5 { margin: 0 0 6px; font-family: var(--mixed); font-weight: 700; font-size: 24px; line-height: 1; }
+.fb p { margin: 0; font-weight: 700; color: var(--ink); }
+.fb--pos h5 { color: var(--pos); }
+.fb--sug h5 { color: var(--sug); }
+
+.badges { display: flex; flex-wrap: wrap; gap: 12px; }
+.skew {
+  display: inline-grid; place-items: center; height: 30px; padding: 2px 16px 0;
+  transform: skewX(-14deg);
+  font-family: var(--display); font-size: 18px; letter-spacing: .05em; color: #1B1609;
+}
+.skew > span { transform: skewX(14deg); }
+
+.reqs { display: flex; flex-direction: column; gap: 6px; max-width: 480px; }
+.req {
+  display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  background: var(--void); border: 1px solid #24211a; border-radius: 2px;
+  padding: 12px 16px; font-family: var(--ui); font-weight: 700; font-size: 15px;
+}
+.req b { font-variant-numeric: tabular-nums; }
+.req.is-met { color: var(--pos); }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.mtile { min-height: 120px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid #000; }
+.mtile b { font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: .03em; line-height: 1; }
+.mtile span { font-family: var(--mixed); font-weight: 700; font-size: 17px; color: var(--ink-gold); }
+.mtile--league { background: linear-gradient(180deg, #4C3E26, #75613B 50%, #A08451); }
+.mtile--league span { color: #FFF3D0; }
+.mtile--quick  { background: linear-gradient(180deg, #291839, #3F2959 50%, #56397A); }
+.mtile--quick span { color: #E2C9FF; }
+.mtile--wl     { background: linear-gradient(180deg, #79861B, #475316 50%, #2A3611); }
+.mtile--wl b { color: #C6F704; }
+.mtile--wl span { color: #EAF5C0; }
+
+.field-demo { display: flex; flex-direction: column; gap: 12px; max-width: 420px; }
+.field {
+  width: 100%; height: 46px;
+  background: var(--band); color: var(--ink);
+  border: 1.5px solid var(--gd-rim); border-radius: 3px;
+  padding: 0 14px; font-family: var(--ui); font-size: 16px; font-weight: 700;
+}
+.field::placeholder { color: var(--ink-3); }
+.field:focus-visible { outline: 2px solid var(--cy-rim); outline-offset: 2px; }
+.field.is-bad { border-color: #CC2222; }
+.field:disabled { background: #3E3E3E; border-color: #727272; color: #9a9a9a; }
+
+.meter { max-width: 420px; height: 22px; background: #0A0A08; border: 1px solid #3a352a; position: relative; display: grid; place-items: center; }
+.meter__fill { position: absolute; inset: 0 auto 0 0; width: 68%; background: linear-gradient(180deg, #E3C467, #E2C567 50%, #CEA046); }
+.meter__val { position: relative; font-family: var(--display); font-size: 17px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.9); padding-top: 2px; }
+
+.tip { position: relative; display: inline-block; max-width: 340px; background: #FFFFFF; color: #1B1609; padding: 13px 16px; border-radius: 6px; font-weight: 700; }
+.tip::after { content: ""; position: absolute; left: 28px; bottom: -9px; border: 9px solid transparent; border-bottom: 0; border-top-color: #FFFFFF; }
+
+.modal { max-width: 560px; background: var(--void); border: 1px solid var(--gd-rim); box-shadow: 0 18px 50px rgba(0,0,0,.8); }
+.modal__msg { padding: 28px 22px; text-align: center; font-weight: 700; font-size: 16px; }
+.modal__msg span { display: block; font-weight: 500; color: var(--ink-2); font-size: 14.5px; margin-top: 8px; }
+.modal__foot { display: flex; justify-content: flex-end; gap: 12px; padding: 14px 18px; background: var(--band); border-top: 1px solid rgba(233,211,141,.35); }
+
+/* ============================================================
+   RARITIES
+   ============================================================ */
+.rargrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px 10px; }
+.rar { margin: 0; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.rar figcaption { font-family: var(--display); font-size: 17px; letter-spacing: .03em; line-height: 1.05; min-width: 0; }
+.rar figcaption code { display: block; background: none; border: 0; padding: 0; font-size: 10px; color: var(--ink-3); margin-top: 3px; }
+.rar.is-base figcaption { color: var(--gd-rim); }
+
+/* ============================================================
+   CHALK — the family half, shared with FHCWiz
+   ============================================================ */
+:root {
+  --board:     #0D1410;
+  --board-rim: #2C3A30;
+  --chalk:     #E8F3EA;
+  --chalk-2:   #9BB0A2;
+  --pen:       #DE2424;
+}
+.board { background: var(--board); border: 2px solid var(--board-rim); border-radius: 9px; overflow: hidden; }
+.board svg { display: block; width: 100%; height: auto; }
+figure.chalkfig { margin: 0; max-width: 460px; }
+figure.chalkfig figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 12px; }
+.vocab figure { margin: 0; }
+.vocab figcaption { margin-top: 8px; font-family: var(--display); font-size: 18px; letter-spacing: .05em; color: var(--ink-gold); }
+.vocab b { display: block; color: var(--ink-2); font-family: var(--ui); font-weight: 500; font-size: 13px; letter-spacing: 0; margin-top: 2px; }
+.emptydemo { border: 1px solid #1c1a13; background: var(--ground-2); padding: 46px 20px; text-align: center; }
+.emptydemo .board { max-width: 240px; margin: 0 auto 22px; }
+.emptydemo h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 30px; letter-spacing: .04em; }
+.emptydemo p { margin: 0 auto; max-width: 46ch; color: var(--ink-2); font-size: 15px; }
+
+.lockup { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.lockup__mark { width: 78px; height: 69px; flex: none; }
+.wordmark {
+  font-family: var(--display); font-size: 58px; line-height: .9;
+  letter-spacing: .02em; color: var(--ink);
+  border-bottom: 5px solid var(--gd-rim); padding-bottom: 4px;
+}
+.wordmark i { font-style: normal; color: var(--ink-3); }
+
+.family { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 18px; }
+.family div { background: var(--void); border: 1px solid #1c1a13; padding: 18px 20px; }
+.family h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 21px; letter-spacing: .05em; color: var(--gd-rim); }
+.family ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+.family li { margin-bottom: 5px; }
+
+/* ============================================================
+   RULES, LISTS, LIMITS
+   ============================================================ */
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 2px; }
+.rule { background: var(--void); border: 1px solid #1c1a13; padding: 18px 20px 20px; }
+.rule h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: .05em; color: var(--gd-rim); }
+.rule p { margin: 0; font-size: 14.5px; color: var(--ink-2); max-width: none; }
+.rule.is-chalk h4 { color: var(--chalk); }
+.rule.is-cy h4 { color: var(--cy-rim); }
+.rule.is-pos h4 { color: var(--pos); }
+
+ul.clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; max-width: 74ch; }
+ul.clean li { padding-left: 20px; position: relative; color: var(--ink-2); }
+ul.clean li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 8px; height: 9px; background: var(--gd-rim);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+ul.clean li b { color: var(--ink); }
+ul.clean.no li::before { background: var(--rd-rim); clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%); }
+
+.nope { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; }
+.nope div { background: var(--void); border: 1px solid #1c1a13; padding: 15px 17px; }
+.nope b { display: block; font-family: var(--display); font-weight: 400; font-size: 19px; letter-spacing: .05em; color: var(--rd-peak); margin-bottom: 4px; }
+.nope span { color: var(--ink-2); font-size: 14px; }
+
+footer { margin-top: 60px; border-top: 1px solid var(--gd-rim); background: var(--void); padding-block: 26px 40px; font-size: 14px; color: var(--ink-3); }
+footer b { color: var(--ink-2); font-weight: 700; }
+
+@media (max-width: 860px) {
+  .shell { flex-direction: column; align-items: stretch; }
+  .main { width: 100%; }
+  .rail {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    min-height: 0; align-self: auto; width: 100%;
+    flex-direction: row; overflow-x: auto; gap: 0;
+    padding-block: 0; border-right: 0; border-bottom: 1px solid var(--gd-rim);
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ground-2); }
+  .rail__mark { display: none; }
+  .rail a { white-space: nowrap; padding: 12px 14px 10px; }
+  .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .masthead::before { background-size: 300px 200px; opacity: .55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M4 15 L12 7 L20 15" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-up2" viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 M4 20 L12 12 L20 20" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M4 9 L12 17 L20 9" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down2" viewBox="0 0 24 24"><path d="M4 4 L12 12 L20 4 M4 12 L12 20 L20 12" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24"><path d="M6 3 H18 L12 12 L18 21 H6 L12 12 Z" fill="currentColor"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 10 14"><path d="M6.5 0 L0 8 H4 L3 14 L10 5.5 H6 Z" fill="currentColor"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 3 V21 M3 12 H21" stroke="#3B3420" stroke-width="5"/></symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Sections">
+    <div class="rail__mark"><b class="rail__wm"><i>UFM</i>WIZ</b><span>Visual System</span></div>
+    <a href="#identity" class="is-active">Identity</a>
+    <a href="#foundation">Foundation</a>
+    <a href="#colour">Colour</a>
+    <a href="#type">Type</a>
+    <a href="#texture">Texture</a>
+    <a href="#components">Components</a>
+    <a href="#rarities">Rarities</a>
+    <a href="#chalk">Chalk</a>
+    <a href="#rules">Rules</a>
+    <a href="#build">Build</a>
+    <a href="#limits">Limits</a>
+  </nav>
+
+  <main class="main">
+
+    <header class="masthead">
+      <div class="masthead__body">
+        <div class="wrap">
+          <h1>Their <em>gold</em>.<br>Our chalk.</h1>
+          <p>The visual system for UFMWiz, the companion to Ultimate Football Manager&nbsp;27.
+            Everything that shows the game's data is measured: from 24 screenshots of the game,
+            and from the values authored into the 27.4.0 build itself. The identity and the chalk
+            language are ours, and they are shared with FHCWiz.</p>
+          <ul class="stats">
+            <li><b>24</b> Screenshots</li>
+            <li><b>2,400</b> Sprites read</li>
+            <li><b>52</b> Rarities</li>
+            <li><b>4</b> Shipped fonts</li>
+            <li><b>7</b> Colour ramps</li>
+            <li><b>0</b> Image assets</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ IDENTITY ============ -->
+    <section id="identity">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Identity</h2><p>A sibling, not a copy</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+
+        <div class="lockup" style="margin-bottom:28px">
+          <svg class="lockup__mark" viewBox="0 0 100 88" role="img" aria-label="UFMWiz mark">
+            <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
+            <path d="M24 26 L37 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+            <path d="M37 62 L50 40" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
+            <path d="M50 40 L63 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+            <path d="M63 62 L72.5 35.5" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
+            <circle cx="24" cy="26" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+            <polygon points="78.7,18.5 81.2,27.9 70.8,24.1" fill="#DE2424"/>
+          </svg>
+          <span class="wordmark"><i>UFM</i>WIZ</span>
+        </div>
+
+        <p class="lede">The site is <strong>UFMWiz</strong>. The name splits in two, and so does the design,
+          exactly as it does for FHCWiz:</p>
+        <ul class="clean">
+          <li><b>UFM is the game's world.</b> Anything that shows the game's own data — cards, ratings,
+            rarities, challenges, packs, the market — is drawn in the measured system in Foundation through Rarities.</li>
+          <li><b>WIZ is ours.</b> Our analysis, our diagrams and our teaching material are drawn in chalk.</li>
+        </ul>
+        <div class="note"><p>The rule is the family rule: <strong>their data wears metal, our thinking wears chalk.</strong>
+          In UFM the metal is gold.</p></div>
+
+        <h3>The mark</h3>
+        <p>The same board and the same hand as FHCWiz, on a different pitch. FHCWiz draws its W as one
+          receiver's route. UFMWiz draws it as a <strong>one-two</strong>: the ball starts at the O, a pass
+          (solid), a run (dashed), a pass (solid), a run (dashed), and the red arrowhead is the finish.
+          That is real football notation, so the W reads as a move to anyone who has seen a tactics board.</p>
+
+        <h3>The wordmark</h3>
+        <p><strong>UFMWIZ</strong> in Bebas Neue, one line, with a rule beneath the full width.
+          UFM sits in <code>#867D61</code>, WIZ in <code>#FFFFFF</code>. The acronym names the subject and the
+          brand is the lit half. That is the trademark position made visible.</p>
+        <p>The rule takes the game's identity colour. FHC's is red, so FHCWiz carries a red rule. UFM's is
+          gold, so UFMWiz carries <code>#E9D38D</code>, the gold hairline that rims every panel in the game.</p>
+        <ul class="clean no">
+          <li>Never set UFM alone, in any face, at any size.</li>
+          <li>Never set UFMWIZ in one flat colour. The halves always differ in value.</li>
+          <li>Never fill the wordmark with the gold foil. Foil is a button surface, not a brand surface.</li>
+        </ul>
+
+        <h3>The family</h3>
+        <div class="family">
+          <div>
+            <h4>Shared with FHCWiz</h4>
+            <ul>
+              <li>The board, the chalk, the stroke and the red pen</li>
+              <li>The five marks, and the rule against a sixth</li>
+              <li>Lockup structure: acronym muted, WIZ lit, rule beneath</li>
+              <li>"Metal reports, chalk explains"</li>
+              <li>Zero image assets; every texture inline</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Owned by UFMWiz</h4>
+            <ul>
+              <li>The whole measured half: grounds, ramps, type, textures</li>
+              <li>The rule colour: gold, not red</li>
+              <li>The route inside the W: a one-two, not a receiver route</li>
+              <li>The card silhouette, the hexagon chips, the rarity palette</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOUNDATION ============ -->
+    <section id="foundation">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Foundation</h2><p>The black is warm</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">This is where UFM and FHC part ways. FHC's black is chromatically dead. UFM's black
+          <strong>leans olive-umber</strong>. Across the twelve interface screenshots in the current store set, 80.7% of all dark pixels have
+          more red than blue (mean R−B of +4.6 over 804,000 samples), and every non-black ground sits between hue 40° and 60°.
+          The game's sprites say the same thing: its "black" panels are authored as <code>#22221B</code> and
+          <code>#0E0E0B</code>, never <code>#222222</code>.</p>
+
+        <h3>Ground ramp</h3>
+        <div class="grounds">
+          <div style="background:#000000"><code>#000000</code><span>Void · panel body</span></div>
+          <div style="background:#060606"><code>#060606</code><span>Page body</span></div>
+          <div style="background:#0E0E0B"><code>#0E0E0B</code><span>HUD · rail</span></div>
+          <div style="background:#171813"><code>#171813</code><span>Page ground</span></div>
+          <div style="background:#191815"><code>#191815</code><span>Hub tile</span></div>
+          <div style="background:#22221B"><code>#22221B</code><span>Header band</span></div>
+          <div style="background:#3C3521"><code>#3C3521</code><span>List row</span></div>
+          <div style="background:#746A4C"><code>#746A4C</code><span>Selected row</span></div>
+        </div>
+
+        <h3>Elevation, the UFM way</h3>
+        <p>There is no shadow ladder and almost no gloss. A surface reads as raised because it carries a
+          <strong>1px gold hairline</strong> (<code>#E9D38D</code>). A surface reads as content because it is
+          <strong>pure black inside that hairline</strong>. Header bands are the warm <code>#22221B</code> with
+          the hairline above and below. Black panel, gold edge: that pairing is the whole elevation system.</p>
+        <p>Behind everything the game runs a blurred, darkened stadium photograph. We don't take the
+          photograph. The page ground is a flat <code>#0E0E0B</code> with a faint warm light from above, which
+          is what the photograph reads as once it is blurred.</p>
+      </div>
+    </section>
+
+    <!-- ============ COLOUR ============ -->
+    <section id="colour">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Colour</h2><p>Seven ramps, and the sets that carry meaning</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">Each ramp runs shadow, body, mid, rim, peak, with values taken from the game's own button
+          and frame sprites and checked against the rendered screens. One thing to know when you read the sprite
+          files: UFM 27 re-skinned Football Head Coach's kit without renaming it.
+          <code>button_large_darkblue</code> is olive-brown, and <code>button_large_lightblue</code> is pale gold.</p>
+
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#E9D38D">Gold</span>
+            <span class="ramp__role">Identity · hairlines · selected · primary commit</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#533C19"><code>#533C19</code></div>
+            <div class="sw on-dark" style="background:#8A7333"><code>#8A7333</code></div>
+            <div class="sw on-light" style="background:#C2A473"><code>#C2A473</code></div>
+            <div class="sw on-light" style="background:#E9D38D"><code>#E9D38D</code></div>
+            <div class="sw on-light" style="background:#F8E9B0"><code>#F8E9B0</code></div>
+          </div>
+        </div>
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#887766">Olive</span>
+            <span class="ramp__role">Secondary · unselected tab · cancel</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#3C3521"><code>#3C3521</code></div>
+            <div class="sw on-dark" style="background:#423624"><code>#423624</code></div>
+            <div class="sw on-dark" style="background:#4D3F2A"><code>#4D3F2A</code></div>
+            <div class="sw on-dark" style="background:#574830"><code>#574830</code></div>
+            <div class="sw on-dark" style="background:#887766"><code>#887766</code></div>
+          </div>
+        </div>
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#00DFED">Cyan</span>
+            <span class="ramp__role">Guidance · tap focus · chemistry · home team</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#0E4543"><code>#0E4543</code></div>
+            <div class="sw on-dark" style="background:#038390"><code>#038390</code></div>
+            <div class="sw on-light" style="background:#00C5D5"><code>#00C5D5</code></div>
+            <div class="sw on-light" style="background:#00DFED"><code>#00DFED</code></div>
+            <div class="sw on-light" style="background:#2BF4FA"><code>#2BF4FA</code></div>
+          </div>
+        </div>
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#BFE557">Lime</span>
+            <span class="ramp__role">Gain · speed-up · the Weekend League</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#2A3611"><code>#2A3611</code></div>
+            <div class="sw on-dark" style="background:#475316"><code>#475316</code></div>
+            <div class="sw on-light" style="background:#97BF43"><code>#97BF43</code></div>
+            <div class="sw on-light" style="background:#BFE557"><code>#BFE557</code></div>
+            <div class="sw on-light" style="background:#C6F704"><code>#C6F704</code></div>
+          </div>
+        </div>
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#F62D2B">Red</span>
+            <span class="ramp__role">Destructive · loss · away team · gems</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#5A0A06"><code>#5A0A06</code></div>
+            <div class="sw on-dark" style="background:#A00000"><code>#A00000</code></div>
+            <div class="sw on-dark" style="background:#D42422"><code>#D42422</code></div>
+            <div class="sw on-dark" style="background:#F62D2B"><code>#F62D2B</code></div>
+            <div class="sw on-light" style="background:#FB6160"><code>#FB6160</code></div>
+          </div>
+        </div>
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#C27DF0">Purple</span>
+            <span class="ramp__role">Quick Match · energy · specials</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#291839"><code>#291839</code></div>
+            <div class="sw on-dark" style="background:#3F2959"><code>#3F2959</code></div>
+            <div class="sw on-dark" style="background:#5A2D9C"><code>#5A2D9C</code></div>
+            <div class="sw on-dark" style="background:#793BC5"><code>#793BC5</code></div>
+            <div class="sw on-light" style="background:#C27DF0"><code>#C27DF0</code></div>
+          </div>
+        </div>
+        <div class="ramp">
+          <div class="ramp__label"><span class="ramp__name" style="color:#C1C2C2">Grey</span>
+            <span class="ramp__role">Disabled. The only neutral in the game</span></div>
+          <div class="ramp__bar">
+            <div class="sw on-dark" style="background:#3E3E3E"><code>#3E3E3E</code></div>
+            <div class="sw on-dark" style="background:#494949"><code>#494949</code></div>
+            <div class="sw on-dark" style="background:#727272"><code>#727272</code></div>
+            <div class="sw on-light" style="background:#989999"><code>#989999</code></div>
+            <div class="sw on-light" style="background:#C1C2C2"><code>#C1C2C2</code></div>
+          </div>
+        </div>
+
+        <h3>The four greens stay separate</h3>
+        <p>UFM uses more greens than FHC and means something different by each. Merging any two loses a
+          distinction the game makes.</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Green</th><th>Value</th><th>Used for</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#BFE557">Action</td><td><code>#97BF43 → #BFE557</code></td><td>Buttons only. In the game, paying gems to finish a timer</td></tr>
+            <tr><td style="color:#50F99D">Status</td><td><code>#50F99D</code></td><td>Text only. "Positives" in a match report, a met requirement, a check</td></tr>
+            <tr><td style="color:#C6F704">Weekend League</td><td><code>#C6F704</code> on <code>#475316</code></td><td>The mode's own colour: its logo, its tiles, its rank shields</td></tr>
+            <tr><td style="color:#1DE994">Money</td><td><code>#1DE994</code></td><td>The cash glyph only. Never text, never a button</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Sets that carry meaning</h3>
+        <p>These are not accents. Each is a scale the game uses consistently, and a player reads it before
+          they read the number.</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Set</th><th>Steps</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Focus</td><td><code style="color:#FF1513">−2 #FF1513</code> <code style="color:#EBB200">−1 #EBB200</code> <code style="color:#D7C690">0 #D7C690</code> <code style="color:#00C3A0">+1 #00C3A0</code> <code style="color:#79E900">+2 #79E900</code></td><td>Training focus icons</td></tr>
+            <tr><td>Chemistry</td><td><code style="color:#AFDE7E">1 #AFDE7E</code> <code style="color:#46EF68">2 #46EF68</code> <code style="color:#1DFFE1">3 #1DFFE1</code></td><td>Chemistry level icons</td></tr>
+            <tr><td>Position fit</td><td><code style="color:#00FD89">fits #00FD89</code> <code style="color:#E57703">near #E57703</code> <code style="color:#E50021">wrong #E50021</code></td><td>Lineup card glows</td></tr>
+            <tr><td>Fitness chip</td><td><code style="color:#76E055">100 #76E055 on #142A00</code> <code style="color:#E09B03">75 #E09B03 on #281C00</code></td><td>Rendered training screen</td></tr>
+            <tr><td>Match bars</td><td><code style="color:#06BADA">home #038390</code> <code style="color:#ED6D70">away #A00000</code> <code>track #494949</code></td><td>Rendered match report</td></tr>
+            <tr><td>Feedback</td><td><code style="color:#50F99D">Positives #50F99D</code> <code style="color:#FEF750">Suggestions #FEF750</code></td><td>Rendered match report</td></tr>
+            <tr><td>Tiers</td><td><code style="color:#D3AD8D">Amateur #D3AD8D</code> <code style="color:#A9C4C4">Semi-Pro #A9C4C4</code> <code style="color:#F7CF5C">Pro #F7CF5C</code> <code style="color:#DDCFC8">Legendary #DDCFC8</code></td><td>Tier badges</td></tr>
+            <tr><td>Currencies</td><td><code style="color:#1DE994">Money #1DE994</code> <code style="color:#EB2B44">Gems #EB2B44</code> <code style="color:#AB40E8">Energy #AB40E8</code></td><td>Currency icons</td></tr>
+            <tr><td>Modes</td><td><code style="color:#C9A86A">League #4C3E26→#A08451</code> <code style="color:#C27DF0">Quick Match #291839→#56397A</code> <code style="color:#C6F704">Weekend League #79861B→#2A3611</code></td><td>Mode frame backgrounds</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Text</h3>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Role</th><th>Value</th><th>Where</th></tr></thead>
+          <tbody>
+            <tr><td>Primary</td><td><code>#FFFFFF</code></td><td>Titles, names, numbers</td></tr>
+            <tr><td>Gold subtitle</td><td><code>#E1CA94</code></td><td>The sentence beside every header, unselected tab labels, helper copy. Measured on four screens within one step</td></tr>
+            <tr><td>Gold label</td><td><code>#FCE684</code></td><td>Stat labels ("Possession"), timers, "FINISHED"</td></tr>
+            <tr><td>Secondary</td><td><code>#CECBCA</code></td><td>State words ("Inactive")</td></tr>
+            <tr><td>Muted</td><td><code>#867D61</code></td><td>Captions, placeholders, the UFM half of our wordmark</td></tr>
+            <tr><td>On gold</td><td><code>#444230</code></td><td>Any text on a gold fill: selected tab, primary button</td></tr>
+            <tr><td>On card metal</td><td><code>#362614</code></td><td>OVR, name and stats on bronze, silver and gold cards</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note"><p><strong>The subtitle is gold, not grey.</strong> FHC sets the line beside a header in
+          <code>#737473</code>. UFM sets it in <code>#E1CA94</code>. Copying FHCWiz's grey subtitle across would be the
+          fastest way to make UFMWiz look wrong.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ TYPE ============ -->
+    <section id="type">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Type</h2><p>Bebas for weight, Roboto Condensed for everything else</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">Unlike FHC, UFM's typefaces are not a guess. The build ships them by name, with their
+          font files and their TextMeshPro materials:</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Shipped font</th><th>Foundry · licence</th><th>Role in the game</th><th>UFMWiz uses</th></tr></thead>
+          <tbody>
+            <tr><td>Bebas Neue Pro Bold</td><td>Dharma Type, 2019 · commercial</td><td>Titles, tabs, card OVR and names, scores, the gold subtitles</td><td><strong>Bebas Neue</strong> for caps (97.7% glyph overlap, same designer). <strong>Sofia Sans Extra Condensed 700</strong> for mixed case (87.4% overlap)</td></tr>
+            <tr><td>Roboto Condensed Bold</td><td>Google · Apache 2.0</td><td>Every other piece of UI text</td><td><strong>Roboto Condensed</strong>, the same font (98.8%)</td></tr>
+            <tr><td>Downstairs</td><td>Gassstype Studio, 2021 · commercial</td><td>A dry-brush marker script for event lettering</td><td>Nothing. The best free match covers 35% of its ink</td></tr>
+            <tr><td>Noto Sans Arabic Bold</td><td>Google · OFL</td><td>The Arabic locale</td><td>Noto Sans Arabic, if we localise</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:14px">Overlap was measured by rendering each glyph of the shipped font and of the candidate at
+          the same cap height and comparing the ink. The free Bebas Neue has no lowercase, which is why the
+          gold subtitles take a second face.</p>
+
+        <div class="spec spec--display">
+          <div class="spec__meta"><b>Bebas Neue</b><span>400 · one weight · caps only</span><span>Titles · tabs · card OVR · scores</span></div>
+          <p>MATCH REPORT 3 – 0</p>
+        </div>
+        <div class="spec spec--mixed">
+          <div class="spec__meta"><b>Sofia Sans Extra Condensed</b><span>700</span><span>The gold line beside every header</span></div>
+          <p>Analyze the key events &amp; stats from this match</p>
+        </div>
+        <div class="spec spec--ui">
+          <div class="spec__meta"><b>Roboto Condensed</b><span>700</span><span>Names · stats · body · lists</span></div>
+          <p>Five players of 80+ average, two of them strikers. Chemistry counts the starting eleven only, so the bench is free.</p>
+        </div>
+        <div class="spec spec--num">
+          <div class="spec__meta"><b>Bebas Neue</b><span>Tabular numerals</span><span>Team OVR · scores · currencies</span></div>
+          <p>86.2 &nbsp; 21,500 &nbsp; 7H 59M</p>
+        </div>
+
+        <h3>Scale</h3>
+        <div class="tblwrap"><table class="scale">
+          <thead><tr><th>Role</th><th>Face</th><th>Size</th><th>Treatment</th></tr></thead>
+          <tbody>
+            <tr><td>Display</td><td>Bebas Neue 400</td><td><code>48–104px</code></td><td>Caps, <code>.01em</code>, soft underlay</td></tr>
+            <tr><td>Section header</td><td>Bebas Neue 400</td><td><code>30–44px</code></td><td>Caps, <code>.02em</code></td></tr>
+            <tr><td>Header subtitle</td><td>Sofia Sans Extra Condensed 700</td><td><code>19–24px</code></td><td>Sentence case, <code>#E1CA94</code>, same baseline as the title</td></tr>
+            <tr><td>Button · tab</td><td>Bebas Neue 400</td><td><code>21–23px</code></td><td>Caps, <code>.04em</code></td></tr>
+            <tr><td>Column head</td><td>Roboto Condensed 700</td><td><code>12–13.5px</code></td><td>Gold, sentence case in dense lists</td></tr>
+            <tr><td>Body</td><td>Roboto Condensed 700</td><td><code>15px</code></td><td>Bold is the default. The game ships no other UI weight</td></tr>
+            <tr><td>Long-form prose</td><td>Roboto Condensed 500</td><td><code>16.5px</code></td><td>The one place a lighter weight is allowed</td></tr>
+            <tr><td>Data</td><td>Roboto Condensed 700</td><td><code>13–17px</code></td><td><code>tabular-nums</code>, always</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Text effects, from the materials</h3>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Material</th><th>Authored values</th><th>In CSS</th></tr></thead>
+          <tbody>
+            <tr><td>Default (Bebas, Roboto)</td><td>Underlay black at 25%, offset −0.2, softness 0.2. No outline</td><td><code>text-shadow: 0 .06em .08em rgba(0,0,0,.25)</code></td></tr>
+            <tr><td>Pack</td><td>Outline black 70% at 0.02, underlay offset −0.97</td><td>A thin dark stroke and a long soft drop. Pack labels only</td></tr>
+            <tr><td>Downstairs</td><td>Outline black 100% at 0.048, hard underlay dilate 0.106</td><td>Not reproduced</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ============ TEXTURE ============ -->
+    <section id="texture">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Texture</h2><p>Six layers, zero image files</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">FHC carries its brand in a torn paper edge and a hazard stripe. UFM carries it in gold applied
+          to black: a hairline, a dry-brush sweep, a polished foil. All six layers below are CSS gradients or inline
+          SVG, about 4KB together.</p>
+        <div class="texrow">
+          <figure><div class="tex tex--hairline"></div><figcaption><b>1 · Gold hairline</b>1px <code>#E9D38D</code> around every panel and above and below every header band. The elevation system.</figcaption></figure>
+          <figure><div class="tex tex--streak"></div><figcaption><b>2 · Brush sweep</b>Dry-brush gold strokes at about 58°, in the measured streak golds <code>#9C6F2D → #EEDCA8 → #C2A473</code>. Panel corners, the masthead, the New Season card.</figcaption></figure>
+          <figure><div class="tex tex--foil"></div><figcaption><b>3 · Foil</b>Eleven stops measured straight across the game's gold button, with the specular peak <code>#FEFBCA</code> at the centre. Primary commit only.</figcaption></figure>
+          <figure><div class="tex tex--honey"></div><figcaption><b>4 · Honeycomb</b>Pointy-top hexagons in <code>#C2A473</code> at 38% on <code>#49422C</code>. The training tile; the hexagon is UFM's shape for any number about a player.</figcaption></figure>
+          <figure><div class="tex tex--slash"></div><figcaption><b>5 · Slash bands</b>Two shallow gold bands at −8° across black. The rarity foreground frame and pack banners.</figcaption></figure>
+          <figure><div class="tex tex--skew"><span></span><span></span></div><figcaption><b>6 · The skew</b>−14° parallelograms for the HUD currency bars and status badges. The only slanted shapes in the system.</figcaption></figure>
+        </div>
+        <div class="note"><p><strong>No photography.</strong> The game puts a blurred stadium behind every screen and
+          a portrait on every card. Both are licensed. Our ground is <code>#0E0E0B</code> with a faint warm light, and
+          our cards are drawn without portraits.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ COMPONENTS ============ -->
+    <section id="components">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Components</h2><p>Everything below is live CSS, not a screenshot</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+
+        <h3>Buttons</h3>
+        <p>UFM buttons are flat metal with a soft fall-off from top to bottom. There is no gloss band and no
+          bright rim, which is the opposite of FHC. Colour names follow what the game shows, not what its
+          files are called.</p>
+        <div class="btnrow">
+          <div class="btncase"><button type="button" class="btn btn--foil">Claim</button><small>Foil · commit for reward</small></div>
+          <div class="btncase"><button type="button" class="btn">How to train</button><small>Pale gold · primary</small></div>
+          <div class="btncase"><button type="button" class="btn btn--olive">Cancel</button><small>Olive · secondary</small></div>
+          <div class="btncase"><button type="button" class="btn btn--lime">Add card</button><small>Lime · gain</small></div>
+        </div>
+        <div class="btnrow" style="margin-top:18px">
+          <div class="btncase"><button type="button" class="btn btn--red">Clear all</button><small>Red · destructive</small></div>
+          <div class="btncase"><button type="button" class="btn btn--purple">Quick match</button><small>Purple · the mode</small></div>
+          <div class="btncase"><button type="button" class="btn btn--cyan">Show me</button><small>Cyan · guidance</small></div>
+          <div class="btncase"><button type="button" class="btn btn--off" disabled>Submit</button><small>Grey · disabled</small></div>
+        </div>
+        <div class="note"><p><strong>Two golds, two jobs.</strong> The foil (<code>button_large_yellow</code>) is for
+          claiming something: a reward, a finished training, a completed PTC. The pale gold
+          (<code>button_large_lightblue</code>) is for a primary action that earns nothing, like "How to train".</p></div>
+
+        <h3>Selection — the fill carries it</h3>
+        <p>This is the second place UFM inverts FHC. FHC selects with a bright rim and leaves the fill alone. UFM
+          selects with the <strong>fill</strong>: olive turns pale gold and the gold label turns dark. Measured on the
+          match report tabs: <code>#54452E</code> with <code>#E1CA95</code> text, then <code>#F3D87F</code> with
+          <code>#444230</code> text.</p>
+        <div class="tabs" role="tablist" aria-label="Match report">
+          <button type="button" class="tab is-on" role="tab" aria-selected="true">Summary</button>
+          <button type="button" class="tab" role="tab" aria-selected="false">Events</button>
+          <button type="button" class="tab" role="tab" aria-selected="false">Statistics</button>
+          <button type="button" class="tab" role="tab" aria-selected="false">Lineup</button>
+        </div>
+
+        <h3>Cards — the shirt silhouette</h3>
+        <p>The outline is traced from the 640×854 card frame. It is a shirt, not a shield: a <strong>collar notch</strong>
+          dips 5.3% into the top edge, the shoulders curve down to 11%, the sides run straight to a small waist step at
+          72–80%, and the hem tapers to a point. The OVR sits <strong>top left</strong> with the position under it, the name
+          sits across 63% of the height, and the six stats form two columns beneath.</p>
+        <div class="cards">
+          <article class="ucard ucard--bronze"><div class="ucard__face">
+            <div class="ucard__ovr"><b>63</b><span>CM</span></div>
+            <div class="ucard__name">Goudmijn</div>
+            <div class="ucard__stats"><span><em>PAC</em>66</span><span><em>DRB</em>64</span><span><em>SHO</em>58</span><span><em>DEF</em>55</span><span><em>PAS</em>63</span><span><em>PHY</em>61</span></div>
+          </div></article>
+          <article class="ucard ucard--silver"><div class="ucard__face">
+            <div class="ucard__ovr"><b>74</b><span>CAM</span></div>
+            <div class="ucard__name">Til</div>
+            <div class="ucard__stats"><span><em>PAC</em>72</span><span><em>DRB</em>75</span><span><em>SHO</em>73</span><span><em>DEF</em>48</span><span><em>PAS</em>72</span><span><em>PHY</em>69</span></div>
+          </div></article>
+          <div class="cardstate">
+            <article class="ucard"><div class="ucard__face">
+              <div class="ucard__ovr"><b>83</b><span>CM</span></div>
+              <div class="ucard__name">Gavi</div>
+              <div class="ucard__stats"><span><em>PAC</em>75</span><span><em>DRB</em>83</span><span><em>SHO</em>67</span><span><em>DEF</em>68</span><span><em>PAS</em>79</span><span><em>PHY</em>70</span></div>
+            </div></article>
+            <span class="hexchip focus" style="--rim:#D7C690;color:#D7C690"><i><svg aria-hidden="true"><use href="#i-glass"/></svg></i></span>
+            <span class="fit fit--good"><svg aria-hidden="true"><use href="#i-bolt"/></svg>100</span>
+          </div>
+          <article class="ucard ucard--rare"><div class="ucard__face">
+            <div class="ucard__ovr"><b>88</b><span>CAM</span></div>
+            <div class="ucard__name">Olmo</div>
+            <div class="ucard__stats"><span><em>PAC</em>79</span><span><em>DRB</em>92</span><span><em>SHO</em>82</span><span><em>DEF</em>54</span><span><em>PAS</em>86</span><span><em>PHY</em>62</span></div>
+          </div></article>
+          <article class="ucard ucard--season"><div class="ucard__face">
+            <div class="ucard__ovr"><b>90</b><span>ST</span></div>
+            <div class="ucard__name">Haaland</div>
+            <div class="ucard__stats"><span><em>PAC</em>86</span><span><em>DRB</em>81</span><span><em>SHO</em>92</span><span><em>DEF</em>46</span><span><em>PAS</em>69</span><span><em>PHY</em>89</span></div>
+          </div></article>
+          <article class="ucard ucard--special"><div class="ucard__face">
+            <div class="ucard__ovr"><b>95</b><span>CM</span></div>
+            <div class="ucard__name">Pedri</div>
+            <div class="ucard__stats"><span><em>PAC</em>85</span><span><em>DRB</em>97</span><span><em>SHO</em>77</span><span><em>DEF</em>79</span><span><em>PAS</em>90</span><span><em>PHY</em>84</span></div>
+          </div></article>
+          <article class="ucard ucard--empty"><div class="ucard__face">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.8-9 6.2V22h18v-1.8c0-3.4-4-6.2-9-6.2Z"/></svg>
+            <em>Select player</em>
+          </div></article>
+        </div>
+        <div class="tblwrap" style="margin-top:18px"><table class="tbl">
+          <thead><tr><th>Type</th><th>Metal, top to bottom</th><th>Rim</th><th>Ink</th></tr></thead>
+          <tbody>
+            <tr><td>Bronze</td><td><code>#C18A60 → #E6B58C → #CD986E → #B3794F → #9E5A35</code></td><td><code>#FFD6BD</code></td><td><code>#362614</code></td></tr>
+            <tr><td>Silver</td><td><code>#9DAFBA → #C3D4DD → #ACBDC8 → #8A9BA6 → #5F727D</code></td><td><code>#E2EFF7</code></td><td><code>#362614</code></td></tr>
+            <tr><td>Gold</td><td><code>#CDB96D → #E9DF8F → #DDC674 → #C4A252 → #98763A</code></td><td><code>#FAF9BB</code></td><td><code>#362614</code></td></tr>
+            <tr><td>Gold Rare</td><td><code>#C8A958 → #EBD27A → #E4C76F → #C8A251 → #AE853F</code></td><td>Foil frame</td><td><code>#362614</code></td></tr>
+            <tr><td>New Season</td><td><code>#343434 → #222021 → #0D0B0B</code>, gold sweep at the shoulder</td><td><code>#FEF9E3</code></td><td><code>#FFFFFF</code></td></tr>
+            <tr><td>Specials</td><td>The set's own art. See Rarities</td><td>Set rim</td><td><code>#FFFFFF</code></td></tr>
+          </tbody>
+        </table></div>
+        <p><strong>Quality is a card property, not an OVR band.</strong> In the shipped market screen, cards rated
+          73–76 render silver and 77–78 render gold, so don't compute the metal from the rating. Store it with the card.
+          The base quality ladder in the game data runs Bronze, Silver, Gold, Gold Rare, Elite, Premium.</p>
+        <p><strong>Card state sits outside the face.</strong> The Focus hex and the fitness chip hang off the top-right
+          corner, as on the training screen. Show them only where we actually know the value.</p>
+
+        <h3>Hexagons — a number about a player</h3>
+        <p>Pointy-top, 86×96 like the game's own chips. Every hexagon in UFM holds a fact about a player or a squad,
+          never decoration.</p>
+        <div class="strength" style="margin-bottom:22px">
+          <figure><span class="hexchip hexchip--lg" style="--rim:#D8D8D8;--fill:linear-gradient(170deg,#FFFFFF,#D7D8D8 60%,#9A9A9A)"><i><small>OVR</small>86.2</i></span><figcaption>Team OVR</figcaption></figure>
+          <figure><span class="hexchip" style="--rim:#D8BA68;--fill:#E6D687"><i>88</i></span><figcaption>ATT</figcaption></figure>
+          <figure><span class="hexchip" style="--rim:#D8BA68;--fill:#E6D687"><i>84</i></span><figcaption>DEF</figcaption></figure>
+          <figure><div class="str str--bronze"><i><b>71.9</b><small>STRENGTH</small></i></div><figcaption>Bronze</figcaption></figure>
+          <figure><div class="str str--silver"><i><b>78.7</b><small>STRENGTH</small></i></div><figcaption>Silver</figcaption></figure>
+          <figure><div class="str str--gold"><i><b>86.2</b><small>STRENGTH</small></i></div><figcaption>Gold</figcaption></figure>
+        </div>
+
+        <h3>Focus</h3>
+        <p>Five steps, a dark hex with a coloured rim and chevrons. It resets after every league match, so it is
+          always shown as a state, never as a stat.</p>
+        <div class="focusrow">
+          <figure><span class="hexchip focus" style="--rim:#FF1513;color:#FF1513"><i><svg aria-hidden="true"><use href="#i-down2"/></svg></i></span><figcaption>−2<code>#FF1513</code></figcaption></figure>
+          <figure><span class="hexchip focus" style="--rim:#EBB200;color:#EBB200"><i><svg aria-hidden="true"><use href="#i-down"/></svg></i></span><figcaption>−1<code>#EBB200</code></figcaption></figure>
+          <figure><span class="hexchip focus" style="--rim:#D7C690;color:#D7C690"><i><svg aria-hidden="true"><use href="#i-glass"/></svg></i></span><figcaption>0<code>#D7C690</code></figcaption></figure>
+          <figure><span class="hexchip focus" style="--rim:#00C3A0;color:#00C3A0"><i><svg aria-hidden="true"><use href="#i-up"/></svg></i></span><figcaption>+1<code>#00C3A0</code></figcaption></figure>
+          <figure><span class="hexchip focus" style="--rim:#79E900;color:#79E900"><i><svg aria-hidden="true"><use href="#i-up2"/></svg></i></span><figcaption>+2<code>#79E900</code></figcaption></figure>
+        </div>
+
+        <h3>Chemistry</h3>
+        <p>Three pips per player, mint to green to cyan. The team badge sums the field. The bench never counts.</p>
+        <div class="chemrow">
+          <figure><span class="pips" data-l="0"><i></i><i></i><i></i></span><figcaption>0</figcaption></figure>
+          <figure><span class="pips" data-l="1"><i></i><i></i><i></i></span><figcaption>+1<code>#AFDE7E</code></figcaption></figure>
+          <figure><span class="pips" data-l="2"><i></i><i></i><i></i></span><figcaption>+2<code>#46EF68</code></figcaption></figure>
+          <figure><span class="pips" data-l="3"><i></i><i></i><i></i></span><figcaption>+3<code>#1DFFE1</code></figcaption></figure>
+          <figure><span class="hexchip" style="--rim:#00DFED;--fill:#0E1010;--chip-ink:#FFFFFF"><i style="font-size:19px">+2.0</i></span><figcaption>CHM</figcaption></figure>
+        </div>
+
+        <h3>Tiers</h3>
+        <div class="tierrow">
+          <figure><span class="roundel" style="--t:#D3AD8D">III</span><figcaption>Amateur<code>#D3AD8D</code></figcaption></figure>
+          <figure><span class="roundel" style="--t:#A9C4C4">II</span><figcaption>Semi-Pro<code>#A9C4C4</code></figcaption></figure>
+          <figure><span class="roundel" style="--t:#F7CF5C">I</span><figcaption>Pro<code>#F7CF5C</code></figcaption></figure>
+          <figure><span class="roundel" style="--t:#DDCFC8">I</span><figcaption>Legendary<code>#DDCFC8</code></figcaption></figure>
+        </div>
+
+        <h3>HUD — skewed currency bars</h3>
+        <p>Black parallelograms at −14°. The icon breaks out to the left, the number is white Bebas, and a gold square
+          adds more. We draw our own simple glyphs. The game's currency art stays the game's.</p>
+        <div class="hud">
+          <span class="pill">
+            <svg class="pill__icon" viewBox="0 0 46 40" aria-hidden="true"><rect x="6" y="9" width="32" height="20" rx="2" transform="rotate(-14 22 19)" fill="#0E6B4C" stroke="#1DE994" stroke-width="2"/><text x="22" y="25" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="16" fill="#1DE994" transform="rotate(-14 22 19)">$</text></svg>
+            <span class="pill__bar"><b>21,500</b></span>
+          </span>
+          <span class="pill">
+            <svg class="pill__icon" viewBox="0 0 46 40" aria-hidden="true"><polygon points="23,36 6,15 13,6 33,6 40,15" fill="#EB2B44"/><polygon points="13,6 33,6 40,15 6,15" fill="#FF7A8C"/></svg>
+            <span class="pill__bar"><b>408</b></span>
+            <span class="pill__plus"><svg aria-hidden="true"><use href="#i-plus"/></svg></span>
+          </span>
+          <span class="pill">
+            <svg class="pill__icon" viewBox="0 0 46 40" aria-hidden="true"><rect x="15" y="3" width="16" height="4" rx="1" fill="#C9A0F5"/><rect x="11" y="7" width="24" height="30" rx="4" fill="#47177C" stroke="#AB40E8" stroke-width="2.5"/><rect x="15" y="18" width="16" height="15" rx="2" fill="#AB40E8"/></svg>
+            <span class="pill__bar"><b>4/3</b></span>
+            <span class="pill__plus"><svg aria-hidden="true"><use href="#i-plus"/></svg></span>
+          </span>
+        </div>
+
+        <h3>Panel and box</h3>
+        <p>Header band over a black body, all inside one gold hairline. Inner boxes take a 2px gold rim, the timer text
+          is the gold label colour.</p>
+        <div class="panel" style="max-width:640px">
+          <div class="panel__head"><h4>Training</h4><span>Train players for better performance in games</span></div>
+          <div class="panel__body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+            <div class="box"><b>Short training</b><span>Finished</span></div>
+            <div class="box"><b>Long training</b><span>7H 59M</span></div>
+          </div>
+        </div>
+
+        <h3>Dense list — the standings pattern</h3>
+        <p>Olive rows on black with a 4px black gap, a one-pixel lighter top edge, and nothing else. No foil, no
+          brush, no hairline inside the list. The selected row lifts to <code>#746A4C</code>.</p>
+        <div class="listwrap"><div class="list">
+          <div class="list__head"><span></span><span>Player</span><span class="n">OVR</span><span class="n">Pos</span><span class="n">PAC</span><span class="n">SHO</span><span class="n">PAS</span></div>
+          <div class="list__rows">
+            <div class="lrow is-on"><span class="lrow__crest" style="--c1:#A50044;--c2:#004D98"></span>
+              <div class="lrow__name"><small>Barcelona</small><b>Pedri</b></div>
+              <span class="hexchip" style="--rim:#B39EE9;--fill:#121C1D;--chip-ink:#FFFFFF"><i>95</i></span>
+              <div class="lrow__pos">CM</div><div class="lstat"><span>PAC</span><b>85</b></div><div class="lstat"><span>SHO</span><b>77</b></div><div class="lstat"><span>PAS</span><b>90</b></div></div>
+            <div class="lrow"><span class="lrow__crest" style="--c1:#6CABDD;--c2:#1C2C5B"></span>
+              <div class="lrow__name"><small>Manchester City</small><b>Haaland</b></div>
+              <span class="hexchip" style="--rim:#BE9959;--fill:#E8C975"><i>91</i></span>
+              <div class="lrow__pos">ST</div><div class="lstat"><span>PAC</span><b>86</b></div><div class="lstat"><span>SHO</span><b>92</b></div><div class="lstat"><span>PAS</span><b>69</b></div></div>
+            <div class="lrow"><span class="lrow__crest" style="--c1:#A50044;--c2:#004D98"></span>
+              <div class="lrow__name"><small>Barcelona</small><b>Fermín</b></div>
+              <span class="hexchip" style="--rim:#D8BA68;--fill:#E6D687"><i>81</i></span>
+              <div class="lrow__pos">CM</div><div class="lstat"><span>PAC</span><b>76</b></div><div class="lstat"><span>SHO</span><b>76</b></div><div class="lstat"><span>PAS</span><b>72</b></div></div>
+            <div class="lrow"><span class="lrow__crest" style="--c1:#E2001A;--c2:#FFFFFF"></span>
+              <div class="lrow__name"><small>PSV Eindhoven</small><b>Til</b></div>
+              <span class="hexchip" style="--rim:#9EB2BB;--fill:#BBCCD5"><i>74</i></span>
+              <div class="lrow__pos">CAM</div><div class="lstat"><span>PAC</span><b>72</b></div><div class="lstat"><span>SHO</span><b>73</b></div><div class="lstat"><span>PAS</span><b>72</b></div></div>
+            <div class="lrow"><span class="lrow__crest" style="--c1:#E30613;--c2:#FFFFFF"></span>
+              <div class="lrow__name"><small>Ajax</small><b>Goudmijn</b></div>
+              <span class="hexchip" style="--rim:#C68C63;--fill:#DCA981"><i>63</i></span>
+              <div class="lrow__pos">CM</div><div class="lstat"><span>PAC</span><b>66</b></div><div class="lstat"><span>SHO</span><b>58</b></div><div class="lstat"><span>PAS</span><b>63</b></div></div>
+          </div>
+        </div></div>
+
+        <h3>Match statistics and feedback</h3>
+        <div class="statbars">
+          <div><div class="sbar__lab"><b>73%</b><span>Possession</span><b>27%</b></div><div class="sbar"><i style="--w:73%"></i><i style="--w:27%"></i></div></div>
+          <div><div class="sbar__lab"><b>10</b><span>Total Shots</span><b>1</b></div><div class="sbar"><i style="--w:91%"></i><i style="--w:9%"></i></div></div>
+          <div><div class="sbar__lab"><b>4</b><span>Fouls</span><b>6</b></div><div class="sbar"><i style="--w:40%"></i><i style="--w:60%"></i></div></div>
+        </div>
+        <div class="feedback" style="margin-top:12px">
+          <div class="fb fb--pos"><h5>Positives</h5><p>We outclassed the opponents</p></div>
+          <div class="fb fb--sug"><h5>Suggestions</h5><p>Check your players' preferred positions</p></div>
+        </div>
+
+        <h3>Status badges and mode tiles</h3>
+        <div class="badges" style="margin-bottom:18px">
+          <span class="skew" style="background:#3BDD9E"><span>New</span></span>
+          <span class="skew" style="background:#F0DB7D"><span>Best value</span></span>
+          <span class="skew" style="background:#C3F756"><span>Claimable</span></span>
+          <span class="skew" style="background:#C27DF0"><span>Event</span></span>
+          <span class="skew" style="background:#FFFFA1"><span>Limited</span></span>
+        </div>
+        <div class="tiles">
+          <div class="mtile mtile--league"><span>1 match a day</span><b>League</b></div>
+          <div class="mtile mtile--quick"><span>1 energy a match</span><b>Quick Match</b></div>
+          <div class="mtile mtile--wl"><span>15 games · rank 1 at 55 points</span><b>Weekend League</b></div>
+        </div>
+
+        <h3>Requirement rows</h3>
+        <p>For the PTC solver. Black rows, a two-pixel radius, label left and value right. When met, both turn
+          <code>#50F99D</code>, the status green, never the button lime.</p>
+        <div class="reqs">
+          <div class="req is-met"><span>Number of players</span><b>5 / 5</b></div>
+          <div class="req is-met"><span>Average rating at least 80</span><b>81.4</b></div>
+          <div class="req"><span>Strikers</span><b>1 / 2</b></div>
+        </div>
+
+        <h3>Dialog</h3>
+        <p>Assembled from the panel anatomy: band header, black body, band footer, one gold hairline around the whole.
+          Cancel is olive, commit is foil.</p>
+        <div class="modal">
+          <div class="panel__head"><h4>Complete challenge?</h4><span>These cards will be traded in</span></div>
+          <div class="modal__msg">Are you sure you want to permanently trade in these players?
+            <span>You are 1.4 OVR above the requirement.</span></div>
+          <div class="modal__foot">
+            <button type="button" class="btn btn--olive">Cancel</button>
+            <button type="button" class="btn btn--foil">Complete</button>
+          </div>
+        </div>
+
+        <h3>Input · meter · tooltip</h3>
+        <div class="field-demo">
+          <input type="text" id="demoSearch" class="field" placeholder="Search players…" aria-label="Search players">
+          <input type="text" id="demoBad" class="field is-bad" value="ab" aria-label="Team name, invalid">
+          <input type="text" id="demoOff" class="field" value="Locked" aria-label="Disabled field" disabled>
+          <div class="meter"><div class="meter__fill"></div><span class="meter__val">1,020 / 1,500 QP</span></div>
+          <div style="padding-bottom:10px"><span class="tip">Chemistry counts the starting eleven. The bench is free.</span></div>
+        </div>
+        <div class="note"><p><strong>Advice inverts, here too.</strong> UFM's tooltips and the manager's speech cloud are
+          white boxes with dark text, the same rule FHCWiz measured in FHC. Transient advice is light; everything that
+          persists is dark.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ RARITIES ============ -->
+    <section id="rarities">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Rarities</h2><p>Fifty-two chips, measured from the game's own</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">Every rarity in 27.4.0 ships a full card frame, a pack and an OVR hexagon. The hexagon's fill and
+          rim are the set's two colours, and they are what a list row should carry. Base qualities are in gold type.
+          Light fills take dark numerals; dark fills take white.</p>
+        <div class="rargrid">
+<figure class="rar"><span class="hexchip" style="--rim:#8E5723;--fill:#2A3F36;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Academics<code>#2A3F36 · #8E5723</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F6DF28;--fill:#1E721D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Africa Cup<code>#1E721D · #F6DF28</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E99A71;--fill:#4A1A21;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Autumn<code>#4A1A21 · #E99A71</code></figcaption></figure>
+<figure class="rar is-base"><span class="hexchip" style="--rim:#C68C63;--fill:#DCA981;--chip-ink:#1B1609"><i>63</i></span><figcaption>Bronze<code>#DCA981 · #C68C63</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E0AC24;--fill:#003322;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Carnival<code>#003322 · #E0AC24</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F6E4AA;--fill:#330209;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Centurions<code>#330209 · #F6E4AA</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F2CC00;--fill:#0036B5;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Champions<code>#0036B5 · #F2CC00</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F2C800;--fill:#0C2250;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Champions Evolution<code>#0C2250 · #F2C800</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F6EAC8;--fill:#C1B3AA;--chip-ink:#1B1609"><i>88</i></span><figcaption>Champions Finalists<code>#C1B3AA · #F6EAC8</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F2C800;--fill:#CA0202;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Christmas<code>#CA0202 · #F2C800</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#EE2244;--fill:#00427D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Club Hoppers<code>#00427D · #EE2244</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#313131;--fill:#000000;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Deal Makers<code>#000000 · #313131</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E84242;--fill:#FDECE0;--chip-ink:#1B1609"><i>88</i></span><figcaption>England 2 Stars<code>#FDECE0 · #E84242</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#BD51D9;--fill:#004FD9;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>European Evolutions<code>#004FD9 · #BD51D9</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#86B7D7;--fill:#162D50;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Future Stars<code>#162D50 · #86B7D7</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#D0AF21;--fill:#1E4C33;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Game Changers<code>#1E4C33 · #D0AF21</code></figcaption></figure>
+<figure class="rar is-base"><span class="hexchip" style="--rim:#D8BA68;--fill:#E6D687;--chip-ink:#1B1609"><i>81</i></span><figcaption>Gold<code>#E6D687 · #D8BA68</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#D9B974;--fill:#45290E;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Golden Ball<code>#45290E · #D9B974</code></figcaption></figure>
+<figure class="rar is-base"><span class="hexchip" style="--rim:#BE9959;--fill:#E8C975;--chip-ink:#1B1609"><i>86</i></span><figcaption>Gold Rare<code>#E8C975 · #BE9959</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#DEB659;--fill:#341806;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Harvest<code>#341806 · #DEB659</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#FFE658;--fill:#401D5A;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Hidden Gems<code>#401D5A · #FFE658</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#8E544D;--fill:#F0C796;--chip-ink:#1B1609"><i>88</i></span><figcaption>Legacy<code>#F0C796 · #8E544D</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F3A90B;--fill:#1D252A;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Matchday<code>#1D252A · #F3A90B</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#9C9C9C;--fill:#191B1C;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Mavericks<code>#191B1C · #9C9C9C</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#C96EED;--fill:#23265D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Missing Stars<code>#23265D · #C96EED</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#DB748B;--fill:#121C1D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Most Wanted<code>#121C1D · #DB748B</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#CF1CE7;--fill:#270691;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Neon<code>#270691 · #CF1CE7</code></figcaption></figure>
+<figure class="rar is-base"><span class="hexchip" style="--rim:#D1BD9D;--fill:#1F1F1F;--chip-ink:#FFFFFF"><i>84</i></span><figcaption>New Season<code>#1F1F1F · #D1BD9D</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#3F347F;--fill:#846CAC;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>New Year<code>#846CAC · #3F347F</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#DBFFFF;--fill:#111926;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Platinum<code>#111926 · #DBFFFF</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#7BEFB2;--fill:#011911;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Player Picks<code>#011911 · #7BEFB2</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#B39EE9;--fill:#121C1D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Player of the Month<code>#121C1D · #B39EE9</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#CBAE66;--fill:#170E08;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>PTC<code>#170E08 · #CBAE66</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E94242;--fill:#2E1F28;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Record Breakers<code>#2E1F28 · #E94242</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#424169;--fill:#3B1A3A;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Screamers<code>#3B1A3A · #424169</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#8BAABD;--fill:#103E3B;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Shapeshifters<code>#103E3B · #8BAABD</code></figcaption></figure>
+<figure class="rar is-base"><span class="hexchip" style="--rim:#9EB2BB;--fill:#BBCCD5;--chip-ink:#1B1609"><i>74</i></span><figcaption>Silver<code>#BBCCD5 · #9EB2BB</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#D6EF00;--fill:#37C1FE;--chip-ink:#1B1609"><i>88</i></span><figcaption>Spring<code>#37C1FE · #D6EF00</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#43B66E;--fill:#002233;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Starter<code>#002233 · #43B66E</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#F7DF88;--fill:#B9E39E;--chip-ink:#1B1609"><i>88</i></span><figcaption>Summer Heat<code>#B9E39E · #F7DF88</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#9F9F9F;--fill:#0B2040;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Super Heroes<code>#0B2040 · #9F9F9F</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E7D17F;--fill:#011612;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Team of the Season<code>#011612 · #E7D17F</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E9CF33;--fill:#121C1D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Team of the Week<code>#121C1D · #E9CF33</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#EED32C;--fill:#232B3F;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Team of the Year<code>#232B3F · #EED32C</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E7C879;--fill:#1A416D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>TOTY Nominees<code>#1A416D · #E7C879</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#4DEDD8;--fill:#011529;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Transfer Stars<code>#011529 · #4DEDD8</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#C89F6E;--fill:#584022;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Veterans<code>#584022 · #C89F6E</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#ABC96B;--fill:#121C1D;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>Weekend League<code>#121C1D · #ABC96B</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#E8E8E8;--fill:#507695;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>World 26<code>#507695 · #E8E8E8</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#EEE874;--fill:#2A170B;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>World Champions<code>#2A170B · #EEE874</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#EEEEBB;--fill:#34548E;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>World Evolutions<code>#34548E · #EEEEBB</code></figcaption></figure>
+<figure class="rar"><span class="hexchip" style="--rim:#2E6EBB;--fill:#0A0A08;--chip-ink:#FFFFFF"><i>88</i></span><figcaption>World Weekly<code>#0A0A08 · #2E6EBB</code></figcaption></figure>
+        </div>
+        <p style="margin-top:20px">The game tells specials apart by their illustrated art, which we can't use. The chip
+          pair is how we tell them apart instead, so <strong>never recolour a rarity's chip</strong>. The pair is the
+          set's identity.</p>
+      </div>
+    </section>
+
+    <!-- ============ CHALK ============ -->
+    <section id="chalk">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Chalk</h2><p>The WIZ half, shared with FHCWiz</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">Everything above lets the site show the game's data faithfully. Chalk is how a reader knows when
+          <em>we</em> are talking. It is the same board, stroke and pen as FHCWiz, so a reader of one site can read the
+          other.</p>
+
+        <h3>The board</h3>
+        <div class="grounds" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+          <div style="background:#0D1410"><code>#0D1410</code><span style="color:#6f8576">Board ground</span></div>
+          <div style="background:#2C3A30"><code>#2C3A30</code><span style="color:#9bb0a2">Board rim · 2 units</span></div>
+          <div style="background:#E8F3EA"><code style="color:#0D1410">#E8F3EA</code><span style="color:#4a5b50">Chalk</span></div>
+          <div style="background:#9BB0A2"><code style="color:#0D1410">#9BB0A2</code><span style="color:#2f3b33">Chalk 2 · pitch lines</span></div>
+          <div style="background:#DE2424"><code>#DE2424</code><span style="color:#ffd2d2">The red pen</span></div>
+        </div>
+        <p style="margin-top:16px">The pen stays the family's red, not UFM's gold. Gold belongs to the game's metal, and a
+          gold arrowhead would put their colour on our thinking. The board takes no grain, no hairline, no streak. It is a
+          figure, not a panel.</p>
+
+        <h3>The vocabulary — five marks, read as football</h3>
+        <p>The five marks are the family's and they don't change. On a football board they mean what a coach already means
+          by them: a solid line is the ball's path, a dashed line is a player's run off the ball.</p>
+        <div class="vocab">
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="50" cy="35" r="15" fill="none" stroke="#E8F3EA" stroke-width="5.5"/></svg></div>
+            <figcaption>O<b>Our player, or the ball</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M37 22 L63 48 M63 22 L37 48" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/></svg></div>
+            <figcaption>X<b>An opponent in the way</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L84 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/></svg></div>
+            <figcaption>Dashed<b>A run, not made yet</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L84 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/></svg></div>
+            <figcaption>Solid<b>A pass, already played</b></figcaption></figure>
+          <figure><div class="board"><svg viewBox="0 0 100 70" aria-hidden="true"><path d="M16 35 L62 35" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/><polygon points="86,35 62,25 62,45" fill="#DE2424"/></svg></div>
+            <figcaption>Arrowhead<b>The finish</b></figcaption></figure>
+        </div>
+        <div class="note"><p><strong>The dribble stays out.</strong> Football notation has a sixth mark, the wavy line for a
+          dribble. The family rule says a sixth mark gets added here first, and the stroke rule says chalk never wobbles.
+          A carry is drawn as a dashed run.</p></div>
+
+        <h3>Pitch lines</h3>
+        <p>A football board may draw the ground it stands on: the halfway line, a box, the centre circle. Pitch lines are
+          <code>#9BB0A2</code> at 2.5 units, never more than three per figure, and never carry an arrowhead.</p>
+
+        <h3>Component · chalk figure</h3>
+        <figure class="chalkfig">
+          <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true">
+            <path d="M58 4 V24 H96 M58 24" fill="none" stroke="#9BB0A2" stroke-width="2.5"/>
+            <circle cx="14" cy="46" r="5.5" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+            <circle cx="44" cy="30" r="5.5" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+            <path d="M19 43 L39 32" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+            <path d="M14 52 L58 52 L66 34" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="14 7"/>
+            <path d="M48 27 L63 23" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+            <path d="M48 40 L58 50 M58 40 L48 50" fill="none" stroke="#9BB0A2" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M66 30 L78 14" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+            <polygon points="84,6 79.5,20 72,13.5" fill="#DE2424"/>
+          </svg></div>
+          <figcaption>The one-two in the mark, drawn out: pass inside, run round the defender, return pass,
+            finish. One arrowhead, one conclusion.</figcaption>
+        </figure>
+
+        <h3>Component · chalk empty state</h3>
+        <div class="emptydemo">
+          <div class="board"><svg viewBox="0 0 100 62" aria-hidden="true">
+            <path d="M50 4 V58" fill="none" stroke="#9BB0A2" stroke-width="2.5"/>
+            <circle cx="50" cy="31" r="10" fill="none" stroke="#9BB0A2" stroke-width="2.5"/>
+            <circle cx="22" cy="44" r="5.5" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+            <path d="M27 42 L44 34 L60 40 L72 26" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="14 7"/>
+            <polygon points="81,16 77,30 69,22" fill="#DE2424"/>
+          </svg></div>
+          <h4>No squad yet</h4>
+          <p>Pick a formation and drop in the cards you own. The builder will show your Chemistry before you spend a coin on the market.</p>
+        </div>
+
+        <h3>What chalk refuses</h3>
+        <div class="nope">
+          <div><b>Never on a card</b><span>Cards, chips, rarities and foil are the game's objects.</span></div>
+          <div><b>Never a number the game owns</b><span>No OVR, price or requirement count on a board.</span></div>
+          <div><b>Never gold</b><span>Not the pen, not the board rim, not a highlight.</span></div>
+          <div><b>Never chrome</b><span>No chalk nav, buttons, headers or rules.</span></div>
+          <div><b>One board per screen</b><span>A second competes with the first and neither reads.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RULES ============ -->
+    <section id="rules">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Rules</h2><p>Seven decisions that settle most questions</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <div class="rules">
+          <div class="rule"><h4>The black is warm</h4><p>Every dark surface comes from the olive-umber ramp. A neutral
+            or blue-black surface reads as a different game. Disabled is the one exception, and that is how it reads as
+            disabled.</p></div>
+          <div class="rule"><h4>Gold is a line before it is a fill</h4><p>Raise a surface with a 1px gold hairline. A gold
+            fill means "selected" or "commit". Foil means "claim". Three strengths of gold, three meanings.</p></div>
+          <div class="rule is-cy"><h4>Selection is a fill</h4><p>Selected turns olive to pale gold and gold text to dark.
+            Never select with a rim glow. That is FHC's grammar, and it is wrong here.</p></div>
+          <div class="rule"><h4>Hexagons hold player numbers</h4><p>OVR, Focus, Chemistry, strength, tier. If a hexagon
+            isn't carrying a number about a player or a squad, it shouldn't be a hexagon.</p></div>
+          <div class="rule"><h4>Dense surfaces go flat</h4><p>Lists, tables and the market are olive rows on black with no
+            foil, no brush and no hairline inside. Texture belongs to headers and hero surfaces.</p></div>
+          <div class="rule is-pos"><h4>Advice inverts</h4><p>Tooltips, hints and the help overlay are white boxes with dark
+            text. Everything persistent stays dark. A full-page empty state is chalk.</p></div>
+          <div class="rule is-chalk"><h4>Metal reports, chalk explains</h4><p>A surface showing the game's numbers takes the
+            measured system. A surface carrying our analysis takes the board. Never mix the two on one object.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BUILD ============ -->
+    <section id="build">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Build</h2><p>What each UFMWiz screen is made of</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Screen</th><th>Built from</th></tr></thead>
+          <tbody>
+            <tr><td>Global</td><td>Ground <code>#0E0E0B</code> with the warm top light. Bebas Neue, Sofia Sans Extra Condensed and Roboto Condensed. Rail nav with the pale-gold selected item. The UFMWiz lockup in the rail.</td></tr>
+            <tr><td>Every page header</td><td>Band <code>#22221B</code>, gold hairlines, brush corner, white Bebas title, gold subtitle on the same baseline.</td></tr>
+            <tr><td>PTC solver</td><td>Requirement rows, empty slots as blacked-out shirt silhouettes, foil "Complete" in the confirm dialog, olive "Cancel".</td></tr>
+            <tr><td>Card database</td><td>Card grid and the standings list side by side. Rarity chips in every row. Filters as olive tabs that fill gold when on.</td></tr>
+            <tr><td>Squad builder</td><td>Pitch view of shirt cards, Chemistry pips per card, the team OVR hex, ATT/MID/DEF chips, the CHM badge. Position-fit glows only where the fit is known.</td></tr>
+            <tr><td>Packs</td><td>Pack tiles with the slash-band banner. Odds in a dense list. Rarity chips for each tier.</td></tr>
+            <tr><td>Weekend League planner</td><td>The lime mode tile, a gold progress meter for QP, the 4-points-a-win table in a dense list, a chalk figure for "what rank 1 needs".</td></tr>
+            <tr><td>Event calendar</td><td>Mode tiles for League, Quick Match and Weekend League. Skewed status badges for New, Limited and Claimable.</td></tr>
+            <tr><td>Blog</td><td>Hub tiles with the brush corner, a band label, a gold hairline. Chalk figures inside articles. Never a screenshot.</td></tr>
+            <tr><td>Help overlay</td><td>White tooltip boxes with dark text. The tour keeps the dark scrim.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ============ LIMITS ============ -->
+    <section id="limits">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner">
+        <h2>Limits</h2><p>What we deliberately don't take</p>
+      </div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">UFMWiz is a companion tool, not a Gamebasics or Miniclip product. The visual language is fair to
+          mirror. The identity and the assets are not.</p>
+        <ul class="clean no">
+          <li><b>The acronym only inside our wordmark.</b> UFM appears as the first half of UFMWiz and nowhere else. "Ultimate
+            Football Manager" is written out only to name the game in prose and is never set as display type.</li>
+          <li><b>No official framing.</b> No UFM, Gamebasics or Miniclip logos, and no copy that implies endorsement.</li>
+          <li><b>No game files.</b> The values on this page were read from the build. The sprites, card art, pack art,
+            currency icons and fonts were not copied, and none of them ship on the site.</li>
+          <li><b>No commercial fonts.</b> Bebas Neue Pro and Downstairs are licensed to the game. We use the free Bebas Neue,
+            Sofia Sans Extra Condensed and Roboto Condensed from Google Fonts.</li>
+          <li><b>No photography, no likenesses.</b> Player portraits and the stadium backdrop are licensed. Names and ratings
+            appear as reference data only.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <p style="margin:0;max-width:78ch">24 screenshots were collected. Rendered values were measured from the
+          native-resolution store set (2796×1290 and 2732×2048) by region sampling and median-cut clustering. Authored values were read from the Ultimate Football Manager 27.4.0 Android build: sprite
+          gradients, rarity chips, the card outline, font names and TextMeshPro materials. Font substitutes were chosen by
+          glyph overlap. <b>Ultimate Football Manager 27</b> is a product of Gamebasics BV, part of Miniclip. UFMWiz is a
+          third-party companion and claims no association with it.</p>
+        <p style="margin:12px 0 0">Voice, vocabulary, naming and legal rules are in the <a href="https://claude.ai/artifact/81gvzz3RX5bQa4WSgr15aH" style="color:var(--ink-gold)">UFMWiz Brand Book</a>.</p>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  function mark() {
+    var best = 0;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].getBoundingClientRect().top <= 140) best = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('is-active', i === best); });
+  }
+  var ticking = false;
+  addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { mark(); ticking = false; });
+  }, { passive: true });
+  mark();
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) { o.classList.toggle('is-on', o === t); o.setAttribute('aria-selected', o === t ? 'true' : 'false'); });
+    });
+  });
+})();
+</script>

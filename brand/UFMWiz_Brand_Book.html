@@ -1,0 +1,469 @@
+<title>UFMWiz Brand Book</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,400;0,500;0,700;1,700&family=Sofia+Sans+Extra+Condensed:wght@600;700;800&display=swap">
+
+<style>
+/* ============================================================
+   UFMWiz Brand Book
+   Who UFMWiz is, how it sounds, what it calls things, and what it
+   will not do. The look lives in the Visual System; this page uses it.
+   Single-theme dark, like the game and the Visual System.
+   Layout: the Visual System shell — rail, gold-hairline bands, warm black.
+   ============================================================ */
+:root {
+  color-scheme: dark;
+  --void: #000000; --ground-2: #0E0E0B; --ground-3: #171813; --band: #22221B;
+  --row: #3C3521; --row-rim: #564E36;
+  --gd-rim: #E9D38D; --gd-peak: #F8E9B0; --gd-tab: #F3D87F;
+  --ink: #FFFFFF; --ink-2: #CECBCA; --ink-3: #867D61; --ink-gold: #E1CA94; --ink-label: #FCE684; --ink-on-gold: #444230;
+  --pos: #50F99D; --red: #F62D2B; --red-peak: #FB6160; --cy: #00DFED;
+  --board: #0D1410; --board-rim: #2C3A30; --chalk: #E8F3EA; --chalk-2: #9BB0A2; --pen: #DE2424;
+  --display: 'Bebas Neue', 'Bebas Neue Pro', 'Arial Narrow', Impact, sans-serif;
+  --mixed: 'Sofia Sans Extra Condensed', 'Bebas Neue Pro', 'Arial Narrow', sans-serif;
+  --ui: 'Roboto Condensed', 'Arial Narrow', Roboto, sans-serif;
+  --foil: linear-gradient(100deg, #DBC59E 0%, #CBA76D 10%, #C69429 20%, #D6B736 30%, #ECDD6C 40%, #FEFBCA 50%, #F9F4B2 60%, #E5D04A 70%, #D1AE31 80%, #BE8826 90%, #C9A971 100%);
+  --tmp-shadow: 0 .06em .08em rgba(0,0,0,.25);
+  --streak: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160' preserveAspectRatio='xMinYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%239C6F2D'/%3E%3Cstop offset='.55' stop-color='%23EEDCA8'/%3E%3Cstop offset='1' stop-color='%23C2A473'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='url(%23g)'%3E%3Cpolygon points='37,169 68,110 63,107 29,164'/%3E%3Cpolygon points='74,111 106,50 101,46 65,106'/%3E%3Cpolygon points='109,50 137,1 131,-3 104,46'/%3E%3Cpolygon points='-22,170 32,70 29,69 -32,164'/%3E%3Cpolygon points='36,72 86,-16 83,-18 29,68'/%3E%3Cpolygon points='-26,168 29,75 26,73 -31,165'/%3E%3Cpolygon points='34,72 81,-10 79,-11 29,68'/%3E%3Cpolygon points='190,167 202,145 201,144 187,165'/%3E%3Cpolygon points='204,145 223,112 221,110 201,143'/%3E%3Cpolygon points='176,166 189,145 188,145 175,166'/%3E%3Cpolygon points='191,141 208,115 207,114 191,141'/%3E%3Cpolygon points='210,112 224,89 223,89 209,112'/%3E%3Cpolygon points='112,167 125,145 123,144 111,166'/%3E%3Cpolygon points='126,145 147,109 147,108 124,143'/%3E%3Cpolygon points='151,106 163,83 162,83 148,105'/%3E%3Cpolygon points='-7,169 39,89 31,85 -14,164'/%3E%3Cpolygon points='45,91 74,33 68,29 34,84'/%3E%3Cpolygon points='187,167 203,140 202,140 186,166'/%3E%3Cpolygon points='204,140 211,127 210,126 202,139'/%3E%3Cpolygon points='213,126 224,107 222,106 211,125'/%3E%3Cpolygon points='63,167 86,127 84,126 59,165'/%3E%3Cpolygon points='88,126 113,84 110,83 85,124'/%3E%3Cpolygon points='115,83 165,-1 164,-2 112,81'/%3E%3Cpolygon points='-17,170 3,124 -0,122 -28,163'/%3E%3Cpolygon points='11,121 45,56 42,55 3,116'/%3E%3Cpolygon points='53,54 70,18 64,15 45,49'/%3E%3Cpolygon points='74,168 91,135 89,133 69,165'/%3E%3Cpolygon points='96,133 109,106 106,104 91,130'/%3E%3Cpolygon points='115,105 130,74 124,71 108,101'/%3E%3Cpolygon points='84,167 103,133 102,133 81,165'/%3E%3Cpolygon points='110,130 143,69 142,68 104,126'/%3E%3Cpolygon points='149,67 177,16 175,15 144,63'/%3E%3Cpolygon points='-21,169 36,69 31,66 -30,164'/%3E%3Cpolygon points='43,63 102,-37 97,-41 37,59'/%3E%3Cpolygon points='149,168 173,125 170,123 145,165'/%3E%3Cpolygon points='177,124 195,89 194,89 172,121'/%3E%3Cpolygon points='190,168 203,143 201,141 186,165'/%3E%3Cpolygon points='205,141 226,106 224,104 203,140'/%3E%3Cpolygon points='69,167 104,108 102,107 66,165'/%3E%3Cpolygon points='108,103 131,65 130,64 107,102'/%3E%3Cpolygon points='-8,169 30,100 23,96 -16,164'/%3E%3Cpolygon points='35,99 73,30 69,27 28,95'/%3E%3Cpolygon points='162,167 183,130 183,130 160,165'/%3E%3Cpolygon points='186,129 212,84 211,83 183,127'/%3E%3Cpolygon points='1,168 26,122 24,121 -3,165'/%3E%3Cpolygon points='31,119 64,63 60,60 27,116'/%3E%3Cpolygon points='70,56 101,2 100,1 66,54'/%3E%3Cpolygon points='-24,169 11,104 9,103 -32,164'/%3E%3Cpolygon points='14,104 58,30 53,27 10,101'/%3E%3Cpolygon points='61,28 91,-23 87,-26 57,26'/%3E%3Cpolygon points='79,169 121,94 119,92 72,164'/%3E%3Cpolygon points='125,92 145,56 142,53 121,89'/%3E%3Cpolygon points='-13,168 30,94 27,92 -18,165'/%3E%3Cpolygon points='36,89 68,33 65,30 31,86'/%3E%3Cpolygon points='168,167 185,137 184,137 166,166'/%3E%3Cpolygon points='187,136 206,104 205,103 185,135'/%3E%3Cpolygon points='36,167 80,94 78,93 33,165'/%3E%3Cpolygon points='85,89 111,45 108,43 82,87'/%3E%3Cpolygon points='54,168 103,84 101,83 50,165'/%3E%3Cpolygon points='105,85 138,28 136,26 102,82'/%3E%3Cpolygon points='-28,167 34,65 33,64 -30,166'/%3E%3Cpolygon points='40,57 72,5 71,4 39,56'/%3E%3C/g%3E%3C/svg%3E");
+  --rail-w: 176px; --maxw: 1080px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--ground-2);
+  background-image: radial-gradient(120% 70% at 50% -10%, rgba(233,211,141,.07), rgba(0,0,0,0) 60%);
+  background-attachment: fixed;
+  color: var(--ink); font-family: var(--ui); font-size: 15.5px; line-height: 1.58; -webkit-font-smoothing: antialiased;
+}
+.shell { display: flex; align-items: flex-start; min-height: 100vh; }
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); flex: 0 0 var(--rail-w); align-self: stretch; min-height: 100vh;
+  background: var(--ground-2); border-right: 1px solid rgba(233,211,141,.35); padding-block: 18px; display: flex; flex-direction: column; gap: 2px; }
+.rail__mark { padding: 0 14px 16px; line-height: 1.05; }
+.rail__mark span { display: block; font-weight: 700; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin-top: 7px; }
+.rail__wm { display: inline-block; font-family: var(--display); font-size: 24px; letter-spacing: .03em; border-bottom: 3px solid var(--gd-rim); padding-bottom: 2px; }
+.rail__wm i { font-style: normal; color: var(--ink-3); }
+.rail a { display: block; font-family: var(--display); font-size: 19px; letter-spacing: .06em; color: var(--ink-gold); text-decoration: none; padding: 8px 14px 7px; }
+.rail a:hover { color: var(--ink); background: rgba(233,211,141,.06); }
+.rail a.is-active { color: var(--ink-on-gold); background: var(--gd-tab); }
+.rail a:focus-visible { outline: 2px solid var(--cy); outline-offset: -2px; }
+.main { flex: 1 1 auto; min-width: 0; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+
+.masthead { position: relative; background: var(--void); border-bottom: 1px solid var(--gd-rim); overflow: hidden; }
+.masthead::before { content: ""; position: absolute; inset: 0; background: var(--streak) no-repeat left bottom / 520px 347px; transform: scaleX(-1); opacity: .85; pointer-events: none; }
+@media (max-width: 860px) { .masthead::before { background-size: 300px 200px; opacity: .55; } }
+.masthead__body { position: relative; z-index: 1; padding-block: 60px 38px; }
+.masthead h1 { font-family: var(--display); font-weight: 400; font-size: clamp(46px, 8vw, 96px); line-height: .9; margin: 0; text-wrap: balance; text-shadow: var(--tmp-shadow); }
+.masthead h1 em { font-style: normal; background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.masthead p { margin: 16px 0 0; max-width: 60ch; color: var(--ink-2); font-size: 16.5px; font-weight: 500; }
+
+section { padding-block: 0 8px; }
+.sec-head { position: relative; overflow: hidden; background: var(--band); border-block: 1px solid var(--gd-rim); padding-block: 18px 15px; margin-top: 52px; }
+.sec-head::before { content: ""; position: absolute; left: 0; top: 0; width: 150px; height: 100px; background: var(--streak) no-repeat left bottom / 150px 100px; transform: scaleY(-1); opacity: .45; pointer-events: none; }
+section:first-of-type .sec-head { margin-top: 0; }
+.sec-head__inner { position: relative; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.sec-head h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4.6vw, 44px); line-height: 1; letter-spacing: .02em; margin: 0; text-shadow: var(--tmp-shadow); }
+.sec-head p { margin: 0; font-family: var(--mixed); font-weight: 700; font-size: clamp(19px, 2.5vw, 24px); line-height: 1.1; color: var(--ink-gold); }
+.sec-body { padding-block: 28px 8px; }
+h3 { font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: .05em; color: var(--ink-gold); margin: 36px 0 12px; }
+h3:first-child { margin-top: 0; }
+p { max-width: 68ch; }
+.lede { color: var(--ink-2); font-size: 16.5px; font-weight: 500; }
+strong { font-weight: 700; color: var(--ink); }
+code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .86em; background: var(--void); border: 1px solid #2a271c; border-radius: 2px; padding: 1px 5px; color: var(--gd-peak); }
+.note { border: 1px solid rgba(233,211,141,.45); border-left: 3px solid var(--gd-rim); background: var(--void); padding: 13px 16px; margin: 20px 0; max-width: 74ch; }
+.note p { margin: 0; }
+
+.positioning { font-family: var(--display); font-size: clamp(28px, 4.2vw, 44px); line-height: 1.02; letter-spacing: .01em; max-width: 24ch; margin: 0 0 18px; text-wrap: balance; }
+.positioning em { font-style: normal; color: var(--gd-rim); }
+
+.jobs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; }
+.job { background: var(--void); border: 1px solid #1c1a13; padding: 16px 18px 18px; }
+.job b { display: block; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: .04em; color: var(--gd-rim); }
+.job span { color: var(--ink-2); font-size: 14.5px; }
+.job small { display: block; margin-top: 8px; font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 560px; }
+.tbl th, .tbl td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid #24211a; vertical-align: top; }
+.tbl th { font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-gold); border-bottom-color: rgba(233,211,141,.35); }
+.tbl td:first-child { font-weight: 700; white-space: nowrap; padding-right: 22px; }
+.tbl td:last-child { color: var(--ink-2); }
+.tblwrap { overflow-x: auto; }
+
+.dodont { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 8px; }
+.dodont div { background: var(--void); border: 1px solid #1c1a13; padding: 14px 16px; }
+.dodont b { display: block; font-family: var(--display); font-weight: 400; font-size: 19px; letter-spacing: .06em; margin-bottom: 4px; }
+.dodont .do b { color: var(--pos); }
+.dodont .dont b { color: var(--red-peak); }
+.dodont q { quotes: "“" "”"; color: var(--ink); font-weight: 700; }
+.dodont p { margin: 6px 0 0; color: var(--ink-2); font-size: 14px; }
+
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; }
+.principle { background: var(--void); border: 1px solid #1c1a13; padding: 18px 20px 20px; }
+.principle h4 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: .05em; color: var(--gd-rim); }
+.principle p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+
+ul.clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; max-width: 74ch; }
+ul.clean li { padding-left: 20px; position: relative; color: var(--ink-2); }
+ul.clean li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 8px; height: 9px; background: var(--gd-rim); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+ul.clean li b { color: var(--ink); }
+ul.clean.no li::before { background: var(--red); clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%); }
+
+.lockup { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.lockup__mark { width: 78px; height: 69px; flex: none; }
+.wordmark { font-family: var(--display); font-size: 58px; line-height: .9; letter-spacing: .02em; border-bottom: 5px solid var(--gd-rim); padding-bottom: 4px; }
+.wordmark i { font-style: normal; color: var(--ink-3); }
+.wordmark--fhc { border-bottom-color: #DE2424; }
+
+.familyrow { display: flex; flex-wrap: wrap; gap: 28px 40px; align-items: center; margin: 8px 0 18px; }
+.familyrow figure { margin: 0; }
+.familyrow figcaption { margin-top: 10px; font-size: 13.5px; color: var(--ink-2); }
+
+.disclaimer { background: var(--void); border: 1px solid var(--gd-rim); padding: 16px 18px; max-width: 74ch; }
+.disclaimer p { margin: 0 0 10px; }
+.disclaimer p:last-of-type { margin-bottom: 12px; }
+.copybtn { font-family: var(--display); font-size: 19px; letter-spacing: .05em; color: var(--ink-on-gold);
+  background: linear-gradient(180deg, #F8DD84, #EACC75 50%, #D7B664); border: 0; border-radius: 4px; padding: 8px 18px 5px; cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 2px 0 rgba(0,0,0,.55); }
+.copybtn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.copystate { margin-left: 10px; font-size: 13.5px; color: var(--pos); }
+
+/* the social card, as a live mock */
+.og { position: relative; aspect-ratio: 1200 / 630; max-width: 100%; width: 640px; background: var(--void); border: 1px solid var(--gd-rim); overflow: hidden; }
+.og::before { content: ""; position: absolute; inset: 0; background: var(--streak) no-repeat left bottom / 62% 66%; }
+.og__in { position: absolute; inset: 0; padding: 7% 7.5%; display: flex; flex-direction: column; justify-content: space-between; }
+.og__wm { align-self: flex-end; font-family: var(--display); font-size: clamp(18px, 3.4vw, 26px); letter-spacing: .03em; border-bottom: 3px solid var(--gd-rim); padding-bottom: 1px; }
+.og__wm i { font-style: normal; color: var(--ink-3); }
+.og h4 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6.6vw, 56px); line-height: .92; max-width: 13ch; text-shadow: var(--tmp-shadow); }
+.og p { margin: 6px 0 0; font-family: var(--mixed); font-weight: 700; font-size: clamp(15px, 2.6vw, 22px); color: var(--ink-gold); max-width: 32ch; }
+
+.assets { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; align-items: end; }
+.assets figure { margin: 0; }
+.assets figcaption { margin-top: 8px; font-size: 13px; color: var(--ink-2); }
+.assets figcaption b { display: block; font-family: var(--display); font-weight: 400; font-size: 18px; letter-spacing: .05em; color: var(--ink-gold); }
+.icon-tile { display: grid; place-items: center; background: var(--board); border: 2px solid var(--board-rim); }
+
+footer { margin-top: 60px; border-top: 1px solid var(--gd-rim); background: var(--void); padding-block: 26px 40px; font-size: 14px; color: var(--ink-3); }
+footer b { color: var(--ink-2); }
+footer a { color: var(--ink-gold); }
+
+@media (max-width: 860px) {
+  .shell { flex-direction: column; align-items: stretch; }
+  .main { width: 100%; }
+  .rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; min-height: 0; align-self: auto; width: 100%; flex-direction: row; overflow-x: auto; gap: 0; padding-block: 0; border-right: 0; border-bottom: 1px solid var(--gd-rim); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ground-2); }
+  .rail__mark { display: none; }
+  .rail a { white-space: nowrap; padding: 12px 14px 10px; }
+  .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark-ufm" viewBox="0 0 100 88">
+      <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
+      <path d="M24 26 L37 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M37 62 L50 40" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
+      <path d="M50 40 L63 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M63 62 L72.5 35.5" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
+      <circle cx="24" cy="26" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+      <polygon points="78.7,18.5 81.2,27.9 70.8,24.1" fill="#DE2424"/>
+    </symbol>
+    <symbol id="mark-fhc" viewBox="0 0 100 88">
+      <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
+      <path d="M24 26 L37 62 L50 40 L63 62 L74 31" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="14 7"/>
+      <circle cx="24" cy="26" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
+      <polygon points="78.7,18.5 81.2,27.9 70.8,24.1" fill="#DE2424"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail__mark"><b class="rail__wm"><i>UFM</i>WIZ</b><span>Brand Book</span></div>
+    <a href="#position" class="is-active">Position</a>
+    <a href="#name">Name</a>
+    <a href="#voice">Voice</a>
+    <a href="#words">Words</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#editorial">Editorial</a>
+    <a href="#assets">Assets</a>
+    <a href="#legal">Legal</a>
+  </nav>
+
+  <main class="main">
+    <header class="masthead">
+      <div class="masthead__body"><div class="wrap">
+        <h1>The maths behind <em>every</em> card.</h1>
+        <p>Who UFMWiz is, how it sounds, what it calls things, and what it won't do. The look is in the
+          UFMWiz Visual System; this book is everything else a contributor needs before writing a page, a post or a
+          button label.</p>
+      </div></div>
+    </header>
+
+    <!-- ============ POSITION ============ -->
+    <section id="position">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Position</h2><p>One sentence, then the jobs</p></div></div></div>
+      <div class="wrap sec-body">
+        <p class="positioning">Free tools for Ultimate Football Manager&nbsp;27 that <em>do the counting</em> so you can do the managing.</p>
+        <p class="lede">UFMWiz is for the player who already likes UFM and wants to spend less time doing arithmetic on a
+          phone: which cards finish a PTC, whether a squad clears Chemistry thresholds, what a pack actually holds, how
+          many wins the Weekend League rank needs. No UFM companion site existed when this book was written, so the job
+          is also to be the reference people link to.</p>
+
+        <h3>The jobs</h3>
+        <div class="jobs">
+          <div class="job"><b>Finish a PTC</b><span>Enter the requirements and the cards you plan to use. See what is still missing and the cheapest card that closes it.</span><small>PTC Solver</small></div>
+          <div class="job"><b>Find any card</b><span>Every card in UFM 27, filterable by rating, position, league, nationality, rarity and any stat.</span><small>Card Database</small></div>
+          <div class="job"><b>Build for Chemistry</b><span>Lay out a starting eleven and see each player's Chemistry and the team OVR before buying anyone.</span><small>Squad Builder</small></div>
+          <div class="job"><b>Know the odds</b><span>What every pack contains and what the published odds mean in pulls.</span><small>Packs</small></div>
+          <div class="job"><b>Plan the Weekend League</b><span>Qualification Points needed, games left, wins required for each of the ten ranks.</span><small>Weekend League</small></div>
+          <div class="job"><b>Track the calendar</b><span>Which rarity is live, which PTCs expire this week, how long until the Season Reset.</span><small>Events</small></div>
+        </div>
+
+        <h3>What UFMWiz is not</h3>
+        <ul class="clean no">
+          <li><b>Not official.</b> Not made, endorsed or reviewed by Gamebasics or Miniclip.</li>
+          <li><b>Not a hack.</b> UFM's YouTube results are full of "unlimited gems" scams. We never offer mods, generators,
+            account services or anything that touches the game client. Saying so plainly is part of the brand.</li>
+          <li><b>Not a pack hype channel.</b> We report odds and value. We don't celebrate pulls or push spending.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ NAME ============ -->
+    <section id="name">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Name</h2><p>One family, two pitches</p></div></div></div>
+      <div class="wrap sec-body">
+        <div class="familyrow">
+          <figure>
+            <div class="lockup"><svg class="lockup__mark" role="img" aria-label="UFMWiz mark"><use href="#mark-ufm"/></svg><span class="wordmark"><i>UFM</i>WIZ</span></div>
+            <figcaption>UFMWiz · gold rule · the W as a one-two</figcaption>
+          </figure>
+          <figure>
+            <div class="lockup"><svg class="lockup__mark" role="img" aria-label="FHCWiz mark"><use href="#mark-fhc"/></svg><span class="wordmark wordmark--fhc"><i>FHC</i>WIZ</span></div>
+            <figcaption>FHCWiz · red rule · the W as a route</figcaption>
+          </figure>
+        </div>
+        <p>The name follows the family pattern: the game's acronym, muted, then <strong>Wiz</strong>, lit. In running text
+          write <strong>UFMWiz</strong>: one word, capital U-F-M-W, lowercase "iz". The all-caps <strong>UFMWIZ</strong> exists
+          only inside the wordmark.</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Thing</th><th>Decision</th></tr></thead>
+          <tbody>
+            <tr><td>Domain</td><td><code>ufmwiz.com</code>. It was unregistered on 29 October 2026 (Verisign registry lookup), so register it before announcing anything. <code>ufmwiki.com</code> is parked by someone else.</td></tr>
+            <tr><td>URL structure</td><td>Edition-namespaced, as on FHCWiz: <code>/ufm27/ptc-solver/</code>, <code>/ufm27/players/</code>, <code>/ufm27/ptcs/</code>, <code>/ufm27/packs/</code>. Blog stays at <code>/blog/</code>. The August reset moves tools to <code>/ufm28/</code> and keeps <code>/ufm27/</code> as an archive.</td></tr>
+            <tr><td>Tool names</td><td>Plain nouns, the same words as FHCWiz: PTC Solver, PTCs, Players, Squad Builder, Packs, Weekend League, Events, Blog. Squad Builder replaces FHCWiz's Team Builder because UFM says "squad" and "lineup", never "roster".</td></tr>
+            <tr><td>Social handles</td><td><code>@ufmwiz</code> everywhere it is free. Never an account name that reads as the game's own.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ============ VOICE ============ -->
+    <section id="voice">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Voice</h2><p>The teammate who has already done the maths</p></div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">UFMWiz sounds like a player who knows the rules cold and tells you the answer first. Short sentences,
+          real numbers, the game's own words. Confident because it is checked, never because it is loud.</p>
+        <div class="principles">
+          <div class="principle"><h4>Answer first</h4><p>Lead with the number or the decision, then the reason. "You need 14 wins out of 15" before any explanation of points.</p></div>
+          <div class="principle"><h4>Use the game's words</h4><p>Players search for what the game prints. PTC, not SBC. Focus, not form. Quick Match, not friendly. See Words.</p></div>
+          <div class="principle"><h4>Show the working</h4><p>When a number decides something, show how it was reached in a line or a chalk figure. The reader should be able to check us.</p></div>
+          <div class="principle"><h4>Honest about the meter</h4><p>Energy, fitness and pack odds cost players real money. Say what something costs and what it returns, without spin in either direction.</p></div>
+          <div class="principle"><h4>Never "boss"</h4><p>The game's coach character calls the player "boss". That is the game's voice. Ours addresses the reader as "you".</p></div>
+          <div class="principle"><h4>Season-aware</h4><p>Everything in UFM resets in summer. Date any claim that can change, and say when advice expires.</p></div>
+        </div>
+
+        <h3>In practice</h3>
+        <div class="dodont">
+          <div class="do"><b>Do</b><q>Rank 1 needs 55 points from 15 games. A win is 4, a loss is 1, so that's 14 wins.</q><p>The answer, the rule, the arithmetic.</p></div>
+          <div class="dont"><b>Don't</b><q>Grinding the Weekend League is tough, but with the right strategy you can climb to the very top!</q><p>No number, no rule, nothing to act on.</p></div>
+          <div class="do"><b>Do</b><q>Train after each league match. Focus re-rolls when the match ends, so earlier training is wasted.</q><p>The instruction and the mechanic behind it.</p></div>
+          <div class="dont"><b>Don't</b><q>Hey boss! Your players need some love in the training ground 💪</q><p>The game's voice, an emoji and no information.</p></div>
+          <div class="do"><b>Do</b><q>Players report one gold around 76 from the 7,500-coin gold pack. Check the market price of the card you need before you open one.</q><p>The cost, the return, who reported it, and what to do.</p></div>
+          <div class="dont"><b>Don't</b><q>INSANE pull from a Screamers Mega Pack!!</q><p>Pack hype. Not our job.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORDS ============ -->
+    <section id="words">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Words</h2><p>Spell it the way the game prints it</p></div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">These spellings come from the game's own English text tables. Use them exactly, including capitals.
+          When the game has a short form, the short form is allowed only where space is tight.</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Write</th><th>Short form</th><th>Never</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Player Trade Challenge</td><td>PTC</td><td>SBC, squad building challenge</td><td>Trade in cards that meet requirements for a card or pack</td></tr>
+            <tr><td>OVR</td><td>—</td><td>Overall rating, rating</td><td>A player's headline number. Team OVR has one decimal</td></tr>
+            <tr><td>Focus</td><td>—</td><td>Form, morale</td><td>The −2 to +2 boost from training. Re-rolls after each league match</td></tr>
+            <tr><td>Fitness</td><td>—</td><td>Stamina, energy</td><td>Per-player %, recovers 1% an hour</td></tr>
+            <tr><td>Energy</td><td>—</td><td>Batteries, stamina</td><td>What a Quick Match costs. Caps at 3</td></tr>
+            <tr><td>Chemistry</td><td>CHM</td><td>Chem (in UI)</td><td>Up to +3 per starter from shared nationality, league or special rarity</td></tr>
+            <tr><td>Quick Match</td><td>—</td><td>Friendly, quick game</td><td>The energy-gated mode. "Quick Game" appears in-game too; prefer Quick Match</td></tr>
+            <tr><td>League</td><td>—</td><td>Tournament, cup</td><td>One match a day, 8 groups, two-legged knockouts</td></tr>
+            <tr><td>Weekend League</td><td>WL</td><td>FUT Champions</td><td>Qualify with QP, then 15 games over the weekend</td></tr>
+            <tr><td>Qualification Points</td><td>QP</td><td>Points</td><td>Earned by League and Quick Match wins</td></tr>
+            <tr><td>Challenge Match</td><td>—</td><td>Conditional match</td><td>Lineup must meet conditions. 100 points a win, 30 a loss</td></tr>
+            <tr><td>Season Reset</td><td>—</td><td>Wipe, new season</td><td>The summer reset. "Season Reset Tickets" carry progress over</td></tr>
+            <tr><td>coins</td><td>—</td><td>Money, cash, bucks</td><td>The soft currency. The HUD labels it Money; in prose, write coins</td></tr>
+            <tr><td>gems</td><td>—</td><td>Diamonds, rubies</td><td>The premium currency. Kept through the Season Reset</td></tr>
+            <tr><td>Unsellable</td><td>—</td><td>Untradeable</td><td>Can't be listed or quick-sold, can be traded into a PTC</td></tr>
+            <tr><td>Collection Book</td><td>CP for its points</td><td>Album</td><td>First-time pulls earn Collection Points</td></tr>
+            <tr><td>Draft Pick</td><td>—</td><td>Pick pack</td><td>Pick one of N players</td></tr>
+            <tr><td>Lineup Preset</td><td>—</td><td>Team slot</td><td>Up to 4 saved lineups, one active</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Tiers, qualities and rarities</h3>
+        <p><strong>Tiers:</strong> Amateur 1–3, Semi-Pro 1–3, Pro 1–3, Legendary 1–3. <strong>Qualities:</strong> Bronze, Silver,
+          Gold, Gold Rare, Elite, Premium. <strong>Rarities</strong> take the game's display name, with the short form allowed in
+          tables: Team of the Week (TOTW), Player of the Month (POTM), Team of the Year (TOTY), Team of the Season (TOTS),
+          Screamers, Most Wanted, Transfer Stars and so on. Write the rarity name in full the first time on any page.</p>
+        <div class="note"><p><strong>The game's own text is inconsistent in places.</strong> The Halloween rarity displays as
+          "Matchday", and "Kick-Off" displays as "European Evolutions". Always write what the player sees on the card, not
+          the internal name.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ NUMBERS ============ -->
+    <section id="numbers">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Numbers</h2><p>Formats a player already reads</p></div></div></div>
+      <div class="wrap sec-body">
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Quantity</th><th>Format</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Player OVR</td><td>Integer</td><td><code>88</code></td></tr>
+            <tr><td>Team OVR</td><td>One decimal, always</td><td><code>86.2</code>, never <code>86</code></td></tr>
+            <tr><td>Chemistry</td><td>Signed, one decimal for teams</td><td><code>+3</code> per player, <code>+2.0</code> team</td></tr>
+            <tr><td>Focus</td><td>Signed integer</td><td><code>−2</code> … <code>+2</code> with a true minus sign</td></tr>
+            <tr><td>Coins</td><td>Thousands separator, no symbol</td><td><code>21,500 coins</code></td></tr>
+            <tr><td>Timers in UI</td><td>The game's own style</td><td><code>7H 59M</code>, <code>12D 17H</code></td></tr>
+            <tr><td>Timers in prose</td><td>Lowercase, spaced</td><td><code>7 h 59 m</code> or "about 8 hours"</td></tr>
+            <tr><td>Odds</td><td>Both forms, chance first</td><td><code>2.5% (1 in 40)</code></td></tr>
+            <tr><td>Fitness</td><td>Percent, no decimals</td><td><code>75%</code></td></tr>
+            <tr><td>Dates</td><td>Day month, with weekday when it matters</td><td><code>Sat 31 Oct</code>; times in UTC with the reader's local time beside</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Interface copy</h3>
+        <ul class="clean">
+          <li><b>Headers</b> are the game's pattern: a one-to-three-word title set in caps, and a gold sentence beside it that says what the screen is for. "Market · Search the market and strengthen your team".</li>
+          <li><b>Buttons</b> are a verb, two words at most: Complete, Add card, Clear all, Apply filters. The result names what happened: "Challenge saved".</li>
+          <li><b>Errors</b> say what went wrong and how to fix it: "That lineup has 10 players. Add one more to check Chemistry."</li>
+          <li><b>Empty states</b> on a full page are chalk with one line of instruction. Inside a working panel they are one muted sentence.</li>
+          <li><b>Reported, not verified.</b> When a figure comes from players rather than the game (energy regen time, pack prices), say "players report" and date it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ EDITORIAL ============ -->
+    <section id="editorial">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Editorial</h2><p>Series that follow the game's calendar</p></div></div></div>
+      <div class="wrap sec-body">
+        <p class="lede">UFM's content runs on a fixed rhythm: a weekly Team of the Week, a monthly Player of the Month, a new
+          rarity every few weeks, the Weekend League every weekend, the Season Reset every summer. Each series below maps
+          to one of those beats, so readers learn when to come back.</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Series</th><th>Cadence</th><th>Title pattern</th><th>Slug</th></tr></thead>
+          <tbody>
+            <tr><td>New Rarity</td><td>Each event drop</td><td>"New rarity: Screamers"</td><td><code>/blog/new-rarity-screamers/</code></td></tr>
+            <tr><td>TOTW</td><td>Weekly</td><td>"Team of the Week 9"</td><td><code>/blog/team-of-the-week-9/</code></td></tr>
+            <tr><td>POTM Watch</td><td>Monthly</td><td>"POTM predictions: November"</td><td><code>/blog/potm-predictions-november/</code></td></tr>
+            <tr><td>PTC Guide</td><td>When a PTC set launches</td><td>"Cheapest way through Most Wanted PTC 2"</td><td><code>/blog/ptc-most-wanted-2/</code></td></tr>
+            <tr><td>Weekend League Report</td><td>Monday</td><td>"Weekend League, week 10: what rank 1 took"</td><td><code>/blog/weekend-league-wk10/</code></td></tr>
+            <tr><td>Market Watch</td><td>Fortnightly</td><td>"Market watch: strikers under 20k"</td><td><code>/blog/market-watch-strikers/</code></td></tr>
+            <tr><td>Reset Watch</td><td>July–August</td><td>"Reset watch: how many tickets your stats are worth"</td><td><code>/blog/reset-watch-1/</code></td></tr>
+            <tr><td>How It Works</td><td>Evergreen</td><td>"What every stat does"</td><td><code>/blog/what-every-stat-does/</code></td></tr>
+          </tbody>
+        </table></div>
+        <p>Every post opens with the answer in one or two sentences, uses chalk figures for anything spatial, and never uses a
+          game screenshot. A post that depends on numbers that change states the date and the game version at the top.</p>
+      </div>
+    </section>
+
+    <!-- ============ ASSETS ============ -->
+    <section id="assets">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Assets</h2><p>What to produce before launch</p></div></div></div>
+      <div class="wrap sec-body">
+        <div class="assets">
+          <figure><div class="icon-tile" style="width:96px;height:96px;border-radius:20px"><svg viewBox="0 0 100 88" width="76" aria-hidden="true"><use href="#mark-ufm"/></svg></div>
+            <figcaption><b>App icon</b>The mark on its own board, maskable, 512 and 192 px. No wordmark.</figcaption></figure>
+          <figure><div class="icon-tile" style="width:48px;height:48px;border-radius:8px"><svg viewBox="0 0 100 88" width="40" aria-hidden="true"><use href="#mark-ufm"/></svg></div>
+            <figcaption><b>Favicon</b>32 px and an SVG. At 16 px drop the O and keep the W and the arrowhead.</figcaption></figure>
+          <figure><div class="icon-tile" style="width:72px;height:72px;border-radius:50%"><svg viewBox="0 0 100 88" width="56" aria-hidden="true"><use href="#mark-ufm"/></svg></div>
+            <figcaption><b>Avatar</b>Discord, Reddit, X. The circle crops the board, never the W.</figcaption></figure>
+        </div>
+        <h3>Social card · 1200 × 630</h3>
+        <div class="og" role="img" aria-label="Example social card: Weekend League, what rank 1 took">
+          <div class="og__in">
+            <span class="og__wm"><i>UFM</i>WIZ</span>
+            <div><h4>Weekend League: what rank 1 took</h4><p>55 points, 15 games, and the squads that got there</p></div>
+          </div>
+        </div>
+        <p style="margin-top:14px">Black, the brush sweep from the bottom left, the post title in Bebas, the subtitle in gold,
+          the wordmark top right with its gold rule. No card art, no portraits, no game logo. One template for every post.</p>
+      </div>
+    </section>
+
+    <!-- ============ LEGAL ============ -->
+    <section id="legal">
+      <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Legal</h2><p>Fan project, said clearly</p></div></div></div>
+      <div class="wrap sec-body">
+        <h3>The disclaimer</h3>
+        <div class="disclaimer">
+          <p id="disclaimerText">UFMWiz is an independent fan project. It is not affiliated with, endorsed by or sponsored by Gamebasics BV or Miniclip. Ultimate Football Manager and UFM are trademarks of their respective owners. Player names and ratings are shown as reference data only.</p>
+          <button type="button" class="copybtn" id="copyDisclaimer">Copy text</button><span class="copystate" id="copyState" role="status"></span>
+        </div>
+        <p style="margin-top:14px">It goes in the footer of every page and in the description of every social account.</p>
+
+        <h3>Rules that protect the site</h3>
+        <ul class="clean no">
+          <li><b>No game files on the site.</b> No sprites, card art, pack art, currency icons, fonts or data copied out of the app. Values that describe the look are fine; the files themselves are not.</li>
+          <li><b>No data taken from the game's servers.</b> Card data comes from what players can see and submit, entered by hand or imported from CSV, as on FHCWiz.</li>
+          <li><b>No logos or likenesses.</b> No UFM, Gamebasics or Miniclip marks. No player photos. Club crests are drawn as plain two-colour shields.</li>
+          <li><b>No account services.</b> No selling, boosting or sharing accounts. UFM's own terms ban account transfers.</li>
+          <li><b>No monetised pack hype.</b> If the site ever carries ads or affiliate links, they never sit beside pack odds.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer><div class="wrap">
+      <p style="margin:0;max-width:78ch">Companion to the <a href="https://claude.ai/artifact/Xak2Zh32yU1PxCDgDFTQvr"><b>UFMWiz Visual System</b></a>. Terms and spellings were taken from the
+        game's own English text tables in build 27.4.0. <b>Ultimate Football Manager 27</b> is a product of Gamebasics BV,
+        part of Miniclip. UFMWiz is a third-party companion and claims no association with it.</p>
+    </div></footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  function mark() {
+    var best = 0;
+    for (var i = 0; i < sections.length; i++) { if (sections[i] && sections[i].getBoundingClientRect().top <= 140) best = i; }
+    links.forEach(function (a, i) { a.classList.toggle('is-active', i === best); });
+  }
+  var ticking = false;
+  addEventListener('scroll', function () { if (ticking) return; ticking = true; requestAnimationFrame(function () { mark(); ticking = false; }); }, { passive: true });
+  mark();
+
+  var btn = document.getElementById('copyDisclaimer');
+  var state = document.getElementById('copyState');
+  var text = document.getElementById('disclaimerText');
+  btn.addEventListener('click', function () {
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(text);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      state.textContent = 'Selected. Press copy on your device.';
+    }
+    try {
+      navigator.clipboard.writeText(text.textContent).then(function () { state.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+  });
+})();
+</script>
