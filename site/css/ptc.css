@@ -18,8 +18,21 @@
 .ptc-done b { font-weight: 700; }
 
 .ptc-slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 16px 12px; }
+.ptc-slotwrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; }
+/* The quick add. Lime, because it is a gain: the closest card of yours that fits. */
+.ptc-plus {
+  position: relative; z-index: 1; margin-top: -22px;
+  width: 34px; height: 34px; display: grid; place-items: center; padding: 3px 0 0;
+  font-family: var(--ufm-display); font-size: 28px; line-height: 1; color: #1F2A07;
+  border: 0; border-radius: 4px; cursor: pointer;
+  background: linear-gradient(180deg, #BFE557, #ADD34D 50%, #97BF43);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 2px 0 rgba(0,0,0,.6);
+}
+.ptc-plus:hover { filter: brightness(1.08); }
+.ptc-plus:focus-visible { outline: 2px solid var(--ufm-ink); outline-offset: 2px; }
+.ptc-slot__tag.is-lineup { color: var(--ufm-sug); }
 .ptc-slot {
-  appearance: none; background: none; border: 0; padding: 0; margin: 0; color: inherit;
+  appearance: none; background: none; border: 0; padding: 0; margin: 0; color: inherit; width: 100%;
   display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; min-width: 0;
 }
 .ptc-slot .ucard { width: 100%; transition: transform .12s ease; }
@@ -42,6 +55,45 @@
 .req b { white-space: nowrap; }
 
 .ptc-peek .ucard { width: 190px; margin: 0 auto; }
+.req__val { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+.req__val small { font-size: 12px; font-weight: 500; color: var(--ufm-ink-2); white-space: nowrap; }
+.req.is-met .req__val small { color: var(--ufm-pos); opacity: .8; }
+
+/* What stops a challenge being finished: persistent, so dark, with a red edge. */
+.ptc-warn { margin: 0 0 8px; padding: 10px 14px; background: var(--ufm-void); border: 1px solid #24211a; border-left: 3px solid var(--ufm-rd-rim); font-size: 14px; font-weight: 500; color: var(--ufm-ink); }
+.ptc-warn--info { border-left-color: var(--ufm-gd-rim); }
+
+/* Show the working: the total and where it comes from. */
+.ptc-maths { margin-top: 12px; padding: 12px 14px; background: var(--ufm-band); border: 1px solid #2a271c; font-size: 14px; font-weight: 500; color: var(--ufm-ink-2); }
+.ptc-maths p { margin: 0 0 6px; }
+.ptc-maths b { color: var(--ufm-ink); font-variant-numeric: tabular-nums; }
+.ptc-maths__note { font-size: 13px; color: var(--ufm-ink-3); margin: 8px 0 0 !important; }
+
+/* A better card back to your squad. */
+.ptc-swap { margin: -6px 0 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-weight: 500; color: var(--ufm-ink-2); max-width: 86ch; }
+
+/* ---- cheapest completion ---- */
+.ptc-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.ptc-main > .panel + .panel { margin-top: 0; }
+.ptc-mrows { display: flex; flex-direction: column; gap: 4px; }
+.ptc-mrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); padding: 8px 10px; }
+.ptc-mrow .field { width: auto; height: 38px; font-size: 14px; padding: 0 10px; }
+.ptc-mrow select.field { width: 84px; padding-right: 26px; }
+.ptc-mrow [data-m="ovr"] { width: 72px; }
+.ptc-mrow [data-m="price"] { width: 110px; }
+.ptc-mrow__unit { font-size: 13px; color: var(--ufm-ink-gold); }
+.ptc-mrow .iconbtn { margin-left: auto; }
+.ptc-opt__add { margin: 10px 0 14px; }
+.ptc-reward { max-width: 280px; }
+.ptc-opt__out { margin-top: 14px; }
+.ptc-opt__total { margin: 0 0 8px; font-size: 15px; color: var(--ufm-ink-gold); }
+.ptc-opt__total b { margin-left: 8px; font-family: var(--ufm-display); font-weight: 400; font-size: 30px; letter-spacing: .02em; color: var(--ufm-ink); font-variant-numeric: tabular-nums; }
+.ptc-opt__picks { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.ptc-opt__picks li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 12px; background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); }
+.ptc-opt__picks b { font-family: var(--ufm-display); font-weight: 400; font-size: 20px; letter-spacing: .04em; }
+.ptc-opt__picks span { font-variant-numeric: tabular-nums; }
+.ptc-opt__verdict { margin: 0 0 10px; font-weight: 700; }
+.ptc-opt__msg { margin: 0; font-weight: 500; color: var(--ufm-sug); }
 
 /* ---- the setup dialog ---- */
 .ptc-rows { display: flex; flex-direction: column; gap: 6px; }
@@ -71,4 +123,11 @@
   .ptc-cards .panel__body { padding: 14px 12px; }
   .ptc-foot .btn { flex: 1 1 100%; }
   .ptc-row input[type="text"].field { width: 120px; }
+  /* a price on one line: position, rating, price, remove */
+  .ptc-mrow { flex-wrap: nowrap; gap: 6px; padding: 8px; }
+  .ptc-mrow select.field { width: 74px; flex: none; }
+  .ptc-mrow [data-m="ovr"] { width: 58px; flex: none; }
+  .ptc-mrow [data-m="price"] { flex: 1 1 auto; width: auto; min-width: 0; }
+  .ptc-mrow__unit { display: none; }
+  .ptc-reward { max-width: none; }
 }

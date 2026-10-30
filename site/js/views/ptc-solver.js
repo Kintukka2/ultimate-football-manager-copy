@@ -1,17 +1,23 @@
 // PTC Solver: enter a Player Trade Challenge and the cards you plan to trade
 // in, and see what it still needs. Challenges are kept in this browser.
 
-import { esc, on, load, save, uid, one, day } from '../lib/util.js';
-import { evaluate, KINDS, PROPS, prop, cmpsFor, DISTINCT_PROPS, defaultReq, exampleChallenge, cleanReq } from '../lib/ptc.js';
+import { esc, on, load, save, uid, int, coins, day } from '../lib/util.js';
+import {
+  evaluate, KINDS, PROPS, prop, cmpsFor, DISTINCT_PROPS, defaultReq, exampleChallenge, cleanReq,
+  AVERAGE_ROUNDS, planQuickFill, optimiseCheapest, expensivePositions, findSwaps, findDowngrades,
+} from '../lib/ptc.js';
 import { POSITIONS } from '../data/football.js';
 import { QUALITIES, RARITIES } from '../data/rarities.js';
 import { myCards } from '../lib/cards.js';
 import { tradeIn } from '../lib/board.js';
-import { shirtCard } from '../ui/card.js';
+import { shirtCard, shortName } from '../ui/card.js';
 import { openDialog, confirmDialog, toast } from '../ui/dialog.js';
 import { pickCard } from '../ui/picker.js';
 
 const KEY = 'ptc', ACTIVE = 'ptc:active';
+// One decimal where it carries information, none where it doesn't: 82, 81.5.
+const dec = (n) => String(Math.round(n * 10) / 10);
+const parseCoins = (v) => Number(String(v ?? '').replace(/[^\d]/g, '')) || 0;
 let list = [];
 let activeId = null;
 let root = null;
@@ -38,6 +44,35 @@ function replace(ch) {
   paint();
 }
 
+// ---- the cards you'd lose ----------------------------------------------------------
+// The Squad Builder's four lineups, by card id. The game locks a card that is
+// in any lineup, so the solver warns before it plans to trade one in.
+function lineupIndex() {
+  const raw = load('squads', []);
+  const map = new Map();
+  (Array.isArray(raw) ? raw : []).forEach((p, i) => (p?.slots || []).forEach((c) => {
+    if (c && c.id) map.set(c.id, [...new Set([...(map.get(c.id) || []), i + 1])]);
+  }));
+  return map;
+}
+const lineupNote = (ids) => `Lineup ${ids.join(' and ')}`;
+function lineupWarning(card, lineups) {
+  const ids = lineups.get(card.id);
+  if (ids) toast(`${card.name} is in ${lineupNote(ids)} in the Squad Builder. The game locks lineup cards, so take it out of the lineup before you trade it in.`);
+}
+
+// The + on every empty slot, from My cards. Cards in a lineup are used only
+// when nothing else fits, so the plan doesn't spend your eleven.
+function quickFill(ch, e, lineups) {
+  const all = myCards.all();
+  const free = all.filter((c) => !lineups.has(c.id));
+  const first = planQuickFill(ch, free, e);
+  if (first.picks.every(Boolean) || free.length === all.length) return first;
+  const fallback = planQuickFill(ch, all, e);
+  const used = new Set(first.picks.filter(Boolean).map((c) => c.id));
+  return { ...first, picks: first.picks.map((p, j) => p || (fallback.picks[j] && !used.has(fallback.picks[j].id) ? fallback.picks[j] : null)) };
+}
+
 // ---- page ---------------------------------------------------------------------
 function emptyState() {
   return `<div class="wrap"><div class="boardempty">${tradeIn()}
@@ -53,8 +88,8 @@ function answer(ch, e) {
       <button type="button" class="btn btn--sm btn--olive" data-act="again">Run again</button></div>`;
   }
   if (e.complete) {
-    const extra = e.surplus === null ? '' : e.surplus > 0.05 ? ` You are ${one(e.surplus)} OVR above the average.` : ' You are exactly on the average.';
-    return `<p class="ptc-answer"><b class="pos-t">Ready to submit.</b> Every requirement is met.${extra}</p>`;
+    const extra = e.surplus === null ? '' : e.surplus > 0 ? ` You are ${e.surplus} OVR over the total it needs.` : ' You are exactly on the total it needs.';
+    return `<p class="ptc-answer"><b class="pos-t">Ready to submit.</b> Every requirement is met.${extra}</p>${giveBack(ch, e)}`;
   }
   // A count's need ("2 more needed") only makes sense beside what it counts.
   const needs = e.unmet.map((r) => (!r.needText ? `${r.label}: not met yet`
@@ -62,24 +97,122 @@ function answer(ch, e) {
   return `<p class="ptc-answer"><b>${e.unmet.length === 1 ? 'One requirement' : `${e.unmet.length} requirements`} to go.</b> ${esc(needs.slice(0, 2).join('. '))}.</p>`;
 }
 
-function slots(ch) {
+// A finished board with OVR to spare: a better card can go back to your squad.
+function giveBack(ch, e) {
+  if (!(e.surplus > 0)) return '';
+  const swaps = findSwaps(ch, myCards.all());
+  if (swaps.length) {
+    const s = swaps[0];
+    return `<p class="ptc-swap">Keep a better card: swap your ${esc(s.out.name)} (${s.out.ovr} ${esc(s.out.pos[0])}) for your ${esc(s.in.name)} (${s.in.ovr} ${esc(s.in.pos[0])}) and the challenge still clears.
+      <button type="button" class="btn btn--xs btn--olive" data-swap="${s.index}" data-in="${esc(s.in.id)}">Swap</button></p>`;
+  }
+  const d = findDowngrades(ch.cards.filter(Boolean), e.surplus)[0];
+  return d ? `<p class="ptc-swap">Your ${esc(d.card.name)} (${d.card.ovr} ${esc(d.card.pos[0])}) could be a ${d.to} and still pass, if it covers the same requirements.</p>` : '';
+}
+
+// An empty slot says what it needs: its position, and the rating that keeps
+// the total on track. The + adds the closest card of yours that fits.
+function slots(ch, fill, lineups) {
+  const empties = ch.cards.map((c, i) => (c ? -1 : i)).filter((i) => i >= 0);
   return ch.cards.map((c, i) => {
-    const label = c ? `Slot ${i + 1}: ${c.name}, ${c.ovr} ${c.pos[0]}` : `Slot ${i + 1}: empty, pick a card`;
-    return `<button type="button" class="ptc-slot" data-slot="${i}" aria-label="${esc(label)}"${ch.done ? ' disabled' : ''}>`
-      + `${shirtCard(c, { label: 'Select player' })}${c && c.sellable === false ? '<span class="ptc-slot__tag">Unsellable</span>' : ''}</button>`;
+    const j = empties.indexOf(i);
+    const plan = j >= 0 ? fill.slots[j] : null;
+    const target = j >= 0 && fill.targets ? fill.targets[j] : null;
+    const pick = j >= 0 && !ch.done ? fill.picks[j] : null;
+    const want = plan ? [plan.pos || 'Any', target].filter(Boolean).join(' · ') : '';
+    const label = c ? `Slot ${i + 1}: ${c.name}, ${c.ovr} ${c.pos[0]}` : `Slot ${i + 1}: empty${want ? `, needs ${want}` : ''}. Pick a card`;
+    const tags = [c && c.sellable === false ? 'Unsellable' : '', c && lineups.has(c.id) ? `In ${lineupNote(lineups.get(c.id))}` : '']
+      .filter(Boolean).map((t) => `<span class="ptc-slot__tag${t.startsWith('In ') ? ' is-lineup' : ''}">${esc(t)}</span>`).join('');
+    const plus = pick ? `<button type="button" class="ptc-plus" data-plus="${i}" aria-label="Add ${esc(pick.name)}, ${pick.ovr} ${esc(pick.pos[0])}" title="Add ${esc(pick.name)}, ${pick.ovr} ${esc(pick.pos[0])}${lineups.has(pick.id) ? ' (in a lineup)' : ''}">+</button>` : '';
+    return `<div class="ptc-slotwrap"><button type="button" class="ptc-slot" data-slot="${i}" aria-label="${esc(label)}"${ch.done ? ' disabled' : ''}>`
+      + `${shirtCard(c, { label: want || 'Select player' })}</button>${plus}${tags}</div>`;
   }).join('');
 }
 
 function reqRows(e) {
   return e.rows.map((r) => `<div class="req${r.met ? ' is-met' : ''}">
       <span class="req__label">${esc(r.label)}${!r.met && r.needText ? `<small class="req__need">${esc(r.needText)}</small>` : ''}</span>
-      <b>${esc(r.current)}</b></div>`).join('');
+      <b class="req__val">${esc(r.current)}${r.total ? `<small>${esc(r.total)} total</small>` : ''}</b></div>`).join('');
+}
+
+// When your own cards can't reach the total, say so before the + gets pressed.
+function fillWarning(ch, e, fill) {
+  const r = e.rating;
+  if (ch.done || !r.remaining || r.impossible || !myCards.all().length) return null;
+  const best = fill.picks.reduce((a, c) => a + (c ? c.ovr : 0), 0);
+  if (best >= r.remaining && fill.picks.every(Boolean)) return null;
+  const text = fill.picks.some(Boolean)
+    ? `The best of your cards for the empty slots add up to ${int(best)}, ${int(r.remaining - best)} short of the ${int(r.remaining)} still needed. Cheapest completion works out what to buy.`
+    : 'None of your cards fits the empty slots. Cheapest completion works out what to buy.';
+  return { level: 'info', text };
+}
+
+const warnings = (e, extra) => [...e.warnings, extra].filter(Boolean).map((w) => `<p class="ptc-warn ptc-warn--${w.level}">${esc(w.text)}</p>`).join('');
+
+// Show the working: where the total comes from, so a reader can check it.
+function maths(ch, e) {
+  const r = e.rating;
+  if (!r.binding || r.binding.kind !== 'avg') return '';
+  const avg = Number(r.binding.value);
+  const bar = avg - AVERAGE_ROUNDS;
+  const raw = ch.size * bar;
+  const rest = r.left && r.remaining
+    ? ` Still to find: <b>${int(r.remaining)}</b> from ${r.left === 1 ? 'the last card' : `${r.left} cards, ${dec(r.remainingAverage)} each`}.` : '';
+  return `<div class="ptc-maths">
+    <p>Total it needs: ${ch.size} × ${dec(bar)} = ${dec(raw)}${raw === r.required ? '' : ', rounded up'}, so <b>${int(r.required)}</b>.</p>
+    <p>On the challenge now: <b>${int(r.current)}</b>.${rest}</p>
+    <p class="ptc-maths__note">Why ${dec(bar)} and not ${dec(avg)}: the game checks the average it shows, a whole number, and ${dec(bar)} already shows as ${dec(avg)}. That is how PTCs count in Football Head Coach 27, which runs on the same Gamebasics system.</p>
+  </div>`;
+}
+
+// ---- cheapest completion ---------------------------------------------------------
+const marketOf = (ch) => (ch.market || []).map((m) => ({ pos: m.pos, ovr: Number(m.ovr), price: Number(m.price) }))
+  .filter((m) => Number.isInteger(m.ovr) && m.ovr >= 1 && m.ovr <= 99 && m.price > 0);
+
+function optOut(ch, e) {
+  const market = marketOf(ch);
+  if (!market.length) return '<p class="empty-line">Add a few prices and the cheapest way to finish shows here.</p>';
+  const res = optimiseCheapest(e.plan, market, e.rating.remaining, ch);
+  if (!res.feasible) return `<p class="ptc-opt__msg">${esc(res.reason)}</p>`;
+  const picks = res.picks.map((p) => `<li><b>${esc(p.option.pos)} ${p.option.ovr}</b><span>${coins(p.option.price)} coins</span></li>`).join('');
+  let verdict = '';
+  if (ch.reward > 0) {
+    const d = ch.reward - res.totalCost;
+    verdict = d >= 0 ? `<p class="ptc-opt__verdict pos-t">You save ${coins(d)} coins against buying the reward.</p>`
+      : `<p class="ptc-opt__verdict bad-t">Buying the reward is ${coins(-d)} coins cheaper.</p>`;
+  }
+  const dear = expensivePositions(market);
+  const tip = dear.length >= 2 ? `<p class="hint">${esc(dear[0].pos)} costs the most per OVR point in these prices. Keep it at the lowest rating the challenge allows, and make up the total at ${esc(dear[dear.length - 1].pos)}.</p>` : '';
+  return `<p class="ptc-opt__total">Coins to finish <b>${coins(res.totalCost)}</b></p>
+    <ul class="ptc-opt__picks">${picks}</ul>${verdict}${tip}
+    <p class="hint">Cards already on the challenge aren't counted: they cost nothing more, but you lose them. A price only says a card's position and rating, so check its rarity and nation yourself.</p>`;
+}
+
+function optimiser(ch, e) {
+  if (ch.done || !e.missing) return '';
+  const rows = (ch.market || []).map((m) => `<div class="ptc-mrow" data-mrow="${esc(m.id)}">
+      <select class="field" data-m="pos" aria-label="Position">${POSITIONS.map((p) => `<option${p === m.pos ? ' selected' : ''}>${p}</option>`).join('')}</select>
+      <input class="field" type="number" inputmode="numeric" min="1" max="99" data-m="ovr" value="${esc(m.ovr ?? '')}" placeholder="OVR" aria-label="OVR">
+      <input class="field" type="text" inputmode="numeric" data-m="price" value="${m.price ? int(m.price) : ''}" placeholder="Price" aria-label="Price in coins">
+      <span class="ptc-mrow__unit">coins</span>
+      <button type="button" class="iconbtn" data-mdel="${esc(m.id)}" aria-label="Remove this price">&times;</button></div>`).join('');
+  return `<section class="panel ptc-opt" aria-label="Cheapest completion">
+    <div class="panel__head"><h2>Cheapest completion</h2><span>From prices you can see in the game</span></div>
+    <div class="panel__body">
+      <p class="hint">We have no market data. Search the market in the game, and type in the prices you see for cards that could fill the empty slots. This picks one card for each slot, for the fewest coins that still clears the total.</p>
+      <div class="ptc-mrows">${rows}</div>
+      <div class="row ptc-opt__add"><button type="button" class="btn btn--xs btn--lime" data-act="madd">Add price</button></div>
+      <label class="lbl ptc-reward"><span>Reward's market value <small>optional</small></span><input class="field" type="text" inputmode="numeric" data-reward value="${ch.reward ? int(ch.reward) : ''}" placeholder="What the reward sells for"></label>
+      <div class="ptc-opt__out" data-optout>${optOut(ch, e)}</div>
+    </div></section>`;
 }
 
 function page() {
   const ch = active();
   if (!ch) return emptyState();
   const e = evaluate(ch);
+  const lineups = lineupIndex();
+  const fill = ch.done ? { slots: e.plan, targets: null, picks: [] } : quickFill(ch, e, lineups);
   const opts = list.map((c) => `<option value="${esc(c.id)}"${c.id === ch.id ? ' selected' : ''}>${esc(c.name)}${c.done ? ' · Complete' : ''}</option>`).join('');
   return `<div class="wrap ptc">
   <div class="ptc-bar">
@@ -92,19 +225,22 @@ function page() {
   </div>
   ${answer(ch, e)}
   <div class="grid cols-side ptc-layout">
+    <div class="ptc-main">
     <section class="panel ptc-cards" aria-label="Cards to submit">
       <div class="panel__head"><h2>Cards to submit</h2><span>${e.filled} of ${ch.size}</span>
         <div class="head-actions"><button type="button" class="btn btn--xs btn--red" data-act="clear"${e.filled && !ch.done ? '' : ' disabled'}>Clear all</button></div></div>
       <div class="panel__body">
-        <p class="hint">Tap a slot to pick one of your cards or type one in. Enter each card's base OVR, not one raised by Focus or Chemistry.</p>
-        <div class="ptc-slots">${slots(ch)}</div>
+        <p class="hint">Tap a slot to pick one of your cards or type one in, or tap + to add the closest card of yours that fits. Enter each card's base OVR, not one raised by Focus or Chemistry.</p>
+        <div class="ptc-slots">${slots(ch, fill, lineups)}</div>
         ${ch.done ? '' : `<div class="ptc-foot"><span class="ptc-status">${e.complete ? 'Ready to trade in.' : 'Complete the requirements to submit.'}</span>
           <button type="button" class="btn btn--foil" data-act="complete"${e.complete ? '' : ' disabled'}>Complete</button></div>`}
       </div>
     </section>
+    ${optimiser(ch, e)}
+    </div>
     <aside class="panel ptc-req" aria-label="Requirements">
       <div class="panel__head"><h2>${esc(ch.name)}</h2><span>Requirements</span></div>
-      <div class="panel__body"><div class="reqs">${reqRows(e)}</div></div>
+      <div class="panel__body">${warnings(e, fillWarning(ch, e, fill))}<div class="reqs">${reqRows(e)}</div>${maths(ch, e)}</div>
     </aside>
   </div>
 </div>`;
@@ -305,7 +441,10 @@ async function act(name) {
     case 'complete': {
       const e = evaluate(ch);
       if (!e.complete) return;
-      const detail = e.surplus === null ? '' : e.surplus > 0.05 ? `You are ${one(e.surplus)} OVR above the requirement.` : 'You are exactly on the requirement.';
+      const lineups = lineupIndex();
+      const locked = ch.cards.filter((c) => c && lineups.has(c.id)).length;
+      const detail = [e.surplus === null ? '' : e.surplus > 0 ? `You are ${e.surplus} OVR over the total it needs.` : 'You are exactly on the total it needs.',
+        locked ? `${locked === 1 ? 'One of these cards is' : `${locked} of these cards are`} in a Squad Builder lineup: the game locks lineup cards, so take ${locked === 1 ? 'it' : 'them'} out first.` : ''].filter(Boolean).join(' ');
       const ok = await confirmDialog({
         title: 'Complete challenge?', sub: 'These cards will be traded in',
         message: 'Are you sure you want to permanently trade in these players?', detail,
@@ -318,8 +457,33 @@ async function act(name) {
       toast(`Challenge complete. ${used.length === 1 ? '1 card' : `${used.length} cards`} traded in.`);
       break;
     }
+    case 'madd': {
+      const e = evaluate(ch);
+      const first = e.plan[0];
+      ch.market = [...(ch.market || []), { id: uid(), pos: first?.pos || 'ST', ovr: '', price: '' }];
+      replace(ch);
+      root.querySelector('.ptc-mrow:last-child [data-m="ovr"]')?.focus();
+      break;
+    }
     default: break;
   }
+}
+
+// A price or the reward typed in: saved as it is typed, and only the answer
+// below redrawn, so the box being typed in keeps its focus.
+function readMarket() {
+  const ch = active();
+  if (!ch) return;
+  ch.market = [...root.querySelectorAll('[data-mrow]')].map((el) => ({
+    id: el.dataset.mrow,
+    pos: el.querySelector('[data-m="pos"]').value,
+    ovr: el.querySelector('[data-m="ovr"]').value === '' ? '' : Number(el.querySelector('[data-m="ovr"]').value),
+    price: parseCoins(el.querySelector('[data-m="price"]').value),
+  }));
+  ch.reward = parseCoins(root.querySelector('[data-reward]')?.value) || null;
+  persist();
+  const out = root.querySelector('[data-optout]');
+  if (out) out.innerHTML = optOut(ch, evaluate(ch));
 }
 
 async function slot(i) {
@@ -342,6 +506,33 @@ async function slot(i) {
   const fresh = active();
   fresh.cards[i] = card;
   replace(fresh);
+  lineupWarning(card, lineupIndex());
+}
+
+function plus(i) {
+  const ch = active();
+  if (!ch || ch.done || ch.cards[i]) return;
+  const e = evaluate(ch);
+  const lineups = lineupIndex();
+  const fill = quickFill(ch, e, lineups);
+  const j = ch.cards.map((c, k) => (c ? -1 : k)).filter((k) => k >= 0).indexOf(i);
+  const card = fill.picks[j];
+  if (!card) return;
+  ch.cards[i] = card;
+  replace(ch);
+  root.querySelector(`[data-slot="${i}"]`)?.focus();
+  if (lineups.has(card.id)) lineupWarning(card, lineups);
+  else toast(`Added ${card.name}, ${card.ovr} ${card.pos[0]}.`);
+}
+
+function swap(i, inId) {
+  const ch = active();
+  const card = myCards.all().find((c) => c.id === inId);
+  if (!ch || !card || !ch.cards[i]) return;
+  const out = ch.cards[i];
+  ch.cards[i] = card;
+  replace(ch);
+  toast(`Swapped: ${shortName(out.name)} stays in your squad, ${shortName(card.name)} goes in.`);
 }
 
 export function mount(body) {
@@ -351,6 +542,17 @@ export function mount(body) {
   on(body, 'click', 'button[data-act]', (e, b) => { if (!b.disabled) act(b.dataset.act); });
   on(body, 'change', 'select[data-act="select"]', (e, s) => { activeId = s.value; persist(); paint(); });
   on(body, 'click', '[data-slot]', (e, b) => { if (!b.disabled) slot(Number(b.dataset.slot)); });
+  on(body, 'click', '[data-plus]', (e, b) => plus(Number(b.dataset.plus)));
+  on(body, 'click', '[data-swap]', (e, b) => swap(Number(b.dataset.swap), b.dataset.in));
+  on(body, 'click', '[data-mdel]', (e, b) => {
+    const ch = active();
+    ch.market = (ch.market || []).filter((m) => m.id !== b.dataset.mdel);
+    replace(ch);
+  });
+  on(body, 'input', '[data-mrow] .field, [data-reward]', readMarket);
+  on(body, 'change', '[data-mrow] select', readMarket);
+  // Prices read with their thousands separator once the box is left.
+  on(body, 'focusout', '[data-m="price"], [data-reward]', (e, i) => { const n = parseCoins(i.value); if (n) i.value = int(n); });
 }
 
 // Coming back to the page: My cards may have changed on another page.
