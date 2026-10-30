@@ -1,0 +1,68 @@
+/* ============================================================
+   Help and the guided tour. Advice inverts: the panel and the
+   tour bubble are white boxes with dark text, the persistent site
+   stays dark, and the tour keeps the dark scrim. The spotlight's
+   rim is cyan, the game's colour for guidance and tap focus.
+   ============================================================ */
+
+.help-fab {
+  position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: 22px; z-index: 40;
+  width: 46px; height: 46px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center; padding-top: 3px;
+  background: #FFFFFF; color: #1B1609;
+  font-family: var(--ufm-display); font-size: 28px; line-height: 1;
+  box-shadow: 0 6px 20px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.4);
+}
+.help-fab:hover { background: #F4EFE3; }
+.help-fab[aria-expanded="true"] { background: var(--ufm-gd-tab); }
+
+.help-panel {
+  position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: 80px; z-index: 41;
+  width: min(380px, calc(100vw - 32px)); max-height: min(560px, calc(100vh - 120px)); overflow-y: auto;
+  background: #FFFFFF; color: #1B1609; border-radius: 8px; padding: 14px 16px 16px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.65);
+  font-family: var(--ufm-ui); font-weight: 500; font-size: 14.5px; line-height: 1.45;
+}
+.help-panel__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.help-panel h2 { margin: 0; font-family: var(--ufm-display); font-weight: 400; font-size: 26px; letter-spacing: .03em; line-height: 1; color: #1B1609; }
+.help-x { width: 32px; height: 32px; border: 0; border-radius: 4px; background: #EFEAE0; color: #1B1609; font-size: 20px; line-height: 1; cursor: pointer; }
+.help-x:hover { background: #E3DCCD; }
+.help-tour {
+  display: block; width: 100%; margin: 0 0 10px; padding: 10px 14px 8px; border: 0; border-radius: 5px; cursor: pointer; text-align: left;
+  background: linear-gradient(180deg, #F8DD84, #EACC75 50%, #D7B664); color: var(--ufm-ink-on-gold);
+  font-family: var(--ufm-display); font-size: 20px; letter-spacing: .04em;
+}
+.help-list { display: flex; flex-direction: column; gap: 4px; }
+.help-q { border-radius: 5px; background: #F4F0E6; }
+.help-q summary { cursor: pointer; padding: 10px 12px 9px; font-weight: 700; list-style: none; display: flex; gap: 8px; align-items: baseline; }
+.help-q summary::-webkit-details-marker { display: none; }
+.help-q summary::before { content: "+"; font-family: var(--ufm-display); font-size: 18px; color: #6B5A2E; width: 10px; flex: none; }
+.help-q[open] summary::before { content: "\2212"; }
+.help-q p { margin: 0; padding: 0 12px 10px 30px; }
+.help-q p + p { padding-top: 0; }
+.help-panel :focus-visible, .tour-bubble :focus-visible { outline: 2px solid var(--ufm-cy-body); outline-offset: 2px; }
+
+.tour-layer { position: fixed; inset: 0; z-index: 60; }
+.tour-catch { position: absolute; inset: 0; cursor: pointer; }
+.tour-spot {
+  position: fixed; border-radius: 6px; pointer-events: none;
+  box-shadow: 0 0 0 2px var(--ufm-cy-rim), 0 0 0 9999px rgba(3,2,0,.74);
+}
+.tour-bubble {
+  position: fixed; z-index: 61; background: #FFFFFF; color: #1B1609; border-radius: 8px; padding: 14px 16px 12px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.7); font-family: var(--ufm-ui); font-weight: 500; font-size: 14.5px; line-height: 1.45;
+}
+.tour-count { margin: 0 0 2px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6B5A2E; }
+.tour-title { margin: 0 0 6px; font-family: var(--ufm-display); font-weight: 400; font-size: 26px; letter-spacing: .03em; line-height: 1; color: #1B1609; }
+.tour-text { margin: 0 0 12px; }
+.tour-actions { display: flex; align-items: center; gap: 8px; }
+.tour-gap { flex: 1 1 auto; }
+.tour-skip { background: none; border: 0; padding: 4px 2px; color: #4A4130; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.tour-hint { margin: 8px 0 0; font-size: 12px; color: #7A6E55; }
+body.touring .help-fab { visibility: hidden; }
+
+@media (max-width: 860px) {
+  .help-fab { bottom: calc(var(--mnav-h, 64px) + 14px + env(safe-area-inset-bottom, 0px)); width: 42px; height: 42px; font-size: 25px; }
+  .help-panel { bottom: calc(var(--mnav-h, 64px) + 66px + env(safe-area-inset-bottom, 0px)); right: 16px; max-height: calc(100vh - var(--mnav-h, 64px) - 140px); }
+}
+@media (prefers-reduced-motion: reduce) { .tour-spot { transition: none; } }

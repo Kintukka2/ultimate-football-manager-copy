@@ -25,6 +25,7 @@ const { ROUTES, SITE, RAIL, THUMB, SHEET, byId } = await import(join(ROOT, 'js/d
 const { POSTS } = await import(join(ROOT, 'js/data/posts.js'));
 const { normalize } = await import(join(ROOT, 'js/lib/cards.js'));
 const { pageFor, pagesOf } = await import(join(ROOT, 'js/views/cardpage.js'));
+const { writeServiceWorker } = await import(join(ROOT, '..', 'tools', 'sw.mjs'));
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const V = SITE.version;
@@ -127,6 +128,7 @@ function page({ route, params = {}, path, base, title, desc, cards }) {
 <link rel="stylesheet" href="css/ufm.css?v=${V}">
 <link rel="stylesheet" href="css/site.css?v=${V}">
 <link rel="stylesheet" href="css/views.css?v=${V}">
+<link rel="stylesheet" href="css/help.css?v=${V}">
 <link rel="stylesheet" href="css/ptc.css?v=${V}">
 <link rel="stylesheet" href="css/squad.css?v=${V}">
 <link rel="stylesheet" href="css/players.css?v=${V}">
@@ -234,6 +236,7 @@ async function main(argv) {
       if (now !== f.content) wrong.push(f.rel);
     }
     wrong.push(...stale.map((d) => `${d}/ (no longer in the database)`));
+    if ((await writeServiceWorker({ root: ROOT, version: V, check: true })).changed) wrong.push('sw.js (precache list)');
     if (wrong.length) {
       console.error(`The built site is stale. Run node tools/build.mjs and commit:\n  ${wrong.join('\n  ')}`);
       process.exit(1);
@@ -247,6 +250,10 @@ async function main(argv) {
     await mkdir(dirname(file), { recursive: true });
     await writeFile(file, f.content);
   }
+  // The service worker's precache lists every file the site serves, so it
+  // is rewritten last, once the pages it lists are on disk.
+  const sw = await writeServiceWorker({ root: ROOT, version: V });
+  console.log(`Service worker: ${sw.count} files precached for ${V}.`);
   console.log(`Wrote ${files.length} files from ${cards.length} database cards${stale.length ? `, removed ${stale.length} stale folders` : ''}.`);
 }
 

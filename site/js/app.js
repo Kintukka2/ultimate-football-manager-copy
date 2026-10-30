@@ -6,6 +6,7 @@
 import { ROUTES, SITE, SHEET, match, byId } from './data/routes.js';
 import { POSTS } from './data/posts.js';
 import { $, $$, esc } from './lib/util.js';
+import { setHelpTab } from './ui/help.js';
 
 const base = new URL(document.baseURI);
 const mounted = new Map();
@@ -24,7 +25,7 @@ function meta(route, params) {
   }
   if (title) document.title = title;
   if (desc) $('meta[name="description"]')?.setAttribute('content', desc);
-  const path = route.id === 'post' ? `blog/${params.slug}/` : route.path;
+  const path = (route.path || '').replace(/:([a-z]+)/g, (_, k) => params[k] ?? '');
   $('link[rel="canonical"]')?.setAttribute('href', `${SITE.origin}/${path}`);
 }
 
@@ -47,6 +48,7 @@ async function show(found, { scroll = true } = {}) {
   meta(route, params);
   markNav(route);
   closeSheet();
+  setHelpTab(viewId);
   if (scroll) window.scrollTo(0, 0);
   const el = $(`#view-${viewId}`);
   if (!el) return;
@@ -106,6 +108,55 @@ $('#btnMore')?.addEventListener('click', () => {
 $('#moreScrim')?.addEventListener('click', closeSheet);
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
 
+// ---- no paragraph ends on one word -----------------------------------------
+// A word alone on the last line of a paragraph reads as a mistake, and the
+// copy is too varied (views, posts, live numbers) to bind by hand. So the last
+// two words of every prose block on the page are bound with a no-break space,
+// whatever drew them, and again whenever a view redraws. Short strings are
+// labels, not prose, and a block holding a control is left alone.
+const PROSE = 'p, li, figcaption';
+function bindLastWords(root) {
+  root.querySelectorAll(PROSE).forEach((el) => {
+    if (el.querySelector('input, select, textarea, button')) return;
+    const text = el.textContent.trim();
+    if (text.split(/\s+/).length < 6) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+    // The gap before the last word: skip trailing space, then the word.
+    let seenWord = false;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const t = nodes[i].data;
+      for (let j = t.length - 1; j >= 0; j--) {
+        const ws = /\s/.test(t[j]);
+        if (!ws) { seenWord = true; continue; }
+        if (!seenWord) continue;
+        if (t[j] !== '\u00a0') nodes[i].data = t.slice(0, j) + '\u00a0' + t.slice(j + 1);
+        return;
+      }
+    }
+  });
+}
+let bindQueued = false;
+const queueBind = () => {
+  if (bindQueued) return;
+  bindQueued = true;
+  requestAnimationFrame(() => { bindQueued = false; bindLastWords(document.querySelector('.main') || document.body); });
+};
+// Only added or replaced nodes are watched, never text edits, so binding a
+// space can't wake the observer again.
+new MutationObserver(queueBind).observe(document.querySelector('.main') || document.body, { childList: true, subtree: true });
+
+// ---- offline ---------------------------------------------------------------
+// The worker sits at the site root and controls every page under it. It needs
+// a real origin, so a page opened from disk simply runs without it.
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(new URL('sw.js', base), { scope: base.pathname }).catch(() => {});
+  });
+}
+
 // ---- start -----------------------------------------------------------------
 const first = match(rel(location.href) ?? '') || { route: byId(document.body.dataset.route) || ROUTES[0], params: {} };
 show(first, { scroll: false });
+queueBind();

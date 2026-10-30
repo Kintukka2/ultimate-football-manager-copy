@@ -1,0 +1,26 @@
+name: indexnow
+
+# Publishing a release is the last step of shipping one (VERSIONING.md). By
+# then its pull request has merged and Cloudflare is deploying it, so this is
+# when to tell the search engines what changed. The script waits for the
+# deploy to land before it sends anything.
+#
+# Run it by hand from the Actions tab too, for a change that went out without
+# a release.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Send the sitemap to IndexNow
+        run: node tools/indexnow.mjs
