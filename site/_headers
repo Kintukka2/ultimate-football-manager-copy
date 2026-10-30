@@ -1,6 +1,9 @@
 # Cloudflare Pages. The modules import each other without version strings, so
 # every script and stylesheet is revalidated on each visit (a 304 when unchanged)
 # rather than cached stale against a newer page.
+# The worker decides what every other file is, so it is never cached itself.
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
 /js/*
   Cache-Control: no-cache
 /css/*

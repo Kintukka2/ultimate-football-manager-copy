@@ -12,6 +12,8 @@ import { DEFAULT_FILTER, SORTS, filterCards, sortCards, band } from '../lib/filt
 import { shirtCard, hexchip, rarityChip, crest } from '../ui/card.js';
 import { openDialog, confirmDialog, toast } from '../ui/dialog.js';
 import { cardFormHTML, wireCardForm, readCardForm } from '../ui/cardform.js';
+import { cardSlugs } from '../lib/carddb.js';
+import { addToCompare } from './compare.js';
 
 const KEPT = ['tab', 'pos', 'quality', 'rarity', 'ovrMin', 'ovrMax', 'sell', 'sort', 'dir'];
 const plural = (n, one, many = one + 's') => `${n.toLocaleString('en-GB')} ${n === 1 ? one : many}`;
@@ -19,7 +21,9 @@ const plural = (n, one, many = one + 's') => `${n.toLocaleString('en-GB')} ${n =
 let st = null;            // the filters and the open tab
 let db = [];              // database cards, once loaded
 let dbLoaded = false;
+let slugs = {};           // each database card's page, by card id
 let root = null;
+let navigate = null;
 
 const tabOf = (s) => s.tab || 'mine';
 const collection = (s, data) => (tabOf(s) === 'db' ? data.db : data.mine);
@@ -74,9 +78,11 @@ function detailBody(c) {
     const b = band(v);
     return `<div class="stattile${b ? ' st-' + b : ''}"><b>${v ?? '–'}</b><span>${esc(s.name)}</span></div>`;
   }).join('');
+  const compareBtn = `<button type="button" class="btn btn--sm btn--olive" data-act="compare" data-id="${esc(c.id)}">Compare</button>`;
   const acts = c.source === 'db'
-    ? `<button type="button" class="btn btn--sm btn--lime" data-act="keep" data-id="${esc(c.id)}">Save card</button>`
-    : `<button type="button" class="btn btn--sm" data-act="edit" data-id="${esc(c.id)}">Edit</button>`
+    ? `<button type="button" class="btn btn--sm btn--lime" data-act="keep" data-id="${esc(c.id)}">Save card</button>${compareBtn}`
+      + (slugs[c.id] ? `<a class="pl-link" href="ufm27/players/${slugs[c.id]}/">Card page ›</a>` : '')
+    : `<button type="button" class="btn btn--sm" data-act="edit" data-id="${esc(c.id)}">Edit</button>${compareBtn}`
       + `<button type="button" class="btn btn--sm btn--red" data-act="delete" data-id="${esc(c.id)}">Delete</button>`;
   return `<div class="pl-detail__top"><div class="pl-detail__card">${shirtCard(c)}</div>${facts(c)}</div>`
     + `<div class="stattiles pl-tiles">${tiles}</div>`
@@ -177,6 +183,7 @@ function pageHTML(s, data) {
     </div>
     ${body}
     ${tab === 'mine' ? csvDetails() : ''}
+    <nav class="pl-browse" aria-label="Browse the database">Browse the database: <a href="ufm27/best-cards/">Best cards</a><a href="ufm27/rarities/">Rarities</a><a href="ufm27/clubs/">Clubs</a><a href="ufm27/positions/">Positions</a><a href="ufm27/compare/">Compare</a></nav>
   </div>`;
 }
 
@@ -216,6 +223,7 @@ function select(id) {
       body: `<div class="pl-detail pl-detail--dialog">${detailBody(c)}</div>`,
       onMount(d, close) {
         on(d, 'click', '[data-act]', (e, b) => { close(); act(b.dataset.act, b.dataset.id); });
+        on(d, 'click', 'a[href]', () => close());
       },
     });
     return;
@@ -340,6 +348,10 @@ async function act(what, id) {
       ok: 'Clear all', okKind: 'red',
     });
     if (ok) { myCards.clear(); toast('My cards cleared'); }
+  } else if (what === 'compare' && card) {
+    const r = addToCompare(card);
+    if (r === 'full') toast('Compare holds four cards. Remove one there first.');
+    if (navigate) navigate('ufm27/compare/');
   } else if (what === 'gomine') { st.tab = 'mine'; keep(); paint(); }
   else if (what === 'morefilters') {
     st.open = !st.open;
@@ -352,13 +364,15 @@ async function act(what, id) {
   }
 }
 
-export function mount(body) {
+export function mount(body, ctx) {
   root = body;
+  navigate = ctx?.navigate || null;
   const saved = load('players', {}) || {};
   st = { ...DEFAULT_FILTER, ...Object.fromEntries(KEPT.filter((k) => saved[k] !== undefined).map((k) => [k, saved[k]])), q: '', sel: null, open: false };
   paint();
   databaseCards().then((cards) => {
     db = cards;
+    slugs = cardSlugs(db);
     dbLoaded = true;
     if (!saved.tab) st.tab = db.length ? 'db' : 'mine';
     paint();

@@ -22,7 +22,7 @@
 <meta property="og:description" content="The Ultimate Football Manager 27 calendar: the live rarity events, the weekly Team of the Week and Weekend League, Player of the Month and the next Season Reset.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ufmwiz.com/ufm27/events/">
-<meta property="og:image" content="https://ufmwiz.com/og.png?v=0.1.0">
+<meta property="og:image" content="https://ufmwiz.com/og.png?v=0.2.0">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,14 +30,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,400;0,500;0,700;1,700&family=Sofia+Sans+Extra+Condensed:wght@700&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=0.1.0">
-<link rel="stylesheet" href="css/ufm.css?v=0.1.0">
-<link rel="stylesheet" href="css/site.css?v=0.1.0">
-<link rel="stylesheet" href="css/views.css?v=0.1.0">
-<link rel="stylesheet" href="css/ptc.css?v=0.1.0">
-<link rel="stylesheet" href="css/squad.css?v=0.1.0">
-<link rel="stylesheet" href="css/players.css?v=0.1.0">
-<script type="module" src="js/app.js?v=0.1.0"></script>
+<link rel="stylesheet" href="css/tokens.css?v=0.2.0">
+<link rel="stylesheet" href="css/ufm.css?v=0.2.0">
+<link rel="stylesheet" href="css/site.css?v=0.2.0">
+<link rel="stylesheet" href="css/views.css?v=0.2.0">
+<link rel="stylesheet" href="css/help.css?v=0.2.0">
+<link rel="stylesheet" href="css/ptc.css?v=0.2.0">
+<link rel="stylesheet" href="css/squad.css?v=0.2.0">
+<link rel="stylesheet" href="css/players.css?v=0.2.0">
+<link rel="stylesheet" href="css/compare.css?v=0.2.0">
+<script type="module" src="js/app.js?v=0.2.0"></script>
 </head>
 <body data-route="events">
 <svg class="defs" aria-hidden="true" focusable="false"><defs><marker id="ah" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#FFFFFF"/></marker><marker id="ah-bib" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#FF6B1A"/></marker><symbol id="mark-ufm" viewBox="0 0 100 88"><rect x="3" y="3" width="94" height="82" rx="7" fill="#123A27"/><rect x="12.5" y="3" width="12.5" height="82" fill="#164530"/><rect x="37.5" y="3" width="12.5" height="82" fill="#164530"/><rect x="62.5" y="3" width="12.5" height="82" fill="#164530"/><rect x="87.5" y="3" width="12.5" height="82" fill="#164530"/><rect x="3" y="3" width="94" height="82" rx="7" fill="none" stroke="#9AA6B0" stroke-width="3"/><polyline points="20,26 35,60 50,32 65,60 80,26" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="21.26" cy="27.96" r="7" fill="#000" opacity=".4"/><circle cx="20" cy="26" r="7" fill="#FFFFFF"/><circle cx="36.26" cy="61.96" r="7" fill="#000" opacity=".4"/><circle cx="35" cy="60" r="7" fill="#FFFFFF"/><circle cx="51.26" cy="33.96" r="7" fill="#000" opacity=".4"/><circle cx="50" cy="32" r="7" fill="#FFFFFF"/><circle cx="66.26" cy="61.96" r="7" fill="#000" opacity=".4"/><circle cx="65" cy="60" r="7" fill="#FFFFFF"/><circle cx="81.26" cy="27.96" r="7" fill="#000" opacity=".4"/><circle cx="80" cy="26" r="7" fill="#FF6B1A"/></symbol></defs></svg>
@@ -47,6 +49,7 @@
     <a class="rail__item" href="./" data-nav="home">Home</a>
     <a class="rail__item" href="ufm27/ptc-solver/" data-nav="ptc-solver">PTC Solver</a>
     <a class="rail__item" href="ufm27/players/" data-nav="players">Players</a>
+    <a class="rail__item" href="ufm27/compare/" data-nav="compare">Compare</a>
     <a class="rail__item" href="ufm27/squad-builder/" data-nav="squad-builder">Squad Builder</a>
     <a class="rail__item" href="ufm27/packs/" data-nav="packs">Packs</a>
     <a class="rail__item" href="ufm27/weekend-league/" data-nav="weekend-league">Weekend League</a>
@@ -68,12 +71,21 @@
   </div></div></main>
 <main id="view-blog" class="view" data-view="blog" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Blog</h1><p>Guides that show the working</p></div></header><div class="view__body"></div></main>
 <main id="view-post" class="view" data-view="post" hidden><div class="view__body"></div></main>
+<main id="view-compare" class="view" data-view="compare" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Compare</h1><p>Two to four cards, stat by stat</p></div></header><div class="view__body"></div></main>
+<main id="view-card" class="view" data-view="card" hidden><div class="view__body"></div></main>
+<main id="view-best-cards" class="view" data-view="best-cards" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Best cards</h1><p>The database, ranked</p></div></header><div class="view__body"></div></main>
+<main id="view-rarities" class="view" data-view="rarities" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Rarities</h1><p>Every special set and its cards</p></div></header><div class="view__body"></div></main>
+<main id="view-rarity" class="view" data-view="rarity" hidden><div class="view__body"></div></main>
+<main id="view-clubs" class="view" data-view="clubs" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Clubs</h1><p>Cards by the club on the card</p></div></header><div class="view__body"></div></main>
+<main id="view-club" class="view" data-view="club" hidden><div class="view__body"></div></main>
+<main id="view-positions" class="view" data-view="positions" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Positions</h1><p>The best cards in each of the twelve</p></div></header><div class="view__body"></div></main>
+<main id="view-position" class="view" data-view="position" hidden><div class="view__body"></div></main>
 <main id="view-about" class="view" data-view="about" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>About</h1><p>A fan project, said clearly</p></div></header><div class="view__body"></div></main>
 <main id="view-notfound" class="view" data-view="notfound" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Not found</h1><p>That page isn't on the board</p></div></header><div class="view__body"></div></main>
     <footer class="foot"><div class="wrap">
       <p>UFMWiz is an independent fan project. It is not affiliated with, endorsed by or sponsored by Gamebasics BV or Miniclip. Ultimate Football Manager and UFM are trademarks of their respective owners. Player names and ratings are shown as reference data only.</p>
       <p>Your cards, squads and challenges are kept in this browser and nowhere else.</p>
-      <nav aria-label="Site"><a href="about/">About</a><a href="blog/">Blog</a><a href="ufm27/events/">Events</a><span>v0.1.0</span></nav>
+      <nav aria-label="Site"><a href="about/">About</a><a href="blog/">Blog</a><a href="ufm27/events/">Events</a><span>v0.2.0</span></nav>
     </div></footer>
   </div>
 </div>
@@ -86,6 +98,7 @@
 </nav>
 <div class="sheet-scrim" id="moreScrim" hidden></div>
 <div class="sheet" id="moreSheet" role="dialog" aria-label="More sections" hidden>
+  <a href="ufm27/compare/" data-nav="compare">Compare<span>Two to four cards, stat by stat</span></a>
   <a href="ufm27/packs/" data-nav="packs">Packs<span>Published odds turned into pulls</span></a>
   <a href="ufm27/weekend-league/" data-nav="weekend-league">Weekend League<span>Qualification Points and the wins for each rank</span></a>
   <a href="ufm27/events/" data-nav="events">Events<span>The calendar, with what ends first</span></a>

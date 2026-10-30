@@ -1,5 +1,5 @@
 {
-  "about": "The UFMWiz card database. Cards are added by hand from what players can see in the game, or imported from players' CSV submissions. No ratings are taken from the game's files or servers. Fields: name, ovr, pos (primary first), quality, rarity, nation, league, club, age, stats, sellable. See site/js/lib/cards.js.",
-  "asOf": "2026-10-30",
+  "about": "The UFMWiz card database. Every card here was read off a card in the game by a player and sent in; none was taken from the game's files or servers. Written by node tools/build-cards.mjs from data/ufm27-extraction.csv: do not edit by hand.",
+  "asOf": null,
   "cards": []
 }

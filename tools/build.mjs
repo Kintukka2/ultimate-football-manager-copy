@@ -2,17 +2,30 @@
 // address, with that page's title, description and canonical, a <base> that
 // points back to the root from its depth, and the page already rendered so a
 // crawler that never runs the script still reads it. Run it after changing
-// routes, posts or a view's render(); the output is committed.
+// routes, posts, the card database or a view's render(); the output is
+// committed.
 //
-//   node tools/build.mjs
+// The card database (site/data/cards.json) becomes pages too: one per card at
+// ufm27/players/<slug>/, one per special rarity, club and position, and their
+// indexes. A card that leaves the database takes its page with it: stale card
+// and hub folders are removed, so an old address 404s rather than going on
+// serving a card that is no longer there.
+//
+//   node tools/build.mjs                 write the site
+//   node tools/build.mjs --check         fail if any written file is stale (CI)
+//   node tools/build.mjs --cards f.json  build from another card file (local
+//                                        checks only; never commit the output)
 
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', 'site');
 const { ROUTES, SITE, RAIL, THUMB, SHEET, byId } = await import(join(ROOT, 'js/data/routes.js'));
 const { POSTS } = await import(join(ROOT, 'js/data/posts.js'));
+const { normalize } = await import(join(ROOT, 'js/lib/cards.js'));
+const { pageFor, pagesOf } = await import(join(ROOT, 'js/views/cardpage.js'));
+const { writeServiceWorker } = await import(join(ROOT, '..', 'tools', 'sw.mjs'));
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const V = SITE.version;
@@ -60,18 +73,18 @@ for (const id of VIEW_IDS) {
   }
 }
 
-function viewsHTML(current, params) {
+function viewsHTML(current, params, cards) {
   return VIEW_IDS.map((id) => {
     const r = byId(id);
     const on = id === current;
     const head = r.head && id !== 'home' && id !== 'post'
       ? `<header class="pagehead"><div class="wrap pagehead__in"><h1>${esc(r.head)}</h1><p>${esc(r.sub)}</p></div></header>` : '';
-    const body = on && modules[id].render ? modules[id].render({ params, build: true }) : '';
+    const body = on && modules[id].render ? modules[id].render({ params, build: true, cards }) : '';
     return `<main id="view-${id}" class="view" data-view="${id}"${on ? '' : ' hidden'}>${head}<div class="view__body">${body}</div></main>`;
   }).join('\n');
 }
 
-function page({ route, params = {}, path, base, title, desc }) {
+function page({ route, params = {}, path, base, title, desc, cards }) {
   const canonical = `${SITE.origin}/${path}`;
   return `<!doctype html>
 <html lang="en">
@@ -115,9 +128,11 @@ function page({ route, params = {}, path, base, title, desc }) {
 <link rel="stylesheet" href="css/ufm.css?v=${V}">
 <link rel="stylesheet" href="css/site.css?v=${V}">
 <link rel="stylesheet" href="css/views.css?v=${V}">
+<link rel="stylesheet" href="css/help.css?v=${V}">
 <link rel="stylesheet" href="css/ptc.css?v=${V}">
 <link rel="stylesheet" href="css/squad.css?v=${V}">
 <link rel="stylesheet" href="css/players.css?v=${V}">
+<link rel="stylesheet" href="css/compare.css?v=${V}">
 <script type="module" src="js/app.js?v=${V}"></script>
 </head>
 <body data-route="${route.id}">
@@ -130,7 +145,7 @@ ${DEFS}
   </nav>
   <div class="main">
     <a class="topbar" href="./" aria-label="UFMWiz home">${markUse('')}${WORDMARK}</a>
-${viewsHTML(route.id, params)}
+${viewsHTML(route.id, params, cards)}
     <footer class="foot"><div class="wrap">
       <p>UFMWiz is an independent fan project. It is not affiliated with, endorsed by or sponsored by Gamebasics BV or Miniclip. Ultimate Football Manager and UFM are trademarks of their respective owners. Player names and ratings are shown as reference data only.</p>
       <p>Your cards, squads and challenges are kept in this browser and nowhere else.</p>
@@ -151,31 +166,95 @@ ${viewsHTML(route.id, params)}
 `;
 }
 
-// ---- write -----------------------------------------------------------------
-const out = [];
-async function emit(rel, html) {
-  const file = join(ROOT, rel);
-  await mkdir(dirname(file), { recursive: true });
-  await writeFile(file, html);
-  out.push(rel);
-}
+// ---- the site, as files -----------------------------------------------------
 const baseFor = (path) => '../'.repeat(path.split('/').filter(Boolean).length) || './';
 
-for (const route of ROUTES) {
-  if (route.path == null || route.path.includes(':')) continue;
-  await emit(join(route.path, 'index.html'), page({ route, path: route.path, base: baseFor(route.path), title: route.title, desc: route.desc }));
+// The cards the database pages are built from, the way the browser reads them.
+export async function loadCards(file = join(ROOT, 'data/cards.json')) {
+  const json = JSON.parse(await readFile(file, 'utf8'));
+  return (json.cards || []).map((c) => ({ ...normalize(c).card, source: 'db' }));
 }
-const post = byId('post');
-for (const p of POSTS) {
-  const path = `blog/${p.slug}/`;
-  await emit(join(path, 'index.html'), page({ route: post, params: { slug: p.slug }, path, base: baseFor(path), title: `${p.title} | UFMWiz`, desc: p.dek }));
-}
-// Served for any missing address, at any depth, so its base is absolute.
-const nf = byId('notfound');
-await emit('404.html', page({ route: nf, path: '404', base: '/', title: nf.title, desc: 'That page is not on UFMWiz.' }));
 
-const urls = out.filter((f) => f.endsWith('index.html')).map((f) => `${SITE.origin}/${f.replace(/index\.html$/, '')}`);
-await emit('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
-await emit('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE.origin}/sitemap.xml\n`);
-await emit('icon.svg', MARK_SVG + '\n');
-console.log(`Wrote ${out.length} files:\n  ${out.join('\n  ')}`);
+// Every file the site is made of, as { rel, content }. Pure apart from the
+// imports above, so the tests can build a site from made-up cards in memory.
+export function buildFiles({ cards = [] } = {}) {
+  const files = [];
+  const emit = (rel, content) => files.push({ rel, content });
+  const at = (route, path, title, desc, params = {}) => emit(join(path, 'index.html'),
+    page({ route, params, path, base: baseFor(path), title, desc, cards }));
+
+  for (const route of ROUTES) {
+    if (route.path == null || route.path.includes(':')) continue;
+    at(route, route.path, route.title, route.desc);
+  }
+  const post = byId('post');
+  for (const p of POSTS) at(post, `blog/${p.slug}/`, `${p.title} | UFMWiz`, p.dek, { slug: p.slug });
+  // A page per card, and per special rarity, club and position.
+  for (const kind of ['card', 'rarity', 'club', 'position']) {
+    const route = byId(kind);
+    for (const params of pagesOf(kind, cards)) {
+      const pg = pageFor(kind, params, cards);
+      at(route, pg.path, pg.title, pg.desc, params);
+    }
+  }
+  // Served for any missing address, at any depth, so its base is absolute.
+  const nf = byId('notfound');
+  emit('404.html', page({ route: nf, path: '404', base: '/', title: nf.title, desc: 'That page is not on UFMWiz.', cards }));
+
+  const urls = files.filter((f) => f.rel.endsWith('index.html')).map((f) => `${SITE.origin}/${f.rel.replace(/index\.html$/, '')}`);
+  emit('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
+  emit('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE.origin}/sitemap.xml\n`);
+  emit('icon.svg', MARK_SVG + '\n');
+  return files;
+}
+
+// The folders the database pages live in. Anything in them the build didn't
+// write this time is a card or hub that has left the database.
+const GENERATED = ['ufm27/players', 'ufm27/rarities', 'ufm27/clubs', 'ufm27/positions'];
+async function staleDirs(files) {
+  const keep = new Set(files.map((f) => f.rel.split('/').slice(0, 3).join('/')));
+  const stale = [];
+  for (const dir of GENERATED) {
+    let entries = [];
+    try { entries = await readdir(join(ROOT, dir), { withFileTypes: true }); } catch { continue; }
+    for (const e of entries) if (e.isDirectory() && !keep.has(`${dir}/${e.name}`)) stale.push(`${dir}/${e.name}`);
+  }
+  return stale;
+}
+
+async function main(argv) {
+  const check = argv.includes('--check');
+  const at = argv.indexOf('--cards');
+  const cards = await loadCards(at >= 0 ? argv[at + 1] : undefined);
+  const files = buildFiles({ cards });
+  const stale = await staleDirs(files);
+  if (check) {
+    const wrong = [];
+    for (const f of files) {
+      let now = null;
+      try { now = await readFile(join(ROOT, f.rel), 'utf8'); } catch { /* missing */ }
+      if (now !== f.content) wrong.push(f.rel);
+    }
+    wrong.push(...stale.map((d) => `${d}/ (no longer in the database)`));
+    if ((await writeServiceWorker({ root: ROOT, version: V, check: true })).changed) wrong.push('sw.js (precache list)');
+    if (wrong.length) {
+      console.error(`The built site is stale. Run node tools/build.mjs and commit:\n  ${wrong.join('\n  ')}`);
+      process.exit(1);
+    }
+    console.log(`All ${files.length} built files are current.`);
+    return;
+  }
+  for (const d of stale) await rm(join(ROOT, d), { recursive: true, force: true });
+  for (const f of files) {
+    const file = join(ROOT, f.rel);
+    await mkdir(dirname(file), { recursive: true });
+    await writeFile(file, f.content);
+  }
+  // The service worker's precache lists every file the site serves, so it
+  // is rewritten last, once the pages it lists are on disk.
+  const sw = await writeServiceWorker({ root: ROOT, version: V });
+  console.log(`Service worker: ${sw.count} files precached for ${V}.`);
+  console.log(`Wrote ${files.length} files from ${cards.length} database cards${stale.length ? `, removed ${stale.length} stale folders` : ''}.`);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main(process.argv.slice(2));

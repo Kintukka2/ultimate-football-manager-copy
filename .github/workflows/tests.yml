@@ -1,0 +1,80 @@
+name: tests
+
+# Pushes to the default branch, and pull requests. Not every branch: a push to
+# a branch with a pull request open would fire both and run everything twice.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Installed ad hoc rather than from a lockfile: the site itself has no
+      # dependencies at all, and only the checks need a browser. --no-save so
+      # nothing writes a dependency into package.json.
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+
+      # Every page is generated (tools/build.mjs) and committed, because the
+      # committed folder is what Cloudflare publishes. A page edited by hand, or
+      # a route, post or view changed without rebuilding, would leave the copy a
+      # crawler and a shared link read out of step with the app. Rebuild and
+      # fail on any difference, new files included.
+      - name: Generated pages match their sources
+        run: |
+          node tools/build.mjs
+          git status --porcelain -- site
+          test -z "$(git status --porcelain -- site)"
+
+      # site/data/cards.json and docs/data/pending-cards.md are written from
+      # the players' extraction sheet; an edit to either by hand is undone here.
+      - name: Card database matches the sheet
+        run: node tools/build-cards.mjs --check
+
+      # The precache list inside the service worker, keyed to the version. A
+      # stale one serves one release's CSS against another's JavaScript.
+      - name: Service worker matches the site
+        run: node tools/sw.mjs --check
+
+      # Engines, formations, generated pages and links, saved-data migrations,
+      # the voice rules, and the installed app offline.
+      - name: Unit tests
+        run: npm test
+
+      # Every word a reader sees, against docs/voice.md.
+      - name: Copy reads for the reader
+        run: node tools/voice-check.mjs
+
+      # Every page in a real browser at 390 and 1280: page errors, failed
+      # loads, sideways scrolling, a paragraph ending on one word.
+      - name: Every page in a browser
+        run: node tools/browser-check.mjs
+
+      # The service worker serves a stamped stylesheet or script from its cache
+      # until the version changes, so changed code under an unchanged version
+      # reaches new visitors and not returning ones. VERSIONING.md has the rule.
+      - name: A change to site/js or site/css bumps the version
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --depth=1 origin "${{ github.base_ref }}"
+          if git diff --quiet FETCH_HEAD -- site/js site/css; then
+            echo "No change under site/js or site/css."
+            exit 0
+          fi
+          base=$(git show FETCH_HEAD:site/js/data/routes.js | grep -o "version: '[^']*'" | head -1)
+          head=$(grep -o "version: '[^']*'" site/js/data/routes.js | head -1)
+          echo "main has $base, this branch has $head"
+          if [ "$base" = "$head" ]; then
+            echo "site/js or site/css changed, but SITE.version is still $head. Bump it (VERSIONING.md)."
+            exit 1
+          fi
