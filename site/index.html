@@ -37,6 +37,7 @@
 <link rel="stylesheet" href="css/ptc.css?v=0.1.0">
 <link rel="stylesheet" href="css/squad.css?v=0.1.0">
 <link rel="stylesheet" href="css/players.css?v=0.1.0">
+<link rel="stylesheet" href="css/compare.css?v=0.1.0">
 <script type="module" src="js/app.js?v=0.1.0"></script>
 </head>
 <body data-route="home">
@@ -47,6 +48,7 @@
     <a class="rail__item" href="./" data-nav="home">Home</a>
     <a class="rail__item" href="ufm27/ptc-solver/" data-nav="ptc-solver">PTC Solver</a>
     <a class="rail__item" href="ufm27/players/" data-nav="players">Players</a>
+    <a class="rail__item" href="ufm27/compare/" data-nav="compare">Compare</a>
     <a class="rail__item" href="ufm27/squad-builder/" data-nav="squad-builder">Squad Builder</a>
     <a class="rail__item" href="ufm27/packs/" data-nav="packs">Packs</a>
     <a class="rail__item" href="ufm27/weekend-league/" data-nav="weekend-league">Weekend League</a>
@@ -99,6 +101,15 @@
 <main id="view-events" class="view" data-view="events" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Events</h1><p>What is live and what ends this week</p></div></header><div class="view__body"></div></main>
 <main id="view-blog" class="view" data-view="blog" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Blog</h1><p>Guides that show the working</p></div></header><div class="view__body"></div></main>
 <main id="view-post" class="view" data-view="post" hidden><div class="view__body"></div></main>
+<main id="view-compare" class="view" data-view="compare" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Compare</h1><p>Two to four cards, stat by stat</p></div></header><div class="view__body"></div></main>
+<main id="view-card" class="view" data-view="card" hidden><div class="view__body"></div></main>
+<main id="view-best-cards" class="view" data-view="best-cards" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Best cards</h1><p>The database, ranked</p></div></header><div class="view__body"></div></main>
+<main id="view-rarities" class="view" data-view="rarities" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Rarities</h1><p>Every special set and its cards</p></div></header><div class="view__body"></div></main>
+<main id="view-rarity" class="view" data-view="rarity" hidden><div class="view__body"></div></main>
+<main id="view-clubs" class="view" data-view="clubs" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Clubs</h1><p>Cards by the club on the card</p></div></header><div class="view__body"></div></main>
+<main id="view-club" class="view" data-view="club" hidden><div class="view__body"></div></main>
+<main id="view-positions" class="view" data-view="positions" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Positions</h1><p>The best cards in each of the twelve</p></div></header><div class="view__body"></div></main>
+<main id="view-position" class="view" data-view="position" hidden><div class="view__body"></div></main>
 <main id="view-about" class="view" data-view="about" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>About</h1><p>A fan project, said clearly</p></div></header><div class="view__body"></div></main>
 <main id="view-notfound" class="view" data-view="notfound" hidden><header class="pagehead"><div class="wrap pagehead__in"><h1>Not found</h1><p>That page isn't on the board</p></div></header><div class="view__body"></div></main>
     <footer class="foot"><div class="wrap">
@@ -117,6 +128,7 @@
 </nav>
 <div class="sheet-scrim" id="moreScrim" hidden></div>
 <div class="sheet" id="moreSheet" role="dialog" aria-label="More sections" hidden>
+  <a href="ufm27/compare/" data-nav="compare">Compare<span>Two to four cards, stat by stat</span></a>
   <a href="ufm27/packs/" data-nav="packs">Packs<span>Published odds turned into pulls</span></a>
   <a href="ufm27/weekend-league/" data-nav="weekend-league">Weekend League<span>Qualification Points and the wins for each rank</span></a>
   <a href="ufm27/events/" data-nav="events">Events<span>The calendar, with what ends first</span></a>

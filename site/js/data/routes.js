@@ -69,6 +69,43 @@ export const ROUTES = [
   },
   { id: 'post', path: 'blog/:slug/', parent: 'blog' },
   {
+    id: 'compare', path: 'ufm27/compare/', nav: 'Compare',
+    head: 'Compare', sub: 'Two to four cards, stat by stat',
+    blurb: 'Two to four cards, stat by stat',
+    title: 'UFM 27 Compare Players: cards side by side, stat by stat | UFMWiz',
+    desc: 'Put two to four Ultimate Football Manager 27 cards side by side: OVR and every shared sub-stat, the leader on each, and a link that opens the same comparison.',
+  },
+  // The card database as pages. Each card and each hub is a real file,
+  // written by tools/build.mjs from site/data/cards.json, and belongs to Players.
+  { id: 'card', path: 'ufm27/players/:slug/', parent: 'players' },
+  {
+    id: 'best-cards', path: 'ufm27/best-cards/', parent: 'players',
+    head: 'Best cards', sub: 'The database, ranked',
+    title: 'Best UFM 27 cards: the top cards by OVR and by position | UFMWiz',
+    desc: 'The best Ultimate Football Manager 27 cards in the UFMWiz database: the top ten by OVR, the best three at every position, and the best Unsellable cards.',
+  },
+  {
+    id: 'rarities', path: 'ufm27/rarities/', parent: 'players',
+    head: 'Rarities', sub: 'Every special set and its cards',
+    title: 'UFM 27 rarities: every special set and its cards | UFMWiz',
+    desc: 'Every special rarity in Ultimate Football Manager 27, from Team of the Week to Screamers, with the cards the UFMWiz database holds for each.',
+  },
+  { id: 'rarity', path: 'ufm27/rarities/:slug/', parent: 'players' },
+  {
+    id: 'clubs', path: 'ufm27/clubs/', parent: 'players',
+    head: 'Clubs', sub: 'Cards by the club on the card',
+    title: 'UFM 27 clubs: cards by club | UFMWiz',
+    desc: 'Ultimate Football Manager 27 cards grouped by the club printed on the card, best first.',
+  },
+  { id: 'club', path: 'ufm27/clubs/:slug/', parent: 'players' },
+  {
+    id: 'positions', path: 'ufm27/positions/', parent: 'players',
+    head: 'Positions', sub: 'The best cards in each of the twelve',
+    title: 'UFM 27 positions: the best cards in each | UFMWiz',
+    desc: 'Ultimate Football Manager 27 cards by position, from goalkeeper to striker, best first.',
+  },
+  { id: 'position', path: 'ufm27/positions/:slug/', parent: 'players' },
+  {
     id: 'about', path: 'about/', nav: 'About',
     head: 'About', sub: 'A fan project, said clearly',
     title: 'About UFMWiz and privacy | UFMWiz',
@@ -81,10 +118,10 @@ export const ROUTES = [
 export const byId = (id) => ROUTES.find((r) => r.id === id);
 
 // The rail on a wide screen, in order.
-export const RAIL = ['home', 'ptc-solver', 'players', 'squad-builder', 'packs', 'weekend-league', 'events', 'blog'];
+export const RAIL = ['home', 'ptc-solver', 'players', 'compare', 'squad-builder', 'packs', 'weekend-league', 'events', 'blog'];
 // The phone's thumb bar has room for four and More; the rest live in the sheet.
 export const THUMB = ['home', 'ptc-solver', 'players', 'squad-builder'];
-export const SHEET = ['packs', 'weekend-league', 'events', 'blog', 'about'];
+export const SHEET = ['compare', 'packs', 'weekend-league', 'events', 'blog', 'about'];
 
 // Match a site-relative path ("ufm27/players/", "blog/x/") to a route.
 export function match(rel) {

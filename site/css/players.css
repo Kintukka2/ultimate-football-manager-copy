@@ -110,3 +110,61 @@
   .pl-top .tabs { width: 100%; }
   .pl-top .tabs .tab { flex: 1 1 0; min-width: 0; }
 }
+
+/* ============================================================
+   THE CARD DATABASE AS PAGES: a card, a hub, the best cards
+   ============================================================ */
+.pl-link { margin-left: auto; align-self: center; font-size: 14px; text-decoration: none; }
+.cp-top { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 4px; }
+.cp-card .ucard { width: 100%; }
+.cp-acts { margin-top: 14px; gap: 8px; }
+.cp-tiles { margin-top: 0; }
+.cp-ranks { margin-top: 16px; }
+.cp-ranks b small { font-family: var(--ufm-ui); }
+.cp-ranks a { display: block; margin-top: 2px; font-size: 12.5px; text-decoration: none; }
+.cp-rankhow { margin: 10px 0 0; font-size: 12.5px; }
+.cp-sec { margin-top: 30px; }
+.cp-sechead { justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.cp-sechead h2.sub, .cp-sechead .cp-h3 { margin: 0; }
+.cp-h3 { font-family: var(--ufm-display); font-weight: 400; font-size: 21px; letter-spacing: .04em; color: var(--ufm-ink); }
+.cp-sec .cp-sechead:not(:first-of-type) { margin-top: 18px; }
+a.cp-row { text-decoration: none; color: var(--ufm-ink); }
+a.cp-row:hover { background: var(--ufm-row-2); }
+a.cp-row:focus-visible { outline: 2px solid var(--ufm-cy-rim); outline-offset: -2px; }
+.cp-price { margin-top: 30px; max-width: 760px; }
+.cp-priceform { margin-top: 14px; grid-template-columns: minmax(140px, 1fr) minmax(140px, 1fr) auto; align-items: end; }
+.cp-pricekv { margin-bottom: 12px; }
+.cp-chart { display: block; width: 100%; max-width: 420px; height: auto; margin: 4px 0 12px; background: var(--ufm-void); border: 1px solid #24211a; }
+.cp-pricetable { max-width: 420px; }
+.cp-none { max-width: 64ch; }
+.cp .hint .rchip { margin-right: 4px; vertical-align: -2px; }
+
+/* Hub indexes: one tile per rarity, club or position */
+.cp-hubs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 4px; }
+.cp-hub { display: flex; align-items: center; gap: 12px; padding: 10px 14px 9px; min-height: 58px;
+  background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); text-decoration: none; color: var(--ufm-ink); }
+.cp-hub .rchip i { width: 18px; height: 18px; }
+.cp-hub .lrow__crest { flex: none; width: 26px; height: 31px; }
+.cp-hub__t { min-width: 0; display: flex; flex-direction: column; }
+.cp-hub__t b { font-family: var(--ufm-display); font-weight: 400; font-size: 21px; letter-spacing: .03em; line-height: 1.05; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cp-hub__t span { font-size: 12.5px; color: var(--ufm-ink-gold); }
+a.cp-hub:hover { background: var(--ufm-row-2); }
+a.cp-hub:focus-visible { outline: 2px solid var(--ufm-cy-rim); outline-offset: -2px; }
+.cp-hub.is-empty { opacity: .55; }
+
+@media (max-width: 860px) {
+  .cp-top { grid-template-columns: minmax(0, 1fr); }
+  .cp-cardcol { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: end; }
+  .cp-acts { margin-top: 0; flex-direction: column; align-items: stretch; }
+  .cp-priceform { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .cp-priceform .btn { grid-column: 1 / -1; }
+  .cp-hubs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cp-hub__t b { font-size: 18px; }
+}
+.pl-browse { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 26px; padding-top: 14px; border-top: 1px solid #24211a; font-size: 13.5px; color: var(--ufm-ink-3); }
+.pl-browse a { color: var(--ufm-ink-gold); text-decoration: none; font-weight: 700; }
+.pl-browse a:hover { color: var(--ufm-ink); }
+/* The database pages draw their own header band, flush with the top. */
+.view[data-view="card"] .view__body, .view[data-view="rarity"] .view__body,
+.view[data-view="club"] .view__body, .view[data-view="position"] .view__body { padding-top: 0; }
+.cp a.btn, .cmp a.btn { text-decoration: none; }

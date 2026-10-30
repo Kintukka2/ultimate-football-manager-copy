@@ -142,6 +142,7 @@ h2.sub, h3.sub {
 .btn[disabled] { --b-top: #5B5B5B; --b-mid: #4E4E4E; --b-bot: #444444; --b-ink: #C1C2C2; cursor: not-allowed; filter: none; }
 .btn--foil[disabled] { background: linear-gradient(180deg, #5B5B5B 0%, #4E4E4E 50%, #444444 100%); color: #C1C2C2; }
 .btn--foil[disabled]::after { display: none; }
+a.btn { text-decoration: none; }
 .linkbtn { background: none; border: 0; padding: 0; color: var(--ufm-gd-rim); text-decoration: underline; cursor: pointer; font-weight: 700; }
 .iconbtn { display: inline-grid; place-items: center; width: 34px; height: 34px; background: var(--ufm-band); border: 1px solid #3a352a; border-radius: 3px; color: var(--ufm-ink-gold); cursor: pointer; font-size: 18px; line-height: 1; }
 .iconbtn:hover { color: var(--ufm-ink); border-color: var(--ufm-gd-mid); }

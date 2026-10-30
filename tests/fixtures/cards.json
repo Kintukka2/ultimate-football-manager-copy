@@ -1,0 +1,15 @@
+{
+  "about": "Made-up cards for the tests only. None of these players exist, and none of these ratings belong to the game.",
+  "cards": [
+    { "id": "f1", "name": "Test Striker", "ovr": 86, "pos": ["ST"], "quality": "rare", "rarity": "normal", "nation": "Testland", "league": "Test League 1", "club": "Test FC", "age": 27, "stats": { "pac": 88, "sho": 87, "pas": 72, "drb": 80, "def": 40, "phy": 79 }, "sellable": true },
+    { "id": "f2", "name": "Test Striker", "ovr": 90, "pos": ["ST", "RW"], "quality": "gold", "rarity": "team-of-the-week", "nation": "Testland", "league": "Test League 1", "club": "Test FC", "stats": { "pac": 91, "sho": 92, "pas": 75, "drb": 84, "def": 42, "phy": 81 }, "sellable": false },
+    { "id": "f3", "name": "Sample Winger", "ovr": 83, "pos": ["LW"], "quality": "gold", "rarity": "team-of-the-week", "nation": "Mockovia", "league": "Test League 1", "club": "Sample United", "stats": { "pac": 93, "sho": 79, "pas": 76, "drb": 86, "def": 35, "phy": 66 }, "sellable": true },
+    { "id": "f4", "name": "Demo Keeper", "ovr": 81, "pos": ["GK"], "quality": "gold", "rarity": "normal", "nation": "Testland", "league": "Test League 2", "club": "Demo City", "age": 29, "stats": { "div": 82, "han": 79, "kck": 70, "ref": 84, "spd": 48, "gkp": 80 }, "sellable": true },
+    { "id": "f5", "name": "Mock Midfielder", "ovr": 79, "pos": ["CM", "CAM"], "quality": "gold", "rarity": "normal", "nation": "Mockovia", "league": "Test League 2", "club": "Demo City", "stats": { "pac": 70, "sho": 72, "pas": 82, "drb": 78, "def": 64, "phy": 71 }, "sellable": true },
+    { "id": "f6", "name": "Fake Anchor", "ovr": 77, "pos": ["CDM"], "quality": "gold", "rarity": "screamers", "nation": "Testland", "league": "Test League 1", "club": "Test FC", "stats": { "pac": 62, "sho": 58, "pas": 74, "drb": 66, "def": 80, "phy": 82 }, "sellable": false },
+    { "id": "f7", "name": "Pretend Centre-Back", "ovr": 68, "pos": ["CB"], "quality": "silver", "rarity": "normal", "nation": "Mockovia", "league": "Test League 2", "club": "Sample United", "stats": { "pac": 55, "sho": 40, "pas": 52, "drb": 49, "def": 70, "phy": 74 }, "sellable": true },
+    { "id": "f8", "name": "Example Back", "ovr": 74, "pos": ["LB"], "quality": "silver", "rarity": "normal", "nation": "Testland", "league": "Test League 1", "club": "Sample United", "stats": { "pac": 81, "sho": 50, "pas": 68, "drb": 70, "def": 71, "phy": 69 }, "sellable": true },
+    { "id": "f9", "name": "Trial Forward", "ovr": 62, "pos": ["ST"], "quality": "bronze", "rarity": "normal", "nation": "Mockovia", "league": "Test League 2", "club": "Demo City", "stats": { "pac": 72, "sho": 61, "pas": 50 }, "sellable": true },
+    { "id": "f10", "name": "Ünïcode Ñame", "ovr": 70, "pos": ["RM"], "quality": "silver", "rarity": "normal", "nation": "Testland", "league": "Test League 1", "club": "Test FC", "stats": {}, "sellable": true }
+  ]
+}
