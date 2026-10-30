@@ -123,17 +123,25 @@ function bindLastWords(root) {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     const nodes = [];
     for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
-    // The gap before the last word: skip trailing space, then the word.
+    // The gap before the last word: skip trailing space, then the word. A
+    // hyphen inside that word is a break too ("kick-off." left "off." alone),
+    // so it becomes a non-breaking hyphen, which looks the same.
     let seenWord = false;
     for (let i = nodes.length - 1; i >= 0; i--) {
-      const t = nodes[i].data;
+      let t = nodes[i].data;
       for (let j = t.length - 1; j >= 0; j--) {
         const ws = /\s/.test(t[j]);
-        if (!ws) { seenWord = true; continue; }
+        if (!ws) {
+          seenWord = true;
+          if (t[j] === '-') t = t.slice(0, j) + '\u2011' + t.slice(j + 1);
+          continue;
+        }
         if (!seenWord) continue;
-        if (t[j] !== '\u00a0') nodes[i].data = t.slice(0, j) + '\u00a0' + t.slice(j + 1);
+        if (t[j] !== '\u00a0') t = t.slice(0, j) + '\u00a0' + t.slice(j + 1);
+        if (t !== nodes[i].data) nodes[i].data = t;
         return;
       }
+      if (t !== nodes[i].data) nodes[i].data = t;
     }
   });
 }
