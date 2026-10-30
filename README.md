@@ -9,7 +9,8 @@
 |---|---|
 | `/` | Home: the tools, this week's events, the blog |
 | `/ufm27/ptc-solver/` | PTC Solver: what a Player Trade Challenge still needs |
-| `/ufm27/players/` | Players: the card database, and the cards you own |
+| `/ufm27/players/` | Players: the card database, and the cards you own; a page per card, hubs per rarity, club and position, and Best cards |
+| `/ufm27/compare/` | Compare: two to four cards, stat by stat |
 | `/ufm27/squad-builder/` | Squad Builder: Chemistry and team OVR across the 19 formations |
 | `/ufm27/packs/` | Packs: sizes, and what the published odds mean in packs |
 | `/ufm27/weekend-league/` | Weekend League: QP to qualify, then the wins each rank needs |
@@ -17,10 +18,14 @@
 | `/blog/`, `/about/` | Guides, and what the site is and keeps |
 
 ```
-npm run build   # write every page from site/js/data/routes.js, posts.js and each view's render()
-npm test        # the engines, the formations, the generated pages and their links
+npm run build   # write every page (and the service worker's precache) from routes, posts, cards and views
+npm run cards   # turn data/ufm27-extraction.csv into site/data/cards.json and the pending list
+npm test        # engines, formations, generated pages and links, storage, voice, offline
+npm run check   # everything CI runs, including the browser check at 390 and 1280
 npm run serve   # http://localhost:8080
 ```
+
+Working agreements for changes are in [CLAUDE.md](CLAUDE.md), release rules in [VERSIONING.md](VERSIONING.md), the reader-facing voice in [docs/voice.md](docs/voice.md), and how card data is collected in [docs/data/](docs/data/).
 
 How it is put together:
 - Every address is a real HTML file written by `tools/build.mjs`, with the page already rendered for crawlers and a `<base>` that points back to the root. `site/js/app.js` then takes over and swaps views in place.
