@@ -1,0 +1,134 @@
+/* ============================================================
+   Squad Builder. The pitch carries cards, so it is the game's
+   surface: warm black inside a gold hairline, with the lines in
+   faint gold. The board only ever appears as the empty state.
+   ============================================================ */
+
+.sq-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; margin-bottom: 16px; }
+.sq-presets .tab { min-width: 0; display: inline-flex; align-items: center; gap: 7px; }
+.sq-count {
+  display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 2px 5px 0;
+  border-radius: 10px; background: rgba(0,0,0,.35); font-size: 15px; line-height: 1;
+}
+.tab.is-on .sq-count { background: rgba(68,66,48,.2); }
+.sq-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sq-actions .btn svg { width: 12px; height: 12px; }
+.sq-flabel { font-family: var(--ufm-mixed); font-weight: 700; font-size: 16px; letter-spacing: 0; opacity: .8; }
+
+/* ---- the pitch -------------------------------------------------------- */
+.sq-pitch {
+  position: relative; width: 100%; max-width: 640px; margin: 0 auto;
+  background:
+    radial-gradient(90% 50% at 50% 0%, rgba(233,211,141,.06), rgba(0,0,0,0) 70%),
+    linear-gradient(180deg, var(--ufm-ground-3) 0%, var(--ufm-ground-2) 55%, #0A0A08 100%);
+  border: 1px solid rgba(233,211,141,.45);
+  overflow: hidden;
+}
+.sq-lines { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .16; pointer-events: none; }
+
+.sq-slot {
+  position: absolute; width: var(--card-w);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  cursor: pointer; border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+.sq-slot:focus-visible { outline: 2px solid var(--ufm-cy-rim); outline-offset: 3px; }
+.sq-card { display: block; width: 100%; transition: transform .12s ease-out; }
+.sq-card .ucard { width: 100%; }
+.sq-slot:hover .sq-card { transform: translateY(-2px); }
+
+/* Position fit, as the game's lineup glows: only where it is known. */
+.sq-slot.is-fits .sq-card { filter: drop-shadow(0 0 1.5px #00FD89) drop-shadow(0 0 5px rgba(0,253,137,.55)); }
+.sq-slot.is-near .sq-card { filter: drop-shadow(0 0 1.5px #E57703) drop-shadow(0 0 5px rgba(229,119,3,.6)); }
+.sq-slot.is-wrong .sq-card { filter: drop-shadow(0 0 1.5px #E50021) drop-shadow(0 0 6px rgba(229,0,33,.7)); }
+
+/* A pitch card is small: OVR, position and name; the stats are in the dialog. */
+.sq-slot .ucard__stats { display: none; }
+.sq-slot .ucard__name { top: 70%; }
+.sq-slot .ucard__ovr span { font-size: 15cqw; }
+.sq-slot .ucard--empty em { font-size: 20cqw; }
+.sq-slot .ucard--empty svg { width: 30%; }
+.sq-slot.is-empty:hover .ucard--empty { --rim: var(--ufm-gd-mid); }
+.sq-name { display: none; }
+.sq-slot .pips { gap: 2px; }
+.sq-slot .pips i { width: 12px; height: 13.6px; }
+
+.sq-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin: 12px 0 0; font-size: 13px; font-weight: 500; color: var(--ufm-ink-2); }
+.sq-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.sq-note { text-align: center; font-size: 13.5px; margin: 6px 0 0; }
+
+/* ---- the summary --------------------------------------------------------- */
+.sq-hexes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 14px; }
+.sq-hexfig { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.sq-hexfig figcaption { font-family: var(--ufm-display); font-size: 17px; letter-spacing: .05em; line-height: 1; color: var(--ufm-ink-gold); }
+.sq-hexfig .hexchip > i { font-size: 21px; }
+.sq-hexfig .hexchip--lg > i { font-size: 30px; }
+.sq-chm {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 16px;
+  background: #0A0A08; border: 1px solid #2A271C; padding: 7px 14px 5px;
+}
+.sq-chm b { font-family: var(--ufm-display); font-weight: 400; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; }
+.sq-chm span:last-child { font-family: var(--ufm-display); font-size: 18px; letter-spacing: .06em; color: var(--ufm-ink-gold); }
+.sq-fine { font-size: 13px; margin: 14px 0 0; line-height: 1.45; }
+.sq-groups td { vertical-align: middle; }
+.sq-groups .sq-next { white-space: nowrap; }
+.sq-kind { display: block; font-size: 11.5px; color: var(--ufm-ink-gold); font-weight: 700; line-height: 1.2; }
+.sq-rest { font-size: 13px; margin: 8px 0 0; }
+
+.sq-ths td:first-child { white-space: nowrap; }
+.sq-ths td.n { padding: 5px 6px; }
+.field.sq-th { width: 54px; height: 34px; padding: 0 6px; text-align: center; font-variant-numeric: tabular-nums; }
+.field.sq-th.is-game { color: var(--ufm-gd-tab); background: var(--ufm-ol-deep); }
+.sq-thnote { margin: 12px 0 8px; font-size: 13.5px; }
+.sq-side .boardempty { padding: 30px 18px 32px; }
+.sq-side .boardempty .board { max-width: 240px; }
+
+/* ---- the formation picker: selection is a fill ---------------------------- */
+.sq-ftiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.sq-ftile {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 10px 6px 8px; border: 0; border-radius: 3px; cursor: pointer;
+  background: var(--ufm-ol-grad); color: var(--ufm-ink-gold);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 2px 0 rgba(0,0,0,.5);
+}
+.sq-ftile:hover { filter: brightness(1.1); }
+.sq-ftile b { font-family: var(--ufm-display); font-weight: 400; font-size: 18px; letter-spacing: .04em; line-height: 1; text-align: center; }
+.sq-ftile.is-on { background: var(--ufm-pick-on); color: var(--ufm-ink-on-gold); }
+.sq-fmini { position: relative; width: 58px; height: 76px; background: #0A0A08; border: 1px solid rgba(233,211,141,.28); }
+.sq-fmini i { position: absolute; width: 7px; height: 7px; border-radius: 50%; background: var(--ufm-gd-mid); transform: translate(-50%, -50%); }
+.sq-ftile.is-on .sq-fmini { background: rgba(68,66,48,.14); border-color: rgba(68,66,48,.55); }
+.sq-ftile.is-on .sq-fmini i { background: var(--ufm-ink-on-gold); }
+
+/* ---- the slot dialog ------------------------------------------------------ */
+.sq-detail { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; align-items: start; }
+.sq-detail .kv { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.sq-fit { margin: 14px 0 8px; font-weight: 700; }
+.sq-fit--fits { color: var(--ufm-pos); }
+.sq-fit--near { color: #F5A04A; }
+.sq-fit--wrong { color: var(--ufm-rd-peak); }
+.sq-fit--wrong { font-weight: 500; }
+.sq-why { margin: 0; padding-left: 18px; color: var(--ufm-ink-2); font-weight: 500; }
+.sq-why li { margin-bottom: 5px; }
+.sq-why .sq-kind { display: inline; font-size: 13px; margin-right: 4px; }
+
+@media (max-width: 860px) {
+  .sq-pitch { max-width: none; }
+  .sq-slot { gap: 2px; }
+  .sq-slot .ucard__name { display: none; }
+  .sq-slot .ucard__ovr { left: 13%; top: 11%; }
+  .sq-slot .ucard__ovr b { font-size: 30cqw; }
+  .sq-slot .ucard__ovr span { font-size: 18cqw; }
+  .sq-slot .ucard--empty em { font-size: 22cqw; }
+  .sq-name {
+    display: block; max-width: 118%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: 10.5px; line-height: 1.1; text-align: center; color: var(--ufm-ink);
+  }
+  .sq-slot .pips i { width: 8px; height: 9px; }
+  .sq-flabel { display: none; }
+}
+@media (max-width: 520px) {
+  .sq-lword { display: none; }
+  .sq-presets .tab { padding-inline: 16px; }
+  .sq-detail { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; }
+  .sq-hexes { gap: 10px; }
+}

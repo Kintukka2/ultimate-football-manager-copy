@@ -1,0 +1,112 @@
+/* ============================================================
+   PLAYERS: the card database and My cards. The standings list
+   beside the selected card; dense surfaces stay flat.
+   ============================================================ */
+
+.pl-top { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.pl-tabn { font-family: var(--ufm-ui); font-weight: 700; font-size: 14px; letter-spacing: 0; margin-left: 4px; opacity: .8; font-variant-numeric: tabular-nums; }
+.pl-tools { gap: 8px; }
+
+/* Filters: one grid that folds down to two columns on a phone */
+.pl-filters { display: grid; grid-template-columns: minmax(200px, 2.2fr) repeat(2, minmax(120px, 1.2fr)) repeat(2, minmax(72px, .6fr)) minmax(110px, 1fr) minmax(170px, 1.4fr); gap: 10px 12px; align-items: end; }
+.pl-filters .lbl > span { display: flex; align-items: center; gap: 6px; min-height: 16px; }
+.pl-sort { display: flex; gap: 6px; }
+.pl-sort .field { flex: 1 1 auto; }
+.pl-sort .iconbtn { flex: none; width: 42px; height: 42px; font-size: 20px; border-color: var(--ufm-gd-rim); }
+.pl-filters__toggle { display: none; }
+
+/* Position tabs: olive, gold fill when on. One scrolling row on a phone. */
+.pl-postabs { margin: 14px 0 6px; gap: 6px; }
+.pl-postabs .tab { padding: 3px 12px 0; height: 36px; font-size: 18px; }
+
+.pl-count { margin: 14px 0 8px; font-size: 13.5px; color: var(--ufm-ink-gold); font-variant-numeric: tabular-nums; }
+
+/* List and detail side by side */
+.pl-layout { display: grid; grid-template-columns: minmax(0, 1fr) 372px; gap: 16px; align-items: start; }
+.pl-list { container-type: inline-size; }
+.pl-list .list { min-width: 0; }
+.pl-row { grid-template-columns: 44px minmax(0, 1fr) 138px 58px 48px repeat(3, 50px); column-gap: 0; }
+.list__head.pl-row { padding-left: 0; }
+.list__head .pl-head__stats { grid-column: span 3; }
+.pl-row .lrow__name { min-width: 0; padding-right: 8px; }
+.pl-row .lrow__name small, .pl-row .lrow__name b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-row__rar { min-width: 0; overflow: hidden; }
+.pl-row__rar .rchip { max-width: 100%; overflow: hidden; text-overflow: ellipsis; font-size: 12.5px; }
+.pl-row .lstat.is-sort b { color: var(--ufm-ink-label); }
+.rchip--base { color: var(--ufm-gd-rim); }
+
+@container (max-width: 640px) {
+  .pl-row { grid-template-columns: 40px minmax(0, 1fr) 24px 54px 44px repeat(3, 44px); }
+  .pl-row__rar .rchip { font-size: 0; gap: 0; }
+  .list__head .pl-row__rar { font-size: 0; }
+}
+@container (max-width: 470px) {
+  .pl-row { grid-template-columns: 36px minmax(0, 1fr) 22px 52px 42px; padding-right: 8px; }
+  .pl-row .lstat, .list__head .pl-head__stats { display: none; }
+  .pl-row .lrow__name b { font-size: 21px; }
+}
+
+/* The selected card: shirt on the left, the facts beside it, the six
+   sub-stats on the honeycomb beneath */
+.pl-side { position: sticky; top: 16px; }
+.pl-detail .panel__head h2 { font-size: 30px; }
+.pl-detail .panel__body { padding: 16px; }
+.pl-detail__top { display: grid; grid-template-columns: 136px minmax(0, 1fr); gap: 16px; align-items: start; }
+.pl-detail__card .ucard { width: 100%; }
+.pl-facts { margin: 0; display: grid; gap: 6px; font-size: 14px; }
+.pl-facts div { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 5px; border-bottom: 1px solid #24211a; min-width: 0; }
+.pl-facts dt { color: var(--ufm-ink-gold); font-size: 12.5px; flex: none; }
+.pl-facts dd { margin: 0; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.pl-facts abbr { text-decoration: none; font-family: var(--ufm-display); font-size: 19px; letter-spacing: .04em; }
+.pl-unsell { color: var(--ufm-sug); }
+.pl-tiles { margin-top: 16px; max-width: none; }
+.pl-tiles .stattile { background-color: var(--ufm-stat-tile); background-image: var(--tex-honey); }
+.pl-tiles .stattile span { font-size: 11.5px; }
+.pl-bands { margin: 8px 0 0; font-size: 12.5px; font-weight: 500; color: var(--ufm-ink-3); }
+.pl-acts { margin-top: 14px; gap: 8px; }
+.pl-detail--dialog .pl-detail__top { grid-template-columns: 120px minmax(0, 1fr); }
+
+/* Empty states */
+.pl-empty { max-width: 760px; }
+.pl-empty p { margin: 0 0 12px; color: var(--ufm-ink-2); font-weight: 500; max-width: 64ch; }
+.pl-mine-empty { padding: 4px 0 8px; }
+
+/* The CSV format, and the import dialog */
+.pl-csv { margin-top: 26px; max-width: 78ch; color: var(--ufm-ink-2); font-weight: 500; font-size: 14px; }
+.pl-csv summary { cursor: pointer; font-family: var(--ufm-display); font-weight: 400; font-size: 20px; letter-spacing: .05em; color: var(--ufm-ink-gold); }
+.pl-csv p { margin: 8px 0 0; }
+.pl-csvcols { margin: 0 0 12px; overflow-wrap: anywhere; }
+.pl code, .modal code {
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .84em; font-weight: 500;
+  background: var(--ufm-void); border: 1px solid #2a271c; border-radius: 2px; padding: 1px 5px; color: var(--ufm-gd-peak);
+}
+.modal textarea[data-csv] { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; font-weight: 400; }
+.pl-file { height: auto; padding: 8px 10px; font-weight: 500; }
+.pl-file::file-selector-button { font: inherit; font-weight: 700; margin-right: 10px; padding: 5px 12px; border: 0; border-radius: 3px; color: var(--ufm-ink-gold); background: linear-gradient(180deg, #574830, #4D3F2A 50%, #423624); cursor: pointer; }
+.pl-problems { background: var(--ufm-void); border: 1px solid #5A0A06; border-left: 3px solid var(--ufm-rd-rim); padding: 10px 14px; font-size: 14px; font-weight: 500; }
+.pl-problems ul { margin: 0; padding-left: 18px; color: var(--ufm-rd-peak); }
+.pl-problems p { margin: 8px 0 0; color: var(--ufm-ink); font-weight: 700; }
+
+@media (max-width: 1180px) {
+  .pl-filters { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pl-filters__q { grid-column: span 2; }
+  .pl-filters__sort { grid-column: span 2; }
+}
+@media (max-width: 1060px) {
+  .pl-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+  .pl-detail__top { grid-template-columns: 112px minmax(0, 1fr); }
+}
+@media (max-width: 860px) {
+  .pl-layout { grid-template-columns: minmax(0, 1fr); }
+  .pl-side { display: none; }
+  .pl-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pl-filters__q { grid-column: 1 / -1; }
+  .pl-filters__sort { grid-column: 1; grid-row: 2; }
+  .pl-filters__toggle { display: inline-flex; grid-column: 2; grid-row: 2; align-self: end; min-height: 42px; }
+  .pl-filters:not(.is-open) .pl-f-x { display: none; }
+  .pl-postabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+  .pl-postabs::-webkit-scrollbar { display: none; }
+  .pl-postabs .tab { flex: none; }
+  .pl-top .tabs { width: 100%; }
+  .pl-top .tabs .tab { flex: 1 1 0; min-width: 0; }
+}

@@ -1,0 +1,326 @@
+/* ============================================================
+   UFMWiz site: the shell, the page layout and the pieces every
+   view shares. Components live in ufm.css; values in tokens.css.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --rail-w: 188px;
+  --maxw: 1180px;
+  --mnav-h: 64px;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ufm-ground-2);
+  /* The game blurs a stadium photograph behind every screen. We don't take the
+     photograph: this is what it reads as once blurred, a warm light from above. */
+  background-image: radial-gradient(120% 70% at 50% -10%, rgba(233,211,141,.07), rgba(0,0,0,0) 60%);
+  background-attachment: fixed;
+  color: var(--ufm-ink);
+  font-family: var(--ufm-ui);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--ufm-gd-rim); }
+a:hover { color: var(--ufm-gd-peak); }
+button, input, select, textarea { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--ufm-cy-rim); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+svg.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ============================================================
+   SHELL: the game's left rail on a wide screen, a top bar and a
+   thumb bar on a phone
+   ============================================================ */
+.shell { display: flex; align-items: flex-start; min-height: 100vh; }
+.rail {
+  position: sticky; top: 0;
+  flex: 0 0 var(--rail-w);
+  align-self: stretch; height: 100vh; overflow-y: auto;
+  background: var(--ufm-ground-2);
+  border-right: 1px solid rgba(233,211,141,.35);
+  padding-block: 18px 14px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.rail__brand { display: flex; align-items: center; gap: 10px; padding: 0 14px 18px; text-decoration: none; }
+.rail__brand svg { width: 44px; height: 39px; flex: none; }
+.rail a.rail__item {
+  display: block;
+  font-family: var(--ufm-display); font-weight: 400; font-size: 20px; letter-spacing: .06em;
+  color: var(--ufm-ink-gold); text-decoration: none;
+  padding: 9px 16px 7px;
+}
+.rail a.rail__item:hover { color: var(--ufm-ink); background: rgba(233,211,141,.06); }
+/* The game's nav rail is the one place the lift is olive, not gold. */
+.rail a.rail__item[aria-current="page"] { color: var(--ufm-ink); background: var(--ufm-nav-on); }
+.rail__foot { margin-top: auto; padding: 14px 16px 0; font-size: 12px; font-weight: 500; color: var(--ufm-ink-3); line-height: 1.4; }
+
+/* The lockup: UFM muted, WIZ lit, the bib rule beneath. Never one flat colour. */
+.wordmark {
+  display: inline-block; font-family: var(--ufm-display); font-weight: 400;
+  font-size: 26px; line-height: .9; letter-spacing: .03em; color: var(--ufm-ink);
+  border-bottom: 3px solid var(--wiz-bib); padding: 2px 0 2px;
+}
+.wordmark i { font-style: normal; color: var(--ufm-ink-3); }
+
+.main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; min-height: 100vh; }
+.wrap {
+  width: 100%; max-width: var(--maxw); margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+.view { flex: 1 0 auto; padding-bottom: 48px; }
+
+.topbar { display: none; }
+.mnav { display: none; }
+
+/* ============================================================
+   PAGE HEADER: the game's band exactly. Warm band, gold
+   hairlines, brush corner, white caps and the gold sentence.
+   ============================================================ */
+.pagehead {
+  position: relative; overflow: hidden;
+  background: var(--ufm-band);
+  border-bottom: 1px solid var(--ufm-gd-rim);
+  padding-block: 20px 16px;
+}
+.pagehead::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 180px; height: 120px;
+  background: var(--tex-streak) no-repeat left bottom / 180px 120px;
+  transform: scaleY(-1); opacity: .45; pointer-events: none;
+}
+.pagehead__in { position: relative; display: flex; align-items: baseline; gap: 6px 16px; flex-wrap: wrap; }
+.pagehead h1 {
+  font-family: var(--ufm-display); font-weight: 400;
+  font-size: clamp(34px, 4.8vw, 50px); line-height: 1;
+  letter-spacing: .02em; margin: 0; color: var(--ufm-ink);
+  text-shadow: var(--ufm-text-shadow);
+}
+.pagehead p {
+  margin: 0; font-family: var(--ufm-mixed); font-weight: 700;
+  font-size: clamp(19px, 2.4vw, 24px); line-height: 1.1; color: var(--ufm-ink-gold);
+}
+.pagehead__note { flex-basis: 100%; margin-top: 8px !important; font-family: var(--ufm-ui) !important; font-weight: 500 !important; font-size: 15px !important; color: var(--ufm-ink-2) !important; max-width: 78ch; line-height: 1.45 !important; }
+.view__body { padding-top: 24px; }
+
+/* ============================================================
+   SHARED PIECES
+   ============================================================ */
+h2.sub, h3.sub {
+  font-family: var(--ufm-display); font-weight: 400; font-size: 26px;
+  letter-spacing: .05em; color: var(--ufm-ink-gold); margin: 0 0 12px; line-height: 1.05;
+}
+.muted { color: var(--ufm-ink-3); font-weight: 500; }
+.soft { color: var(--ufm-ink-2); font-weight: 500; }
+.num { font-variant-numeric: tabular-nums; }
+.pos-t { color: var(--ufm-pos); }
+.sug-t { color: var(--ufm-sug); }
+.bad-t { color: var(--ufm-rd-peak); }
+
+.grid { display: grid; gap: 16px; }
+.cols-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.cols-side { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.row--end { justify-content: flex-end; }
+.spacer { flex: 1 1 auto; }
+
+.panel + .panel { margin-top: 16px; }
+.grid > .panel + .panel { margin-top: 0; }
+.panel__head h2 { position: relative; margin: 0; font-family: var(--ufm-display); font-weight: 400; font-size: 28px; letter-spacing: .03em; line-height: 1; }
+.panel__head .head-actions { position: relative; margin-left: auto; display: flex; gap: 8px; }
+
+/* Small buttons, for working panels. Same metals, a smaller cut. */
+.btn--sm { min-height: 36px; padding: 3px 14px 0; font-size: 19px; border-radius: 4px; }
+.btn--xs { min-height: 30px; padding: 3px 10px 0; font-size: 17px; border-radius: 3px; }
+.btn[disabled] { --b-top: #5B5B5B; --b-mid: #4E4E4E; --b-bot: #444444; --b-ink: #C1C2C2; cursor: not-allowed; filter: none; }
+.btn--foil[disabled] { background: linear-gradient(180deg, #5B5B5B 0%, #4E4E4E 50%, #444444 100%); color: #C1C2C2; }
+.btn--foil[disabled]::after { display: none; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--ufm-gd-rim); text-decoration: underline; cursor: pointer; font-weight: 700; }
+.iconbtn { display: inline-grid; place-items: center; width: 34px; height: 34px; background: var(--ufm-band); border: 1px solid #3a352a; border-radius: 3px; color: var(--ufm-ink-gold); cursor: pointer; font-size: 18px; line-height: 1; }
+.iconbtn:hover { color: var(--ufm-ink); border-color: var(--ufm-gd-mid); }
+
+.tabs--sm .tab { min-width: 0; height: 38px; font-size: 19px; padding: 3px 14px 0; }
+
+/* Forms */
+.form { display: grid; gap: 12px; }
+.form__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px 12px; }
+.lbl { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.lbl > span { font-size: 12.5px; color: var(--ufm-ink-gold); letter-spacing: .02em; }
+.lbl small { font-weight: 500; color: var(--ufm-ink-3); font-size: 12px; }
+.field { height: 42px; font-size: 15px; min-width: 0; }
+select.field { padding-right: 30px; appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ufm-gd-rim) 50%), linear-gradient(135deg, var(--ufm-gd-rim) 50%, transparent 50%);
+  background-position: calc(100% - 17px) 18px, calc(100% - 12px) 18px; background-size: 5px 5px; background-repeat: no-repeat; }
+textarea.field { height: auto; min-height: 120px; padding: 10px 14px; line-height: 1.4; font-weight: 500; resize: vertical; }
+.check { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+.check input { width: 18px; height: 18px; accent-color: var(--ufm-gd-tab); }
+
+/* Hint copy inside a working panel: one muted sentence. */
+.hint { margin: 0 0 12px; color: var(--ufm-ink-2); font-weight: 500; font-size: 14px; max-width: 72ch; }
+
+/* Advice inverts: white boxes, dark text. Persistent things stay dark. */
+.advice { background: #FFFFFF; color: #1B1609; border-radius: 6px; padding: 12px 15px; font-size: 14.5px; max-width: 72ch; }
+.advice b { color: #1B1609; }
+
+/* A dense key-value strip, for results */
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; }
+.kv > div { background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); padding: 10px 14px 9px; }
+.kv span { display: block; font-size: 12.5px; color: var(--ufm-ink-gold); }
+.kv b { font-family: var(--ufm-display); font-weight: 400; font-size: 30px; line-height: 1.05; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.kv b small { font-family: var(--ufm-ui); font-size: 13px; font-weight: 700; color: var(--ufm-ink-2); margin-left: 4px; letter-spacing: 0; }
+.kv .is-met b { color: var(--ufm-pos); }
+.kv .is-bad b { color: var(--ufm-rd-peak); }
+
+/* Tables in the dense style: olive rows, black gaps, nothing inside */
+.dtable { width: 100%; border-collapse: separate; border-spacing: 0 4px; font-variant-numeric: tabular-nums; }
+.dtable th { text-align: left; font-size: 13px; color: var(--ufm-ink-gold); padding: 6px 12px; background: var(--ufm-band); white-space: nowrap; }
+.dtable td { background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); padding: 9px 12px; }
+.dtable tr.is-on td { background: var(--ufm-row-on); box-shadow: inset 0 1px 0 var(--ufm-row-on-rim); }
+.dtable td.n, .dtable th.n { text-align: right; }
+.dtable .big { font-family: var(--ufm-display); font-weight: 400; font-size: 22px; letter-spacing: .03em; line-height: 1; }
+.dtable-wrap { overflow-x: auto; background: var(--ufm-void); border: 1px solid #000; padding: 0 4px; }
+
+/* Status badges: the skew, with the game's fills */
+.skew--new { background: var(--ufm-gd-tab); }
+.skew--live { background: var(--ufm-lm-rim); }
+.skew--ending { background: var(--ufm-rd-rim); color: #fff; }
+.skew--next { background: var(--ufm-cy-mid); }
+.skew--weekly { background: #CECBCA; }
+.skew--limited { background: var(--ufm-pu-peak); }
+.skew--sm { height: 24px; font-size: 15px; padding: 2px 11px 0; }
+
+/* ============================================================
+   THE BOARD, as a figure and as a full-page empty state
+   ============================================================ */
+figure.boardfig { margin: 0; }
+figure.boardfig .board { max-width: 520px; }
+figure.boardfig figcaption { margin-top: 10px; font-size: 14px; font-weight: 500; color: var(--ufm-ink-2); line-height: 1.5; max-width: 60ch; }
+.boardempty { border: 1px solid #1c1a13; background: var(--ufm-ground-2); padding: 40px 20px 44px; text-align: center; }
+.boardempty .board { max-width: 280px; margin: 0 auto 22px; }
+.boardempty h2 { margin: 0 0 8px; font-family: var(--ufm-display); font-weight: 400; font-size: 32px; letter-spacing: .04em; line-height: 1; }
+.boardempty p { margin: 0 auto; max-width: 48ch; color: var(--ufm-ink-2); font-weight: 500; }
+.boardempty .row { justify-content: center; margin-top: 20px; }
+/* inside a working panel, an empty state is one muted sentence */
+.empty-line { color: var(--ufm-ink-3); font-weight: 500; padding: 14px 0; margin: 0; }
+
+/* ============================================================
+   DIALOG: band header, black body, band footer, one hairline
+   ============================================================ */
+dialog.modal {
+  padding: 0; color: var(--ufm-ink); width: min(640px, calc(100vw - 24px)); max-width: none;
+  max-height: calc(100vh - 32px); overflow: hidden; display: none; flex-direction: column;
+}
+dialog.modal[open] { display: flex; }
+dialog.modal::backdrop { background: rgba(3,2,0,.78); }
+.modal__head { position: relative; overflow: hidden; background: var(--ufm-band); border-bottom: 1px solid rgba(233,211,141,.35); padding: 14px 52px 11px 18px; }
+.modal__head::before { content: ""; position: absolute; left: 0; top: 0; width: 90px; height: 60px; background: var(--tex-streak) no-repeat left bottom / 90px 60px; transform: scaleY(-1); opacity: .5; }
+.modal__head h2 { position: relative; margin: 0; font-family: var(--ufm-display); font-weight: 400; font-size: 30px; letter-spacing: .03em; line-height: 1; }
+.modal__head p { position: relative; margin: 4px 0 0; font-family: var(--ufm-mixed); font-weight: 700; font-size: 19px; line-height: 1.1; color: var(--ufm-ink-gold); }
+.modal__x { position: absolute; right: 12px; top: 12px; z-index: 1; }
+.modal__body { padding: 18px; overflow-y: auto; }
+.modal__head, .modal__foot { flex: none; }
+.modal__foot { flex-wrap: wrap; }
+dialog.modal--wide { width: min(920px, calc(100vw - 24px)); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 50;
+  background: #FFFFFF; color: #1B1609; padding: 11px 18px; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,.6);
+  font-weight: 700; max-width: calc(100vw - 32px);
+}
+
+/* ============================================================
+   FOOTER: the disclaimer on every page
+   ============================================================ */
+.foot { border-top: 1px solid var(--ufm-gd-rim); background: var(--ufm-void); padding-block: 24px 34px; font-size: 13.5px; font-weight: 500; color: var(--ufm-ink-3); }
+.foot p { margin: 0 0 8px; max-width: 86ch; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
+.foot a { color: var(--ufm-ink-gold); text-decoration: none; font-weight: 700; }
+.foot a:hover { color: var(--ufm-ink); }
+
+/* ============================================================
+   PROSE: blog posts and the About page
+   ============================================================ */
+.prose { max-width: 70ch; font-family: var(--ufm-ui); font-weight: 500; font-size: 16.5px; line-height: 1.62; color: #E9E6E2; }
+.prose h2 { font-family: var(--ufm-display); font-weight: 400; font-size: 30px; letter-spacing: .04em; color: var(--ufm-ink); margin: 34px 0 10px; line-height: 1.05; }
+.prose h3 { font-family: var(--ufm-display); font-weight: 400; font-size: 23px; letter-spacing: .05em; color: var(--ufm-ink-gold); margin: 26px 0 8px; }
+.prose p { margin: 0 0 14px; }
+.prose strong, .prose b { color: var(--ufm-ink); font-weight: 700; }
+.prose ul, .prose ol { padding-left: 22px; margin: 0 0 14px; }
+.prose li { margin-bottom: 6px; }
+.prose .answer { font-size: 19px; font-weight: 700; color: var(--ufm-ink); border-left: 3px solid var(--ufm-gd-rim); padding: 2px 0 2px 16px; margin: 0 0 22px; }
+.prose figure { margin: 24px 0; }
+.prose .dtable-wrap { margin: 18px 0; }
+.prose .meta { font-size: 13.5px; color: var(--ufm-ink-3); margin-bottom: 18px; }
+
+/* ============================================================
+   PHONE: a top bar with the lockup, five tabs at the thumb
+   ============================================================ */
+@media (max-width: 860px) {
+  .shell { flex-direction: column; align-items: stretch; }
+  .main { width: 100%; padding-bottom: calc(var(--mnav-h) + env(safe-area-inset-bottom, 0px)); }
+  .rail { display: none; }
+  .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .topbar {
+    display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 20;
+    background: var(--ufm-ground-2); border-bottom: 1px solid rgba(233,211,141,.35);
+    padding: calc(8px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px));
+    text-decoration: none;
+  }
+  .topbar svg { width: 34px; height: 30px; }
+  .topbar .wordmark { font-size: 22px; }
+  .mnav {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    height: calc(var(--mnav-h) + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--ufm-ground-2); border-top: 1px solid rgba(233,211,141,.35);
+  }
+  .mnav a, .mnav button {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    background: none; border: 0; text-decoration: none; cursor: pointer;
+    font-family: var(--ufm-display); font-size: 15px; letter-spacing: .05em; color: var(--ufm-ink-gold);
+  }
+  .mnav svg { width: 22px; height: 22px; }
+  .mnav [aria-current="page"] { color: var(--ufm-ink); background: var(--ufm-nav-on); }
+  .sheet-scrim { position: fixed; inset: 0; z-index: 31; background: rgba(3,2,0,.7); }
+  .sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 32;
+    background: var(--ufm-void); border-top: 1px solid var(--ufm-gd-rim);
+    padding: 10px 0 calc(var(--mnav-h) + env(safe-area-inset-bottom, 0px));
+  }
+  .sheet a { display: block; padding: 12px 20px; text-decoration: none; font-family: var(--ufm-display); font-size: 23px; letter-spacing: .04em; color: var(--ufm-ink); }
+  .sheet a span { display: block; font-family: var(--ufm-mixed); font-weight: 700; font-size: 16px; letter-spacing: 0; color: var(--ufm-ink-gold); }
+  .sheet a[aria-current="page"] { background: var(--ufm-nav-on); }
+  .cols-2, .cols-side { grid-template-columns: minmax(0, 1fr); }
+  .toast { bottom: calc(var(--mnav-h) + 16px); }
+  .masthead::before { background-size: 300px 200px; opacity: .55; }
+}
+@media (min-width: 861px) { .sheet, .sheet-scrim { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ============================================================
+   CARDS AT ANY SIZE: the shirt card's type scales with the card,
+   so the same card reads in a grid, a pitch slot or a dialog
+   ============================================================ */
+.ucard { container-type: inline-size; }
+.ucard__ovr b { font-size: 26cqw; }
+.ucard__ovr span { font-size: 12.5cqw; }
+.ucard__name { font-size: 14cqw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ucard__stats { font-size: 7.6cqw; }
+.ucard--empty em { font-size: 12cqw; }
+
+/* The rarity swatch in a row or a filter: the set's pair, fill inside rim,
+   then its name. Square, because a hexagon always holds a number about a
+   player. Never recolour one; the pair is the set's identity. */
+.rchip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ufm-ink); white-space: nowrap; }
+.rchip i { flex: none; width: 14px; height: 14px; border-radius: 2px; background: var(--fill); box-shadow: inset 0 0 0 2px var(--rim); }
+.rchip--none { color: var(--ufm-ink-3); }
+.lrow[role="button"] { cursor: pointer; }
+.lrow[role="button"]:hover { background: var(--ufm-row-2); }
+.lrow[role="button"]:focus-visible { outline: 2px solid var(--ufm-cy-rim); outline-offset: -2px; }
