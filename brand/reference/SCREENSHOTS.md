@@ -18,3 +18,20 @@ Eight scenes, served in three formats. The Google Play tablet images are pixel-i
 | league-knockout | Knockout bracket, two-legged scores, club shields | `…iphone__league-knockout.jpg` | `…ipad__league-knockout.jpg` | `…phone__league-knockout.jpg` |
 
 Sources: `https://itunes.apple.com/lookup?id=6474134759` (screenshotUrls, requested at native size) and `https://play.google.com/store/apps/details?id=com.gamebasics.ufm` (requested at `=w2560`). Downloaded 29 Oct 2026.
+
+## Harvested set (241 unique images)
+
+Collected on 29 Oct 2026 from third-party pages and YouTube. Each image was checked against the store set above, and visual duplicates were merged (16×16 average-hash within 6 bits at the same aspect ratio, keeping the largest copy). The full table, with source URL, size, era and what each image shows, is in [`screenshots/harvest/INDEX.md`](screenshots/harvest/INDEX.md).
+
+| Era | Images | Best sources | In this repo |
+|---|---|---|---|
+| UFM 27 (from 25 Aug 2026, black and gold) | 67 | 15 Malavida device captures at 2400×1080 (home hub, team hub, lineup with reserves, roles, formations, tactics, match view, in-match lineups, match report, "Match won", loading screen, collection, player profile); App Store event and Play feature art; 48 YouTube frames | All 67 |
+| UFM 26 (Aug 2025 to Aug 2026, teal and green) | 159 | BlueStacks and App Pricing Lab copies of the old store set, gamebasics.nl, MEmu; 132 YouTube frames | The 27 store and site images. The 132 YouTube frames are listed with their `i.ytimg.com` URLs |
+| UFM 25 (soft launch, before Aug 2025) | 15 | 7 Uptodown device captures at 1733×800, including the "UFM25 Manager Contract" screen | All 15 |
+
+**Screens still missing:** league standings table, a Weekend League screen beyond its hub tile, the missions list and UFM 27 settings.
+
+**Sources that failed:**
+- Cloudflare or other bot checks, skipped: APKPure, AppBrain, Aptoide, APKFab, AppAgg, Softonic, FileHippo, archive.ph and LDPlayer.
+- Wayback Machine: rate-limited.
+- YouTube storyboards: behind a sign-in check, so YouTube's public frame grabs were used instead.

@@ -19,7 +19,7 @@
   --gd-rim: #E9D38D; --gd-peak: #F8E9B0; --gd-tab: #F3D87F;
   --ink: #FFFFFF; --ink-2: #CECBCA; --ink-3: #867D61; --ink-gold: #E1CA94; --ink-label: #FCE684; --ink-on-gold: #444230;
   --pos: #50F99D; --red: #F62D2B; --red-peak: #FB6160; --cy: #00DFED;
-  --board: #0D1410; --board-rim: #2C3A30; --chalk: #E8F3EA; --chalk-2: #9BB0A2; --pen: #DE2424;
+  --grass-a: #123A27; --grass-b: #164530; --frame: #9AA6B0; --frame-hi: #D3DBE1; --paint: #EEF3EC; --them: #0C1712; --bib: #FF6B1A;
   --display: 'Bebas Neue', 'Bebas Neue Pro', 'Arial Narrow', Impact, sans-serif;
   --mixed: 'Sofia Sans Extra Condensed', 'Bebas Neue Pro', 'Arial Narrow', sans-serif;
   --ui: 'Roboto Condensed', 'Arial Narrow', Roboto, sans-serif;
@@ -40,11 +40,11 @@ body {
   background: var(--ground-2); border-right: 1px solid rgba(233,211,141,.35); padding-block: 18px; display: flex; flex-direction: column; gap: 2px; }
 .rail__mark { padding: 0 14px 16px; line-height: 1.05; }
 .rail__mark span { display: block; font-weight: 700; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); margin-top: 7px; }
-.rail__wm { display: inline-block; font-family: var(--display); font-size: 24px; letter-spacing: .03em; border-bottom: 3px solid var(--gd-rim); padding-bottom: 2px; }
+.rail__wm { display: inline-block; font-family: var(--display); font-size: 24px; letter-spacing: .03em; border-bottom: 3px solid var(--bib); padding-bottom: 2px; }
 .rail__wm i { font-style: normal; color: var(--ink-3); }
 .rail a { display: block; font-family: var(--display); font-size: 19px; letter-spacing: .06em; color: var(--ink-gold); text-decoration: none; padding: 8px 14px 7px; }
 .rail a:hover { color: var(--ink); background: rgba(233,211,141,.06); }
-.rail a.is-active { color: var(--ink-on-gold); background: var(--gd-tab); }
+.rail a.is-active { color: var(--ink); background: #49412B; }
 .rail a:focus-visible { outline: 2px solid var(--cy); outline-offset: -2px; }
 .main { flex: 1 1 auto; min-width: 0; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
@@ -111,7 +111,8 @@ ul.clean.no li::before { background: var(--red); clip-path: polygon(20% 0, 50% 3
 
 .lockup { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .lockup__mark { width: 78px; height: 69px; flex: none; }
-.wordmark { font-family: var(--display); font-size: 58px; line-height: .9; letter-spacing: .02em; border-bottom: 5px solid var(--gd-rim); padding-bottom: 4px; }
+.wordmark { font-family: var(--display); font-size: 58px; line-height: .9; letter-spacing: .02em; border-bottom: 5px solid var(--bib); padding-bottom: 4px; }
+.lockup__mark { width: 88px; height: 77px; }
 .wordmark i { font-style: normal; color: var(--ink-3); }
 .wordmark--fhc { border-bottom-color: #DE2424; }
 
@@ -129,19 +130,22 @@ ul.clean.no li::before { background: var(--red); clip-path: polygon(20% 0, 50% 3
 .copystate { margin-left: 10px; font-size: 13.5px; color: var(--pos); }
 
 /* the social card, as a live mock */
-.og { position: relative; aspect-ratio: 1200 / 630; max-width: 100%; width: 640px; background: var(--void); border: 1px solid var(--gd-rim); overflow: hidden; }
-.og::before { content: ""; position: absolute; inset: 0; background: var(--streak) no-repeat left bottom / 62% 66%; }
-.og__in { position: absolute; inset: 0; padding: 7% 7.5%; display: flex; flex-direction: column; justify-content: space-between; }
-.og__wm { align-self: flex-end; font-family: var(--display); font-size: clamp(18px, 3.4vw, 26px); letter-spacing: .03em; border-bottom: 3px solid var(--gd-rim); padding-bottom: 1px; }
+.og { position: relative; aspect-ratio: 1200 / 630; max-width: 100%; width: 640px; background: var(--void); border: 1px solid #2a271c; overflow: hidden; }
+.og__in { position: absolute; inset: 0; padding: 7% 48% 7% 7%; display: flex; flex-direction: column; justify-content: space-between; }
+.og__wm { align-self: flex-start; font-family: var(--display); font-size: clamp(18px, 3.4vw, 26px); letter-spacing: .03em; border-bottom: 3px solid var(--bib); padding-bottom: 1px; }
 .og__wm i { font-style: normal; color: var(--ink-3); }
-.og h4 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6.6vw, 56px); line-height: .92; max-width: 13ch; text-shadow: var(--tmp-shadow); }
-.og p { margin: 6px 0 0; font-family: var(--mixed); font-weight: 700; font-size: clamp(15px, 2.6vw, 22px); color: var(--ink-gold); max-width: 32ch; }
+.og h4 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(24px, 5.6vw, 46px); line-height: .92; text-shadow: var(--tmp-shadow); }
+.og p { margin: 6px 0 0; font-family: var(--mixed); font-weight: 700; font-size: clamp(13px, 2.3vw, 19px); color: var(--ink-gold); }
+.og__board { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); width: 38%; }
+.board { background: repeating-linear-gradient(90deg, var(--grass-a) 0 12.5%, var(--grass-b) 12.5% 25%); border: 3px solid var(--frame); border-radius: 8px; overflow: hidden;
+  box-shadow: inset 0 1px 0 var(--frame-hi), inset 0 0 0 1px rgba(0,0,0,.35), 0 0 0 1px #000; }
+.board svg { display: block; width: 100%; height: auto; }
 
 .assets { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; align-items: end; }
 .assets figure { margin: 0; }
 .assets figcaption { margin-top: 8px; font-size: 13px; color: var(--ink-2); }
 .assets figcaption b { display: block; font-family: var(--display); font-weight: 400; font-size: 18px; letter-spacing: .05em; color: var(--ink-gold); }
-.icon-tile { display: grid; place-items: center; background: var(--board); border: 2px solid var(--board-rim); }
+.icon-tile { display: grid; place-items: center; overflow: hidden; background: repeating-linear-gradient(90deg, var(--grass-a) 0 12.5%, var(--grass-b) 12.5% 25%); border: 3px solid var(--frame); box-shadow: inset 0 1px 0 var(--frame-hi); }
 
 footer { margin-top: 60px; border-top: 1px solid var(--gd-rim); background: var(--void); padding-block: 26px 40px; font-size: 14px; color: var(--ink-3); }
 footer b { color: var(--ink-2); }
@@ -161,15 +165,7 @@ footer a { color: var(--ink-gold); }
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="mark-ufm" viewBox="0 0 100 88">
-      <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
-      <path d="M24 26 L37 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-      <path d="M37 62 L50 40" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
-      <path d="M50 40 L63 62" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round"/>
-      <path d="M63 62 L72.5 35.5" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="14 7"/>
-      <circle cx="24" cy="26" r="6" fill="#0D1410" stroke="#E8F3EA" stroke-width="4"/>
-      <polygon points="78.7,18.5 81.2,27.9 70.8,24.1" fill="#DE2424"/>
-    </symbol>
+    <marker id="ah" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#FFFFFF"/></marker><marker id="ah-bib" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#FF6B1A"/></marker><symbol id="mark-ufm" viewBox="0 0 100 88"><clipPath id="mk-clip"><rect x="3" y="3" width="94" height="82" rx="7"/></clipPath><g clip-path="url(#mk-clip)"><rect width="100" height="88" fill="#123A27"/><rect x="12.5" y="0" width="12.5" height="88" fill="#164530"/><rect x="37.5" y="0" width="12.5" height="88" fill="#164530"/><rect x="62.5" y="0" width="12.5" height="88" fill="#164530"/><rect x="87.5" y="0" width="12.5" height="88" fill="#164530"/></g><rect x="3" y="3" width="94" height="82" rx="7" fill="none" stroke="#9AA6B0" stroke-width="3"/><polyline points="20,26 35,60 50,32 65,60 80,26" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="21.3" cy="28.0" r="7.0" fill="#000" opacity=".4"/><circle cx="20.0" cy="26.0" r="7.0" fill="#FFFFFF"/><circle cx="36.3" cy="62.0" r="7.0" fill="#000" opacity=".4"/><circle cx="35.0" cy="60.0" r="7.0" fill="#FFFFFF"/><circle cx="51.3" cy="34.0" r="7.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="32.0" r="7.0" fill="#FFFFFF"/><circle cx="66.3" cy="62.0" r="7.0" fill="#000" opacity=".4"/><circle cx="65.0" cy="60.0" r="7.0" fill="#FFFFFF"/><circle cx="81.3" cy="28.0" r="7.0" fill="#000" opacity=".4"/><circle cx="80.0" cy="26.0" r="7.0" fill="#FF6B1A"/></symbol><symbol id="mark-w" viewBox="10 16 80 54"><polyline points="20,26 35,60 50,32 65,60 80,26" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="21.3" cy="28.0" r="7.0" fill="#000" opacity=".4"/><circle cx="20.0" cy="26.0" r="7.0" fill="#FFFFFF"/><circle cx="36.3" cy="62.0" r="7.0" fill="#000" opacity=".4"/><circle cx="35.0" cy="60.0" r="7.0" fill="#FFFFFF"/><circle cx="51.3" cy="34.0" r="7.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="32.0" r="7.0" fill="#FFFFFF"/><circle cx="66.3" cy="62.0" r="7.0" fill="#000" opacity=".4"/><circle cx="65.0" cy="60.0" r="7.0" fill="#FFFFFF"/><circle cx="81.3" cy="28.0" r="7.0" fill="#000" opacity=".4"/><circle cx="80.0" cy="26.0" r="7.0" fill="#FF6B1A"/></symbol>
     <symbol id="mark-fhc" viewBox="0 0 100 88">
       <rect x="2" y="2" width="96" height="84" rx="6" fill="#0D1410" stroke="#2C3A30" stroke-width="2"/>
       <path d="M24 26 L37 62 L50 40 L63 62 L74 31" fill="none" stroke="#E8F3EA" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="14 7"/>
@@ -239,13 +235,15 @@ footer a { color: var(--ink-gold); }
         <div class="familyrow">
           <figure>
             <div class="lockup"><svg class="lockup__mark" role="img" aria-label="UFMWiz mark"><use href="#mark-ufm"/></svg><span class="wordmark"><i>UFM</i>WIZ</span></div>
-            <figcaption>UFMWiz · gold rule · the W as a one-two</figcaption>
+            <figcaption>UFMWiz · bib rule · the W of the WM on a tactics board</figcaption>
           </figure>
           <figure>
             <div class="lockup"><svg class="lockup__mark" role="img" aria-label="FHCWiz mark"><use href="#mark-fhc"/></svg><span class="wordmark wordmark--fhc"><i>FHC</i>WIZ</span></div>
-            <figcaption>FHCWiz · red rule · the W as a route</figcaption>
+            <figcaption>FHCWiz · red rule · the W as a route on a chalkboard</figcaption>
           </figure>
         </div>
+        <p>The two sites share a naming pattern and a lockup logic, and nothing else visual. Each draws its own thinking
+          on its own surface: FHCWiz on a coach's chalkboard, UFMWiz on a football tactics board with a bib-orange signature.</p>
         <p>The name follows the family pattern: the game's acronym, muted, then <strong>Wiz</strong>, lit. In running text
           write <strong>UFMWiz</strong>: one word, capital U-F-M-W, lowercase "iz". The all-caps <strong>UFMWIZ</strong> exists
           only inside the wordmark.</p>
@@ -270,7 +268,7 @@ footer a { color: var(--ink-gold); }
         <div class="principles">
           <div class="principle"><h4>Answer first</h4><p>Lead with the number or the decision, then the reason. "You need 14 wins out of 15" before any explanation of points.</p></div>
           <div class="principle"><h4>Use the game's words</h4><p>Players search for what the game prints. PTC, not SBC. Focus, not form. Quick Match, not friendly. See Words.</p></div>
-          <div class="principle"><h4>Show the working</h4><p>When a number decides something, show how it was reached in a line or a chalk figure. The reader should be able to check us.</p></div>
+          <div class="principle"><h4>Show the working</h4><p>When a number decides something, show how it was reached in a line or a board figure. The reader should be able to check us.</p></div>
           <div class="principle"><h4>Honest about the meter</h4><p>Energy, fitness and pack odds cost players real money. Say what something costs and what it returns, without spin in either direction.</p></div>
           <div class="principle"><h4>Never "boss"</h4><p>The game's coach character calls the player "boss". That is the game's voice. Ours addresses the reader as "you".</p></div>
           <div class="principle"><h4>Season-aware</h4><p>Everything in UFM resets in summer. Date any claim that can change, and say when advice expires.</p></div>
@@ -353,7 +351,7 @@ footer a { color: var(--ink-gold); }
           <li><b>Headers</b> are the game's pattern: a one-to-three-word title set in caps, and a gold sentence beside it that says what the screen is for. "Market · Search the market and strengthen your team".</li>
           <li><b>Buttons</b> are a verb, two words at most: Complete, Add card, Clear all, Apply filters. The result names what happened: "Challenge saved".</li>
           <li><b>Errors</b> say what went wrong and how to fix it: "That lineup has 10 players. Add one more to check Chemistry."</li>
-          <li><b>Empty states</b> on a full page are chalk with one line of instruction. Inside a working panel they are one muted sentence.</li>
+          <li><b>Empty states</b> on a full page go on the board with one line of instruction. Inside a working panel they are one muted sentence.</li>
           <li><b>Reported, not verified.</b> When a figure comes from players rather than the game (energy regen time, pack prices), say "players report" and date it.</li>
         </ul>
       </div>
@@ -379,7 +377,7 @@ footer a { color: var(--ink-gold); }
             <tr><td>How It Works</td><td>Evergreen</td><td>"What every stat does"</td><td><code>/blog/what-every-stat-does/</code></td></tr>
           </tbody>
         </table></div>
-        <p>Every post opens with the answer in one or two sentences, uses chalk figures for anything spatial, and never uses a
+        <p>Every post opens with the answer in one or two sentences, uses board figures for anything spatial, and never uses a
           game screenshot. A post that depends on numbers that change states the date and the game version at the top.</p>
       </div>
     </section>
@@ -389,11 +387,11 @@ footer a { color: var(--ink-gold); }
       <div class="sec-head"><div class="wrap"><div class="sec-head__inner"><h2>Assets</h2><p>What to produce before launch</p></div></div></div>
       <div class="wrap sec-body">
         <div class="assets">
-          <figure><div class="icon-tile" style="width:96px;height:96px;border-radius:20px"><svg viewBox="0 0 100 88" width="76" aria-hidden="true"><use href="#mark-ufm"/></svg></div>
-            <figcaption><b>App icon</b>The mark on its own board, maskable, 512 and 192 px. No wordmark.</figcaption></figure>
-          <figure><div class="icon-tile" style="width:48px;height:48px;border-radius:8px"><svg viewBox="0 0 100 88" width="40" aria-hidden="true"><use href="#mark-ufm"/></svg></div>
-            <figcaption><b>Favicon</b>32 px and an SVG. At 16 px drop the O and keep the W and the arrowhead.</figcaption></figure>
-          <figure><div class="icon-tile" style="width:72px;height:72px;border-radius:50%"><svg viewBox="0 0 100 88" width="56" aria-hidden="true"><use href="#mark-ufm"/></svg></div>
+          <figure><div class="icon-tile" style="width:96px;height:96px;border-radius:20px"><svg viewBox="0 0 80 54" width="72" aria-hidden="true"><use href="#mark-w"/></svg></div>
+            <figcaption><b>App icon</b>The W on its own board, maskable, 512 and 192 px. No wordmark.</figcaption></figure>
+          <figure><div class="icon-tile" style="width:48px;height:48px;border-radius:8px"><svg viewBox="0 0 80 54" width="34" aria-hidden="true"><use href="#mark-w"/></svg></div>
+            <figcaption><b>Favicon</b>32 px and an SVG. At 16 px keep the W and the bib magnet; drop the other four magnets.</figcaption></figure>
+          <figure><div class="icon-tile" style="width:72px;height:72px;border-radius:50%"><svg viewBox="0 0 80 54" width="48" aria-hidden="true"><use href="#mark-w"/></svg></div>
             <figcaption><b>Avatar</b>Discord, Reddit, X. The circle crops the board, never the W.</figcaption></figure>
         </div>
         <h3>Social card · 1200 × 630</h3>
@@ -402,9 +400,11 @@ footer a { color: var(--ink-gold); }
             <span class="og__wm"><i>UFM</i>WIZ</span>
             <div><h4>Weekend League: what rank 1 took</h4><p>55 points, 15 games, and the squads that got there</p></div>
           </div>
+          <div class="og__board"><div class="board"><svg viewBox="0 0 100 62" aria-hidden="true"><path d="M100 12 H78 V50 H100" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><path d="M100 22 H92 V40 H100" fill="none" stroke="#EEF3EC" stroke-width="1.6" opacity=".55"/><circle cx="86" cy="31" r="1" fill="#EEF3EC" opacity=".55"/><path d="M16 41 L33 26" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/><path d="M43 25 L68 39" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/><path d="M37 53 L68 46" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#ah)"/><circle cx="60.9" cy="26.4" r="5.0" fill="#000" opacity=".4"/><circle cx="60.0" cy="25.0" r="5.0" fill="#0C1712" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="50.9" cy="41.4" r="5.0" fill="#000" opacity=".4"/><circle cx="50.0" cy="40.0" r="5.0" fill="#0C1712" stroke="#FFFFFF" stroke-width="1.5"/><circle cx="12.9" cy="45.4" r="5.0" fill="#000" opacity=".4"/><circle cx="12.0" cy="44.0" r="5.0" fill="#FFFFFF"/><circle cx="38.9" cy="23.4" r="5.0" fill="#000" opacity=".4"/><circle cx="38.0" cy="22.0" r="5.0" fill="#FFFFFF"/><circle cx="32.9" cy="55.4" r="5.0" fill="#000" opacity=".4"/><circle cx="32.0" cy="54.0" r="5.0" fill="#FF6B1A"/></svg></div></div>
         </div>
-        <p style="margin-top:14px">Black, the brush sweep from the bottom left, the post title in Bebas, the subtitle in gold,
-          the wordmark top right with its gold rule. No card art, no portraits, no game logo. One template for every post.</p>
+        <p style="margin-top:14px">The game's warm black on the left with the post title in Bebas and the subtitle in gold; our
+          board on the right with the move the post is about; the wordmark with its bib rule. No card art, no portraits, no
+          game logo. One template for every post.</p>
       </div>
     </section>
 
