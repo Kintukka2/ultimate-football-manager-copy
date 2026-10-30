@@ -1,6 +1,32 @@
 # ultimate-football-manager-copy
 
-Research and design notes for **UFMWiz**, a companion site for Gamebasics' *Ultimate Football Manager 27*, and a sibling of FHCWiz.
+**UFMWiz**, a companion site for Gamebasics' *Ultimate Football Manager 27* and a sibling of FHCWiz: the site itself, and the research and design notes behind it.
+
+## The site
+`site/` is the whole website, ready to deploy as static files (Cloudflare Pages, Netlify or any web server). There is no framework and nothing to install.
+
+| Address | Page |
+|---|---|
+| `/` | Home: the tools, this week's events, the blog |
+| `/ufm27/ptc-solver/` | PTC Solver: what a Player Trade Challenge still needs |
+| `/ufm27/players/` | Players: the card database, and the cards you own |
+| `/ufm27/squad-builder/` | Squad Builder: Chemistry and team OVR across the 19 formations |
+| `/ufm27/packs/` | Packs: sizes, and what the published odds mean in packs |
+| `/ufm27/weekend-league/` | Weekend League: QP to qualify, then the wins each rank needs |
+| `/ufm27/events/` | Events: what is live and what ends first |
+| `/blog/`, `/about/` | Guides, and what the site is and keeps |
+
+```
+npm run build   # write every page from site/js/data/routes.js, posts.js and each view's render()
+npm test        # the engines, the formations, the generated pages and their links
+npm run serve   # http://localhost:8080
+```
+
+How it is put together:
+- Every address is a real HTML file written by `tools/build.mjs`, with the page already rendered for crawlers and a `<base>` that points back to the root. `site/js/app.js` then takes over and swaps views in place.
+- `site/css/tokens.css` is `brand/ufmwiz-tokens.css` (a test keeps them equal), and `site/css/ufm.css` holds the Visual System's own component CSS on those tokens.
+- The game's rules the tools count with live in `site/js/data/game.js`, each marked as printed by the game or reported by players.
+- Cards, squads and challenges are saved in the visitor's browser and nowhere else. The card database, `site/data/cards.json`, ships empty: no ratings were taken from the game, so it fills from cards players can see and submit.
 
 ## Research
 - [docs/UFM27-analysis.md](docs/UFM27-analysis.md): a complete analysis of Ultimate Football Manager 27. It covers the history, company, tech stack, every gameplay system, the economy, live-ops, reception, a strategy guide and a rebuild blueprint.

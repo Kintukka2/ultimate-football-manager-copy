@@ -1,0 +1,181 @@
+/* ============================================================
+   UFMWiz design tokens
+   Source of truth for the site. Values are measured from
+   Ultimate Football Manager 27 (build 27.4.0): rendered screenshots
+   and the sprite, font and material values authored into the build.
+   See UFMWiz_Visual_System.html for what each token is for.
+   ============================================================ */
+
+
+:root {
+  color-scheme: dark;
+
+  /* ---- grounds: warm olive-umber, never neutral ---- */
+  --ufm-void:        #000000;  /* panel and list bodies */
+  --ufm-ground:      #060606;  /* page body behind brackets */
+  --ufm-ground-2:    #0E0E0B;  /* HUD bar, side panels, nav rail, page ground */
+  --ufm-ground-3:    #171813;  /* rendered ground outside panels */
+  --ufm-band:        #22221B;  /* header band, list header, input, footer */
+  --ufm-tile:        #191815;  /* hub tile body */
+  --ufm-row:         #3C3521;  /* dense list row */
+  --ufm-row-2:       #423C27;  /* dense list row, light */
+  --ufm-row-rim:     #564E36;  /* row top edge */
+  --ufm-row-on:      #746A4C;  /* selected row */
+  --ufm-row-on-rim:  #867D61;  /* selected row edge */
+
+  /* ---- gold: identity, hairlines, selected, commit ---- */
+  --ufm-gd-deep:     #533C19;
+  --ufm-gd-body:     #8A7333;
+  --ufm-gd-mid:      #C2A473;
+  --ufm-gd-rim:      #E9D38D;  /* THE hairline */
+  --ufm-gd-peak:     #F8E9B0;
+  --ufm-gd-tab:      #F3D87F;  /* selected tab fill */
+  --ufm-gd-tab-grad: linear-gradient(180deg, #F8DD84 0%, #EACC75 50%, #D7B664 100%);
+  --ufm-foil: linear-gradient(100deg,
+    #DBC59E 0%, #CBA76D 10%, #C69429 20%, #D6B736 30%, #ECDD6C 40%,
+    #FEFBCA 50%, #F9F4B2 60%, #E5D04A 70%, #D1AE31 80%, #BE8826 90%, #C9A971 100%);
+  --ufm-streak-dark: #9C6F2D;
+  --ufm-streak-mid:  #C2A473;
+  --ufm-streak-hi:   #EEDCA8;
+
+  /* ---- olive: secondary, unselected, cancel ---- */
+  --ufm-ol-deep:     #3C3521;
+  --ufm-ol-body:     #423624;
+  --ufm-ol-mid:      #4D3F2A;
+  --ufm-ol-rim:      #574830;
+  --ufm-ol-peak:     #887766;
+  --ufm-ol-grad:     linear-gradient(180deg, #574830 0%, #4D3F2A 50%, #423624 100%);
+
+  /* ---- cyan: guidance, tap focus, chemistry, home team ---- */
+  --ufm-cy-deep:     #0E4543;
+  --ufm-cy-body:     #038390;
+  --ufm-cy-mid:      #00C5D5;
+  --ufm-cy-rim:      #00DFED;
+  --ufm-cy-peak:     #2BF4FA;
+
+  /* ---- lime: gain, speed-up, Weekend League ---- */
+  --ufm-lm-deep:     #2A3611;
+  --ufm-lm-body:     #475316;
+  --ufm-lm-mid:      #97BF43;
+  --ufm-lm-rim:      #BFE557;
+  --ufm-lm-peak:     #C6F704;
+
+  /* ---- red: destructive, loss, away team, gems ---- */
+  --ufm-rd-deep:     #5A0A06;
+  --ufm-rd-body:     #A00000;
+  --ufm-rd-mid:      #D42422;
+  --ufm-rd-rim:      #F62D2B;
+  --ufm-rd-peak:     #FB6160;
+
+  /* ---- purple: Quick Match, energy, specials ---- */
+  --ufm-pu-deep:     #291839;
+  --ufm-pu-body:     #3F2959;
+  --ufm-pu-mid:      #5A2D9C;
+  --ufm-pu-rim:      #793BC5;
+  --ufm-pu-peak:     #C27DF0;
+
+  /* ---- grey: disabled, the only neutral ---- */
+  --ufm-dis-body:    #3E3E3E;
+  --ufm-dis-mid:     #494949;
+  --ufm-dis-rim:     #727272;
+  --ufm-dis-peak:    #C1C2C2;
+
+  /* ---- text ---- */
+  --ufm-ink:         #FFFFFF;
+  --ufm-ink-2:       #CECBCA;
+  --ufm-ink-3:       #867D61;
+  --ufm-ink-gold:    #E1CA94;  /* header subtitle, unselected tab label */
+  --ufm-ink-label:   #FCE684;  /* stat labels, timers */
+  --ufm-ink-on-gold: #444230;
+  --ufm-ink-card:    #362614;
+
+  /* ---- status (text only) ---- */
+  --ufm-pos:         #50F99D;
+  --ufm-sug:         #FEF750;
+
+  /* ---- meaning sets ---- */
+  --ufm-focus-m2:    #FF1513;
+  --ufm-focus-m1:    #EBB200;
+  --ufm-focus-0:     #D7C690;
+  --ufm-focus-p1:    #00C3A0;
+  --ufm-focus-p2:    #79E900;
+
+  --ufm-chem-1:      #AFDE7E;
+  --ufm-chem-2:      #46EF68;
+  --ufm-chem-3:      #1DFFE1;
+
+  --ufm-fit-good:    #00FD89;
+  --ufm-fit-near:    #E57703;
+  --ufm-fit-wrong:   #E50021;
+
+  --ufm-fitness-100: #76E055;  --ufm-fitness-100-bg: #142A00;
+  --ufm-fitness-75:  #E09B03;  --ufm-fitness-75-bg:  #281C00;
+
+  --ufm-bar-home:    #038390;
+  --ufm-bar-away:    #A00000;
+  --ufm-bar-track:   #494949;
+
+  --ufm-tier-amateur:  #D3AD8D;
+  --ufm-tier-semipro:  #A9C4C4;
+  --ufm-tier-pro:      #F7CF5C;
+  --ufm-tier-legend:   #DDCFC8;
+
+  --ufm-money:       #1DE994;
+  --ufm-gems:        #EB2B44;
+  --ufm-energy:      #AB40E8;
+
+  --ufm-mode-league: linear-gradient(180deg, #4C3E26 0%, #75613B 50%, #A08451 100%);
+  --ufm-mode-quick:  linear-gradient(180deg, #291839 0%, #3F2959 50%, #56397A 100%);
+  --ufm-mode-wl:     linear-gradient(180deg, #79861B 0%, #475316 50%, #2A3611 100%);
+  --ufm-mode-challenge: #02D5E2;  /* corner accent on #191E1C */
+
+  /* ---- match view, profile, hub (UFM 27 device captures) ---- */
+  --ufm-nav-on:      #49412B;  /* active nav rail item */
+  --ufm-score-home:  #02C6D8;
+  --ufm-score-away:  #DE3132;
+  --ufm-ticker-edge: #038390;
+  --ufm-stat-low:    #D23C50;  /* observed at 49, 59 */
+  --ufm-stat-mid:    #F07D27;  /* observed at 72, 73 */
+  --ufm-stat-high:   #81AD5A;  /* observed at 78, 79 */
+  --ufm-stat-tile:   #49422C;
+  --ufm-hub-band:    #030200;
+  --ufm-chevron:     #D0AB50;
+  --ufm-pick-on:     #FCDF6E;  /* selected formation */
+
+  /* ---- card metals (top → bottom) and rims ---- */
+  --ufm-card-bronze: linear-gradient(180deg, #C18A60 0%, #E6B58C 20%, #E6B58C 35%, #CD986E 50%, #C69066 65%, #B3794F 80%, #9E5A35 100%);
+  --ufm-card-bronze-rim: #FFD6BD;
+  --ufm-card-silver: linear-gradient(180deg, #9DAFBA 0%, #C3D4DD 20%, #C3D4DD 35%, #ACBDC8 50%, #A4B5C0 65%, #8A9BA6 80%, #5F727D 100%);
+  --ufm-card-silver-rim: #E2EFF7;
+  --ufm-card-gold:   linear-gradient(180deg, #CDB96D 0%, #E9DF8F 20%, #EADF90 35%, #DDC674 50%, #D8BE67 65%, #C4A252 80%, #98763A 100%);
+  --ufm-card-gold-rim: #FAF9BB;
+  --ufm-card-rare:   linear-gradient(180deg, #C8A958 0%, #E3C970 20%, #EBD27A 35%, #E4C76F 50%, #DAB862 65%, #C8A251 80%, #AE853F 100%);
+  --ufm-card-season: linear-gradient(180deg, #343434 0%, #323030 35%, #222021 60%, #0D0B0B 85%, #42301C 100%);
+  --ufm-card-season-rim: #FEF9E3;
+
+  /* the shirt silhouette, traced from the 640×854 frame; aspect-ratio 640 / 854 */
+  --ufm-card-shape: polygon(50% 5.3%, 55% 3%, 60% 1.2%, 65% 1.5%, 70% 2.1%, 75% 3%, 80% 4.2%, 85% 5.6%, 90% 7.5%, 95% 9.6%, 98% 11.4%, 98.4% 20%, 98.4% 72%, 95% 75.4%, 94.1% 80%, 93.9% 85%, 92.2% 88%, 90% 90%, 86.6% 92%, 75.6% 94%, 64.8% 96%, 54.4% 98%, 50% 98.7%, 45.6% 98%, 34.4% 96%, 24.1% 94%, 13.4% 92%, 9.5% 90%, 7.7% 88%, 6.1% 85%, 5.9% 80%, 5% 75.4%, 1.6% 72%, 1.6% 20%, 2% 11.4%, 5% 9.6%, 10% 7.5%, 15% 5.6%, 20% 4.2%, 25% 3%, 30% 2.1%, 35% 1.5%, 40% 1.2%, 45% 3%);
+  /* pointy-top hexagon, 86×96 like the game's chips */
+  --ufm-hex-shape: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  --ufm-skew: -14deg;
+
+  /* ---- the board: the WIZ half, UFMWiz's own ----
+     A football tactics board. Cool where the game is warm. */
+  --wiz-grass-a:     #123A27;  /* mown stripe, dark */
+  --wiz-grass-b:     #164530;  /* mown stripe, light */
+  --wiz-grass:       repeating-linear-gradient(90deg, #123A27 0 12.5%, #164530 12.5% 25%);
+  --wiz-frame:       #9AA6B0;  /* brushed aluminium rim, 3 units */
+  --wiz-frame-hi:    #D3DBE1;  /* rim top edge */
+  --wiz-paint:       #EEF3EC;  /* pitch line paint, 1.6 units at 55% */
+  --wiz-marker:      #FFFFFF;  /* dry-wipe marker and our magnets, 4.5 units */
+  --wiz-them:        #0C1712;  /* opponent magnet, white ring */
+  --wiz-bib:         #FF6B1A;  /* the training bib: one per figure, and the wordmark rule */
+
+  /* ---- type ---- */
+  --ufm-display: 'Bebas Neue', 'Bebas Neue Pro', 'Arial Narrow', Impact, sans-serif;           /* caps only */
+  --ufm-mixed:   'Sofia Sans Extra Condensed', 'Bebas Neue Pro', 'Arial Narrow', sans-serif;  /* 700, gold subtitles */
+  --ufm-ui:      'Roboto Condensed', 'Arial Narrow', Roboto, sans-serif;                      /* 700 default */
+
+  /* TextMeshPro default underlay: black 25%, offset down, soft */
+  --ufm-text-shadow: 0 .06em .08em rgba(0, 0, 0, .25);
+}

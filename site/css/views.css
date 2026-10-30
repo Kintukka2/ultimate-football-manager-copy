@@ -1,0 +1,85 @@
+/* ============================================================
+   Home, Packs, Weekend League, Events, Blog and About
+   ============================================================ */
+
+.view__pad { padding-top: 24px; }
+.view[data-view="home"] .view__body, .view[data-view="post"] .view__body { padding-top: 0; }
+a.more { font-size: 14px; text-decoration: none; color: var(--ufm-ink-gold); }
+a.more:hover { color: var(--ufm-ink); }
+.crumbs { margin: 0 0 14px; font-size: 13.5px; color: var(--ufm-ink-3); }
+.crumbs a { color: var(--ufm-ink-gold); text-decoration: none; }
+
+/* ---- home ---- */
+.masthead .eyebrow { max-width: none; margin: 0 0 14px; font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ufm-ink-gold); }
+.masthead h1 em { white-space: nowrap; }
+.home > section { margin-top: 34px; }
+.home__head { justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.home__head h2.sub { margin: 0; }
+.home__tiles { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+a.hub { text-decoration: none; color: var(--ufm-ink); }
+a.hub:hover .hub__band b { color: var(--ufm-gd-peak); }
+a.hub:hover { border-color: rgba(233,211,141,.5); }
+a.hub:focus-visible { outline: 2px solid var(--ufm-cy-rim); outline-offset: 2px; }
+.hub__art { height: 104px; }
+.hub__note { text-shadow: var(--ufm-text-shadow); }
+.hub__art--db { background-color: #49422C; background-image: var(--tex-honey); }
+/* the slash bands: the rarity frame and pack banner texture */
+.hub__art--events { background: linear-gradient(-8deg, transparent 0 52%, #C8A251 52% 56%, transparent 56% 66%, #C8A251 66% 68.5%, transparent 68.5%), var(--ufm-void); }
+.hub__art--challenge .hub__note, .hub__art--quick .hub__note { color: #fff; }
+.hub__sub { display: block; padding: 0 14px 12px; background: #030200; font-family: var(--ufm-mixed); font-weight: 700; font-size: 16.5px; line-height: 1.15; color: var(--ufm-ink-gold); }
+.home__split { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; }
+.postline { display: block; text-decoration: none; padding: 12px 14px 11px; background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); margin-bottom: 4px; }
+.postline b { display: block; font-family: var(--ufm-display); font-weight: 400; font-size: 22px; letter-spacing: .03em; color: var(--ufm-ink); line-height: 1.05; }
+.postline span { display: block; font-size: 13.5px; font-weight: 500; color: var(--ufm-ink-2); margin-top: 3px; }
+.postline:hover { background: var(--ufm-row-2); }
+.home__mark { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 28px; align-items: center; border-top: 1px solid #24211a; padding-top: 30px; }
+.home__mark p { margin: 0 0 10px; max-width: 62ch; }
+
+/* ---- events ---- */
+.events, .home__events { display: flex; flex-direction: column; gap: 4px; }
+.evrow { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 10px 14px 10px 12px; background: var(--ufm-row); box-shadow: inset 0 1px 0 var(--ufm-row-rim); }
+/* the set's swatch: its chip pair, fill inside rim; the reset has no set */
+.evrow__chip { display: block; width: 32px; height: 32px; border-radius: 3px; background: var(--fill); box-shadow: inset 0 0 0 3px var(--rim), 0 0 0 1px #000; }
+.evrow__chip--reset { --fill: var(--ufm-band); --rim: var(--ufm-gd-rim); }
+.evrow__main b { display: block; font-family: var(--ufm-display); font-weight: 400; font-size: 23px; letter-spacing: .03em; line-height: 1.05; }
+.evrow__main span { display: block; font-size: 13.5px; font-weight: 500; color: var(--ufm-ink-2); margin-top: 2px; }
+.evrow__main a { color: var(--ufm-gd-rim); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.evrow__when { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.evrow__when small { font-size: 12.5px; color: var(--ufm-ink-gold); white-space: nowrap; }
+.evrow--ending { background: #4A2A1D; box-shadow: inset 0 1px 0 #6A3A26; }
+.evrow--ended { opacity: .6; }
+.skew--sm { color: #1B1609; }
+.skew--ending { color: #FFFFFF; }
+
+/* ---- packs ---- */
+.packs .dtable-wrap { margin-top: 14px; }
+.packs aside .dtable td b { font-family: var(--ufm-display); font-weight: 400; font-size: 20px; letter-spacing: .03em; }
+
+/* ---- weekend league ---- */
+.wl__tile { min-height: 0; padding: 18px 20px; }
+.wl__tile b { font-size: clamp(26px, 3.6vw, 36px); }
+.wl__line { margin: 12px 0 0; font-size: 16px; }
+.wl__verdict { margin: 0 0 12px; font-size: 18px; }
+.wl .meter { max-width: none; height: 26px; }
+.wl .meter__val { font-size: 18px; }
+
+/* ---- blog ---- */
+.ptiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.ptile { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--ufm-ink); background: var(--ufm-void); border: 1px solid var(--ufm-gd-rim); padding: 0 18px 16px; min-height: 210px; }
+.ptile::before { content: ""; position: absolute; left: 0; top: 0; width: 120px; height: 80px; background: var(--tex-streak) no-repeat left bottom / 120px 80px; transform: scaleY(-1); opacity: .5; pointer-events: none; }
+.ptile__band { position: relative; margin: 0 -18px 8px; padding: 9px 18px 7px; background: var(--ufm-band); border-bottom: 1px solid rgba(233,211,141,.35); font-family: var(--ufm-display); font-size: 17px; letter-spacing: .08em; color: var(--ufm-ink-gold); }
+.ptile b { position: relative; font-family: var(--ufm-display); font-weight: 400; font-size: 30px; line-height: 1; letter-spacing: .02em; }
+.ptile__dek { font-family: var(--ufm-mixed); font-weight: 700; font-size: 18px; line-height: 1.15; color: var(--ufm-ink-gold); }
+.ptile small { margin-top: auto; font-size: 12.5px; font-weight: 500; color: var(--ufm-ink-3); }
+.ptile:hover { border-color: var(--ufm-gd-peak); }
+.ptile:hover b { color: var(--ufm-gd-peak); }
+.prose figure.boardfig .board { max-width: 440px; }
+
+@media (max-width: 860px) {
+  .home__split, .home__mark { grid-template-columns: minmax(0, 1fr); }
+  .home__mark .boardfig { max-width: 340px; }
+  .evrow { grid-template-columns: 36px minmax(0, 1fr); gap: 10px; }
+  .evrow__when { grid-column: 2; align-items: flex-start; flex-direction: row; gap: 10px; text-align: left; }
+  .stats li { font-size: 15px; }
+  .hub__art { height: 76px; }
+}

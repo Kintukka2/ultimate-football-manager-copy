@@ -1,0 +1,9 @@
+# Cloudflare Pages. The modules import each other without version strings, so
+# every script and stylesheet is revalidated on each visit (a 304 when unchanged)
+# rather than cached stale against a newer page.
+/js/*
+  Cache-Control: no-cache
+/css/*
+  Cache-Control: no-cache
+/data/*
+  Cache-Control: no-cache
