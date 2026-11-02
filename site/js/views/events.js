@@ -54,10 +54,16 @@ export function eventRows({ limit = Infinity, now = Date.now() } = {}) {
   }).join('');
 }
 
-export function render() {
+// The day a status is worked out for. In the browser that is today; in the
+// build it is the day the calendar was checked, so the page a crawler reads
+// says what was true on that day, and a rebuild on a later day writes the same
+// page. The browser redraws with today's status as soon as the view mounts.
+export const statusDay = (ctx = {}) => (ctx.build ? Date.parse(EVENTS_AS_OF + 'T12:00:00Z') : Date.now());
+
+export function render(ctx = {}) {
   return `<div class="wrap">
     <p class="hint">Checked on ${dayYear(EVENTS_AS_OF)}. Dates are the game's, in UTC. The game doesn't publish end times, so an event that ends on a day may close at any hour of it.</p>
-    <div class="events">${eventRows()}</div>
+    <div class="events">${eventRows({ now: statusDay(ctx) })}</div>
   </div>`;
 }
 

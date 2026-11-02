@@ -55,3 +55,23 @@ test('no page uses a game screenshot or game art', async () => {
     assert.doesNotMatch(html, /screenshots\/|\.jpe?g"/, p.path);
   }
 });
+
+// The built pages are committed and CI rebuilds them, so a page that read the
+// clock would turn CI red on the first day an event ended. Build twice, five
+// years apart, and the output has to be the same.
+test('the build writes the same pages whatever day it runs', async () => {
+  const { buildFiles, loadCards } = await import('../tools/build.mjs');
+  const cards = await loadCards();
+  const now = Date.now;
+  let early, late;
+  try {
+    Date.now = () => Date.parse('2026-01-01T09:00:00Z');
+    early = buildFiles({ cards });
+    Date.now = () => Date.parse('2031-06-15T21:00:00Z');
+    late = buildFiles({ cards });
+  } finally {
+    Date.now = now;
+  }
+  assert.equal(late.length, early.length);
+  early.forEach((f, i) => assert.equal(late[i].content, f.content, `${f.rel} depends on the day it was built`));
+});

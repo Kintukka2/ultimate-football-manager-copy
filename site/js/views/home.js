@@ -8,7 +8,7 @@ import { FORMATIONS } from '../data/football.js';
 import { RARITIES } from '../data/rarities.js';
 import { WEEKEND_LEAGUE } from '../data/game.js';
 import { wm } from '../lib/board.js';
-import { eventRows } from './events.js';
+import { eventRows, statusDay } from './events.js';
 
 const CHEV = '<span class="chev" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M5 2.5 9.5 7 5 11.5" fill="none" stroke="#2A2110" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
 
@@ -30,7 +30,7 @@ function tile({ id, art, note }) {
     + `<span class="hub__band"><b>${esc(r.nav)}</b>${CHEV}</span><span class="hub__sub">${esc(r.blurb)}</span></a>`;
 }
 
-export function render() {
+export function render(ctx = {}) {
   const specials = RARITIES.filter((r) => r.fill).length;
   return `<section class="masthead"><div class="wrap masthead__body">
     <p class="eyebrow">UFMWiz · Free tools for Ultimate Football Manager 27</p>
@@ -51,7 +51,7 @@ export function render() {
     <section class="home__split">
       <div>
         <div class="row home__head"><h2 class="sub">This week</h2><a class="more" href="${byId('events').path}">Full calendar ›</a></div>
-        <div class="home__events" data-events>${eventRows({ limit: 4 })}</div>
+        <div class="home__events" data-events>${eventRows({ limit: 4, now: statusDay(ctx) })}</div>
       </div>
       <div>
         <div class="row home__head"><h2 class="sub">From the blog</h2><a class="more" href="${byId('blog').path}">All guides ›</a></div>

@@ -8,6 +8,14 @@ a release.
 
 ## [Unreleased]
 
+## [0.2.1] - Unreleased
+
+### Fixed
+
+- **The event calendar no longer changes the built pages from one day to the
+  next.** Home and Events are written as of the day the calendar was checked,
+  and your browser still shows today's status the moment the page opens.
+
 ## [0.2.0] - Unreleased
 
 ### Added
