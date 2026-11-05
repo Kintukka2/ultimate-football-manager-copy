@@ -1,6 +1,6 @@
 // The club list against the league books. data/ufm27-league-books.csv is each
 // book's index as the game shows it; data/ufm27-clubs.csv gives every club a
-// league. Where a book has been read the two must agree exactly, because the
+// league. All 30 books are read, and the two must agree exactly, because the
 // book wins (docs/data/club-leagues.md).
 
 import test from 'node:test';
@@ -28,6 +28,11 @@ test('each book is one of the 30 leagues, its slots numbered 1 to n', () => {
   }
 });
 
+test('every league has its book, so every league in the club list comes from one', () => {
+  assert.deepEqual([...books.keys()].sort(), [...leagues].sort());
+  for (const c of clubs) assert.ok(!c.league || books.has(c.league), `${c.club}: ${c.league} has no book`);
+});
+
 test('no club is in two books', () => {
   const seen = new Map();
   for (const [league, rows] of books) {
@@ -49,7 +54,7 @@ test('every club in a book is a club in the list, under the name the game shows'
 // Kraków, and the Poland book lists it twice), and two keys can show the same
 // name for the same club (both Laval keys are Stade Laval, and the France 2
 // book lists it once). So a club is its shown name with its season club.
-test('a league whose book has been read has exactly the clubs in it', () => {
+test('each league has exactly the clubs in its book', () => {
   for (const [league, rows] of books) {
     const listed = new Map();
     for (const c of clubs) if (c.league === league) listed.set(`${c.club}\n${c.season_name}`, c.club);

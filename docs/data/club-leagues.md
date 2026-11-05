@@ -2,7 +2,7 @@
 
 `data/ufm27-clubs.csv` lists the 626 clubs in the game's text table. Its `league` column was filled on 1 November 2026 from each league's current season, as a starting point to check against the league books. Where a book disagrees, the book wins: correct the row.
 
-21 of the 30 books have been read so far (see [Read off the league books](#read-off-the-league-books)). The other nine leagues are still the season lists.
+All 30 books have now been read (see [Read off the league books](#read-off-the-league-books)), and the column matches them: 537 clubs have a league and 89 don't.
 
 ## How it was filled
 
@@ -35,24 +35,24 @@
 | Netherlands 1 | Eredivisie | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Eredivisie) | 5 Nov 2026 |
 | Norway 1 | Eliteserien | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Eliteserien) | 5 Nov 2026 |
 | Poland 1 | Ekstraklasa | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ekstraklasa) | 5 Nov 2026 |
-| Portugal 1 | Primeira Liga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Primeira_Liga) | |
-| Romania 1 | Liga I (SuperLiga) | 2026–27 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Liga_I) | |
-| Scotland 1 | Scottish Premiership | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Scottish_Premiership) | |
-| South Korea 1 | K League 1 | 2026 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026_K_League_1) | |
-| Spain 1 | La Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_La_Liga) | |
-| Spain 2 | Segunda División | 2026–27 | 22 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Segunda_División) | |
-| Sweden 1 | Allsvenskan | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Allsvenskan) | |
-| Swiss 1 | Swiss Super League | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Swiss_Super_League) | |
-| Turkey 1 | Süper Lig | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Süper_Lig) | |
+| Portugal 1 | Primeira Liga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Primeira_Liga) | 5 Nov 2026 |
+| Romania 1 | Liga I (SuperLiga) | 2026–27 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Liga_I) | 5 Nov 2026 |
+| Scotland 1 | Scottish Premiership | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Scottish_Premiership) | 5 Nov 2026 |
+| South Korea 1 | K League 1 | 2026 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026_K_League_1) | 5 Nov 2026 |
+| Spain 1 | La Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_La_Liga) | 5 Nov 2026 |
+| Spain 2 | Segunda División | 2026–27 | 22 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Segunda_División) | 5 Nov 2026 |
+| Sweden 1 | Allsvenskan | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Allsvenskan) | 5 Nov 2026 |
+| Swiss 1 | Swiss Super League | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Swiss_Super_League) | 5 Nov 2026 |
+| Turkey 1 | Süper Lig | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Süper_Lig) | 5 Nov 2026 |
 
 ## Read off the league books
 
-`data/ufm27-league-books.csv` holds each book's index as the game shows it: the league, the club's slot in the index, and the club under its shown name. Where a book has been read, the clubs carrying that league in `data/ufm27-clubs.csv` are exactly the clubs in the book, and `tests/clubs.test.mjs` fails if they drift apart.
+`data/ufm27-league-books.csv` holds each book's index as the game shows it: the league, the club's slot in the index, and the club under its shown name. The clubs carrying each league in `data/ufm27-clubs.csv` are exactly the clubs in its book, and `tests/clubs.test.mjs` fails if they drift apart or a league is left without a book.
 
-The 21 below were read on 5 November 2026, in two batches, from a player's screenshots of each book's index.
+All 30 were read on 5 November 2026, in three batches, from a player's screenshots of each book's index.
 
 - **Which book is which.** The index doesn't print the book's name. Each screenshot was matched to its book by its clubs: every club on it carried the same league in the season list, and the counts matched that league's.
-- **The Collection Books screen** counts 30 books, the same 30 as `data/ufm27-leagues.csv`. The covers name the country, with a number from the second tier down: England, then England 2, 3 and 4.
+- **The Collection Books screen** counts 30 books, the same 30 as `data/ufm27-leagues.csv`. The covers name the country, with a number from the second tier down: England, then England 2, 3 and 4. Two covers name it differently from the league list: **Korea** is South Korea 1 and **Switzerland** is Swiss 1. The screen's name sort still files Korea between Scotland and Spain.
 - **How the index runs.** Two facing pages of four columns by three rows, the left page filled before the right. `slot` follows that order. A book with more than 24 clubs runs on to a second spread: Argentina's slots 25 to 30.
 - **The order is the game's own**, not alphabetical, and `slot` keeps it.
 - **One name can be two clubs.** Kraków Red is both Cracovia and Wisła Kraków, and the Poland 1 book lists it twice, at slots 6 and 18.
@@ -80,38 +80,39 @@ The 21 below were read on 5 November 2026, in two batches, from a player's scree
 | Netherlands 1 | 18 | Agrees, once the key the book doesn't use is dropped (below) |
 | Norway 1 | 16 | Agrees, once the key the book doesn't use is dropped (below) |
 | Poland 1 | 18 | Agrees |
+| Portugal 1 | 18 | Agrees |
+| Romania 1 | 16 | Agrees, once the key the book doesn't use is dropped (below) |
+| Scotland 1 | 12 | Agrees |
+| South Korea 1 | 12 | Agrees |
+| Spain 1 | 20 | Agrees |
+| Spain 2 | 22 | Agrees |
+| Sweden 1 | 16 | Agrees |
+| Swiss 1 | 12 | Agrees |
+| Turkey 1 | 18 | Agrees |
 
 ## Clubs the game lists twice
 
-Two keys in the game's table name the same club. Until its book is read, both rows carry the league. Once it is, the key the book uses keeps the league and the other is left blank. Where both keys show the same name, the book can't tell them apart, so both keep the league.
+Two keys in the game's table name the same club. Before the books were read, both rows carried the league. Now the key the book uses keeps it and the other is blank.
 
-Settled by the Argentina book:
+| League | Club | The book has | Left blank |
+|---|---|---|---|
+| Argentina 1 | Argentinos Juniors | Buenos Aires Crimson (Argentinos Jrs.) | Argentinos Juniors |
+| Argentina 1 | Defensa y Justicia | Florencio Varela Yellow (Defensa) | Defensa y Justicia |
+| Argentina 1 | Estudiantes de La Plata | La Plata Red (Estudiantes) | Estudiantes (Club Estudiantes de La Plata) |
+| Germany 2 | Greuther Fürth | Fürth Green | Fürth |
+| Netherlands 1 | AZ | AZ | AZ Alkmaar |
+| Norway 1 | Vålerenga | Oslo Blue (Vålerenga Fotball) | Vålerenga |
+| Romania 1 | Sepsi OSK | Sfântu Gheorghe Red (Sepsi OSK Sf. Gheorghe) | Sepsi Red (Sepsi OSK) |
 
-- Argentinos Juniors: the book has **Buenos Aires Crimson** (Argentinos Jrs.). The key "Argentinos Juniors" isn't in it.
-- Defensa y Justicia: the book has **Florencio Varela Yellow** (Defensa). The key "Defensa y Justicia" isn't in it.
-- Estudiantes de La Plata: the book has **La Plata Red** (Estudiantes). The key "Estudiantes" (Club Estudiantes de La Plata) isn't in it.
+Laval can't be settled from a book. Both keys (Laval MFC, Stade Laval) show as "Laval", and the France 2 book has one "Laval". Both rows keep France 2, and `tests/clubs.test.mjs` counts them once.
 
-Settled by the Germany 2, Netherlands 1 and Norway 1 books:
+## Racing
 
-- Greuther Fürth: the book has **Fürth Green**. The key "Fürth" isn't in it.
-- AZ: the book has **AZ**. The key "AZ Alkmaar" isn't in it.
-- Vålerenga: the book has **Oslo Blue** (Vålerenga Fotball). The key "Vålerenga" isn't in it.
-
-Can't be settled from a book:
-
-- France 2: Laval. Both keys (Laval MFC, Stade Laval) show as "Laval", and the book has one "Laval". Both rows keep France 2, and `tests/clubs.test.mjs` counts them once.
-
-Still open:
-
-- Romania 1: Sepsi OSK: Sepsi OSK, Sepsi OSK Sf. Gheorghe
-
-## Left open
-
-- **Racing** shows in the game as just "Racing". Racing Club (Avellaneda Blue), Racing Santander (Santander) and Racing de Ferrol (Ferrol) each already have their own key, so the league book will say which this is. It isn't Racing Club: the Argentina book has Avellaneda Blue and no "Racing". Spain 1 and Spain 2 are left.
+"Racing" is in no book. Racing Club is Avellaneda Blue (Argentina 1), Racing Santander is Santander (Spain 1), and Racing de Ferrol, under Ferrol, is in no book either. So "Racing" keeps a blank league, with the clubs below.
 
 ## Not in any of the 30 leagues this season (82)
 
-Relegated, or never in these divisions this season. They stay in the file with a blank league: if one turns up in a league book, give it that league.
+Relegated, or never in these divisions this season, and none of them is in a league book. They stay in the file with a blank league. With the seven unused keys above, that makes the 89 blanks.
 
 - Aalborg Red (AaB)
 - Adana Blue (Adana Demirspor)
