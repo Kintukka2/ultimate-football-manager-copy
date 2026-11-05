@@ -1,6 +1,8 @@
 # Which league each club is in
 
-`data/ufm27-clubs.csv` lists the 626 clubs in the game's text table. Its `league` column was filled on 1 November 2026 from each league's current season, so it is a starting point to check against the league books, not a reading of them. Where a book disagrees, the book wins: correct the row.
+`data/ufm27-clubs.csv` lists the 626 clubs in the game's text table. Its `league` column was filled on 1 November 2026 from each league's current season, as a starting point to check against the league books. Where a book disagrees, the book wins: correct the row.
+
+Ten of the 30 books have been read so far (see [Read off the league books](#read-off-the-league-books)). The other 20 leagues are still the season lists.
 
 ## How it was filled
 
@@ -10,46 +12,75 @@
 
 ## The 30 leagues
 
-| League | Competition | Season | Clubs | Source |
-|---|---|---|---|---|
-| Argentina 1 | Argentine Primera División (Liga Profesional de Fútbol) | 2026 | 30 | [Wikipedia](https://en.wikipedia.org/wiki/2026_AFA_Liga_Profesional_de_F%C3%BAtbol) |
-| Australia 1 | A-League Men | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_A-League_Men) |
-| Austria 1 | Austrian Football Bundesliga | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Austrian_Football_Bundesliga) |
-| Belgium 1 | Belgian Pro League | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Belgian_Pro_League) |
-| Brazil 1 | Campeonato Brasileiro Série A | 2026 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Campeonato_Brasileiro_S%C3%A9rie_A) |
-| Denmark 1 | Danish Superliga | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Danish_Superliga) |
-| England 1 | Premier League | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Premier_League) |
-| England 2 | EFL Championship | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_Championship) |
-| England 3 | EFL League One | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_League_One) |
-| England 4 | EFL League Two | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_League_Two) |
-| France 1 | Ligue 1 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_1) |
-| France 2 | Ligue 2 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_2) |
-| Germany 1 | Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Bundesliga) |
-| Germany 2 | 2. Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_2._Bundesliga) |
-| Germany 3 | 3. Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_3._Liga) |
-| Ireland 1 | League of Ireland Premier Division | 2026 | 10 | [Wikipedia](https://en.wikipedia.org/wiki/2026_League_of_Ireland_Premier_Division) |
-| Italy 1 | Serie A | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_A) |
-| Italy 2 | Serie B | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_B) |
-| Netherlands 1 | Eredivisie | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Eredivisie) |
-| Norway 1 | Eliteserien | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Eliteserien) |
-| Poland 1 | Ekstraklasa | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ekstraklasa) |
-| Portugal 1 | Primeira Liga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Primeira_Liga) |
-| Romania 1 | Liga I (SuperLiga) | 2026–27 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Liga_I) |
-| Scotland 1 | Scottish Premiership | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Scottish_Premiership) |
-| South Korea 1 | K League 1 | 2026 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026_K_League_1) |
-| Spain 1 | La Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_La_Liga) |
-| Spain 2 | Segunda División | 2026–27 | 22 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Segunda_División) |
-| Sweden 1 | Allsvenskan | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Allsvenskan) |
-| Swiss 1 | Swiss Super League | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Swiss_Super_League) |
-| Turkey 1 | Süper Lig | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Süper_Lig) |
+| League | Competition | Season | Clubs | Source | Book read |
+|---|---|---|---|---|---|
+| Argentina 1 | Argentine Primera División (Liga Profesional de Fútbol) | 2026 | 30 | [Wikipedia](https://en.wikipedia.org/wiki/2026_AFA_Liga_Profesional_de_F%C3%BAtbol) | 5 Nov 2026 |
+| Australia 1 | A-League Men | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_A-League_Men) | 5 Nov 2026 |
+| Austria 1 | Austrian Football Bundesliga | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Austrian_Football_Bundesliga) | 5 Nov 2026 |
+| Belgium 1 | Belgian Pro League | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Belgian_Pro_League) | 5 Nov 2026 |
+| Brazil 1 | Campeonato Brasileiro Série A | 2026 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Campeonato_Brasileiro_S%C3%A9rie_A) | 5 Nov 2026 |
+| Denmark 1 | Danish Superliga | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Danish_Superliga) | 5 Nov 2026 |
+| England 1 | Premier League | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_Premier_League) | 5 Nov 2026 |
+| England 2 | EFL Championship | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_Championship) | 5 Nov 2026 |
+| England 3 | EFL League One | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_League_One) | 5 Nov 2026 |
+| England 4 | EFL League Two | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_League_Two) | 5 Nov 2026 |
+| France 1 | Ligue 1 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_1) | |
+| France 2 | Ligue 2 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_2) | |
+| Germany 1 | Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Bundesliga) | |
+| Germany 2 | 2. Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_2._Bundesliga) | |
+| Germany 3 | 3. Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_3._Liga) | |
+| Ireland 1 | League of Ireland Premier Division | 2026 | 10 | [Wikipedia](https://en.wikipedia.org/wiki/2026_League_of_Ireland_Premier_Division) | |
+| Italy 1 | Serie A | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_A) | |
+| Italy 2 | Serie B | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_B) | |
+| Netherlands 1 | Eredivisie | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Eredivisie) | |
+| Norway 1 | Eliteserien | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Eliteserien) | |
+| Poland 1 | Ekstraklasa | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ekstraklasa) | |
+| Portugal 1 | Primeira Liga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Primeira_Liga) | |
+| Romania 1 | Liga I (SuperLiga) | 2026–27 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Liga_I) | |
+| Scotland 1 | Scottish Premiership | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Scottish_Premiership) | |
+| South Korea 1 | K League 1 | 2026 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026_K_League_1) | |
+| Spain 1 | La Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_La_Liga) | |
+| Spain 2 | Segunda División | 2026–27 | 22 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Segunda_División) | |
+| Sweden 1 | Allsvenskan | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Allsvenskan) | |
+| Swiss 1 | Swiss Super League | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Swiss_Super_League) | |
+| Turkey 1 | Süper Lig | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Süper_Lig) | |
+
+## Read off the league books
+
+`data/ufm27-league-books.csv` holds each book's index as the game shows it: the league, the club's slot in the index, and the club under its shown name. Where a book has been read, the clubs carrying that league in `data/ufm27-clubs.csv` are exactly the clubs in the book, and `tests/clubs.test.mjs` fails if they drift apart.
+
+The ten below were read on 5 November 2026 from a player's screenshots of each book's index.
+
+- **Which book is which.** The index doesn't print the book's name. Each screenshot was matched to its book by its clubs: every club on it carried the same league in the season list, and the counts matched that league's.
+- **The Collection Books screen** counts 30 books, the same 30 as `data/ufm27-leagues.csv`. The covers name the country, with a number from the second tier down: England, then England 2, 3 and 4.
+- **How the index runs.** Two facing pages of four columns by three rows, the left page filled before the right. `slot` follows that order. A book with more than 24 clubs runs on to a second spread: Argentina's slots 25 to 30.
+- **The order is the game's, not alphabetical.** In most books the clubs new to the league this season come last (Coventry, Hull and Ipswich in England 1), and in England 2 to 4 the clubs that came down from the tier above come first.
+
+| Book | Clubs | Against the season list |
+|---|---|---|
+| Argentina 1 | 30 | Agrees, once the three keys the book doesn't use are dropped (below) |
+| Australia 1 | 12 | Agrees |
+| Austria 1 | 12 | Agrees |
+| Belgium 1 | 18 | Agrees |
+| Brazil 1 | 20 | Agrees |
+| Denmark 1 | 12 | Agrees |
+| England 1 | 20 | Agrees |
+| England 2 | 24 | Agrees |
+| England 3 | 24 | Agrees |
+| England 4 | 24 | Agrees |
 
 ## Clubs the game lists twice
 
-Two keys in the game's table name the same club. Both rows carry the league; the book will show which one the game actually uses.
+Two keys in the game's table name the same club. Until its book is read, both rows carry the league. Once it is, the key the book uses keeps the league and the other is left blank.
 
-- Argentina 1: Argentinos Juniors: Argentinos Juniors, Argentinos Jrs.
-- Argentina 1: Defensa y Justicia: Defensa y Justicia, Defensa
-- Argentina 1: Estudiantes de La Plata: Club Estudiantes de La Plata, Estudiantes
+Settled by the Argentina book:
+
+- Argentinos Juniors: the book has **Buenos Aires Crimson** (Argentinos Jrs.). The key "Argentinos Juniors" isn't in it.
+- Defensa y Justicia: the book has **Florencio Varela Yellow** (Defensa). The key "Defensa y Justicia" isn't in it.
+- Estudiantes de La Plata: the book has **La Plata Red** (Estudiantes). The key "Estudiantes" (Club Estudiantes de La Plata) isn't in it.
+
+Still open:
+
 - France 2: Laval: Laval MFC, Stade Laval
 - Germany 2: Greuther Fürth: Fürth, Fürth
 - Netherlands 1: AZ: AZ, AZ Alkmaar
@@ -58,7 +89,7 @@ Two keys in the game's table name the same club. Both rows carry the league; the
 
 ## Left open
 
-- **Racing** shows in the game as just "Racing". Racing Club (Avellaneda Blue), Racing Santander (Santander) and Racing de Ferrol (Ferrol) each already have their own key, so the league book will say which this is.
+- **Racing** shows in the game as just "Racing". Racing Club (Avellaneda Blue), Racing Santander (Santander) and Racing de Ferrol (Ferrol) each already have their own key, so the league book will say which this is. It isn't Racing Club: the Argentina book has Avellaneda Blue and no "Racing". Spain 1 and Spain 2 are left.
 
 ## Not in any of the 30 leagues this season (82)
 
