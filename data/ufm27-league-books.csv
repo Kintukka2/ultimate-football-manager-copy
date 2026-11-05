@@ -195,3 +195,197 @@ England 4,21,Tranmere
 England 4,22,Walsall
 England 4,23,Rochdale Blue
 England 4,24,York Red Blue
+France 1,1,Angers
+France 1,2,Auxerre
+France 1,3,Brest
+France 1,4,Le Havre
+France 1,5,Lens
+France 1,6,Lille
+France 1,7,Lorient
+France 1,8,Lyon
+France 1,9,Marseille
+France 1,10,Monaco
+France 1,11,Nice
+France 1,12,Paris Blue Red
+France 1,13,Paris Blue
+France 1,14,Rennes
+France 1,15,Strasbourg
+France 1,16,Toulouse
+France 1,17,Le Mans
+France 1,18,Troyes Blue
+France 2,1,Metz
+France 2,2,Nantes
+France 2,3,Annecy Red
+France 2,4,Boulogne-sur-Mer
+France 2,5,Clermont
+France 2,6,Dunkerque Blue
+France 2,7,Grenoble
+France 2,8,Guingamp
+France 2,9,Laval
+France 2,10,Montpellier
+France 2,11,Nancy
+France 2,12,Paris Green
+France 2,13,Pau Yellow
+France 2,14,Reims
+France 2,15,Rodez Red
+France 2,16,Saint-Étienne
+France 2,17,Montbéliard Blue
+France 2,18,Dijon Red
+Germany 1,1,Augsburg White
+Germany 1,2,Berlin Red
+Germany 1,3,Bremen Green
+Germany 1,4,Cologne Red
+Germany 1,5,Dortmund Yellow
+Germany 1,6,Frankfurt Black
+Germany 1,7,Freiburg Red
+Germany 1,8,Hamburg Blue
+Germany 1,9,Hoffenheim Blue
+Germany 1,10,Leipzig White
+Germany 1,11,Leverkusen Red
+Germany 1,12,Mainz Red
+Germany 1,13,Mönchengladbach Black
+Germany 1,14,Munich Red
+Germany 1,15,Stuttgart Red
+Germany 1,16,Elversberg Green
+Germany 1,17,Gelsenkirchen Blue
+Germany 1,18,Paderborn Blue
+Germany 2,1,Hamburg Brown
+Germany 2,2,Heidenheim Red
+Germany 2,3,Wolfsburg Green
+Germany 2,4,Berlin Blue
+Germany 2,5,Bielefeld White
+Germany 2,6,Bochum Blue
+Germany 2,7,Braunschweig Yellow
+Germany 2,8,Darmstadt Blue
+Germany 2,9,Dresden Yellow
+Germany 2,10,Fürth Green
+Germany 2,11,Hannover Red
+Germany 2,12,Kaiserslautern Red
+Germany 2,13,Karlsruhe Blue
+Germany 2,14,Kiel Blue
+Germany 2,15,Magdeburg Blue
+Germany 2,16,Nuremberg Red
+Germany 2,17,Cottbus Red
+Germany 2,18,Osnabrück Purple
+Germany 3,1,Düsseldorf Red
+Germany 3,2,Münster Green
+Germany 3,3,Aachen Black
+Germany 3,4,Cologne Crimson
+Germany 3,5,Duisburg Blue
+Germany 3,6,Essen Red
+Germany 3,7,Havelse Red
+Germany 3,8,Hoffenheim Blue II
+Germany 3,9,Ingolstadt Red
+Germany 3,10,Mannheim Blue
+Germany 3,11,Regensburg Red
+Germany 3,12,Rostock Blue
+Germany 3,13,Saarbrücken Blue
+Germany 3,14,Stuttgart White
+Germany 3,15,Verl Black
+Germany 3,16,Wiesbaden Red
+Germany 3,17,Aspach Red Black
+Germany 3,18,Würzburger Red
+Germany 3,19,Köln Red
+Germany 3,20,SV Meppen
+Ireland 1,1,Dundalk White
+Ireland 1,2,Derry Red
+Ireland 1,3,Drogheda Red
+Ireland 1,4,Dublin Black
+Ireland 1,5,Dublin Crimson
+Ireland 1,6,Dublin Green
+Ireland 1,7,Dublin Red
+Ireland 1,8,Galway Clarets
+Ireland 1,9,Sligo Red
+Ireland 1,10,Waterford Blue
+Italy 1,1,Bergamo
+Italy 1,2,Bologna
+Italy 1,3,Cagliari
+Italy 1,4,Como
+Italy 1,5,Florence
+Italy 1,6,Genoa Red Blue
+Italy 1,7,Lecce
+Italy 1,8,Milan Black Blue
+Italy 1,9,Milan Red White
+Italy 1,10,Naples
+Italy 1,11,Parma
+Italy 1,12,Rome Blue
+Italy 1,13,Rome Maroons
+Italy 1,14,Sassuolo
+Italy 1,15,Turin Black White
+Italy 1,16,Turin Maroons
+Italy 1,17,Udine
+Italy 1,18,Frosinone
+Italy 1,19,Monza
+Italy 1,20,Venice
+Italy 2,1,Cremona
+Italy 2,2,Pisa
+Italy 2,3,Verona
+Italy 2,4,Avellino Green
+Italy 2,5,Bolzano White
+Italy 2,6,Carrara
+Italy 2,7,Castellammare di Stabia
+Italy 2,8,Catanzaro Red
+Italy 2,9,Cesena
+Italy 2,10,Chiavari
+Italy 2,11,Empoli
+Italy 2,12,Genoa Blue
+Italy 2,13,Mantova Red
+Italy 2,14,Modena
+Italy 2,15,Padua
+Italy 2,16,Palermo
+Italy 2,17,Ascoli Piceno Black White
+Italy 2,18,Benevento Calcio
+Italy 2,19,Arezzo Claret
+Italy 2,20,Vicenza White Red
+Netherlands 1,1,Ajax
+Netherlands 1,2,AZ
+Netherlands 1,3,Excelsior
+Netherlands 1,4,FC Groningen
+Netherlands 1,5,FC Twente
+Netherlands 1,6,FC Utrecht
+Netherlands 1,7,Feyenoord
+Netherlands 1,8,Fortuna Sittard
+Netherlands 1,9,Go Ahead Eagles
+Netherlands 1,10,N.E.C. Nijmegen
+Netherlands 1,11,PEC Zwolle
+Netherlands 1,12,PSV Eindhoven
+Netherlands 1,13,sc Heerenveen
+Netherlands 1,14,SC Telstar
+Netherlands 1,15,Sparta Rotterdam
+Netherlands 1,16,ADO Den Haag
+Netherlands 1,17,Willem II
+Netherlands 1,18,SC Cambuur Leeuwarden
+Norway 1,1,Bergen Red
+Norway 1,2,Bodø Yellow
+Norway 1,3,Kristiansand Yellow
+Norway 1,4,Ålesund Orange
+Norway 1,5,Fredrikstad Red
+Norway 1,6,Hamar Red
+Norway 1,7,Kristiansund Blue
+Norway 1,8,Molde Blue
+Norway 1,9,Oslo Blue
+Norway 1,10,Oslo Red
+Norway 1,11,Sandefjord Blue
+Norway 1,12,Sarpsborg Blue
+Norway 1,13,Stavanger Blue
+Norway 1,14,Tromsø White
+Norway 1,15,Trondheim White
+Norway 1,16,Lillestrøm Yellow
+Poland 1,1,Białystok Yellow
+Poland 1,2,Częstochowa Red
+Poland 1,3,Gliwice Blue
+Poland 1,4,Katowice Yellow
+Poland 1,5,Kielce Red
+Poland 1,6,Kraków Red
+Poland 1,7,Łódź Red
+Poland 1,8,Lubin Orange
+Poland 1,9,Lublin Yellow
+Poland 1,10,Płock Blue
+Poland 1,11,Poznań Blue
+Poland 1,12,Radom Green
+Poland 1,13,Szczecin Maroon
+Poland 1,14,Warsaw White
+Poland 1,15,Zabrze White
+Poland 1,16,Wrocław Green
+Poland 1,17,Kraków Yellow
+Poland 1,18,Kraków Red

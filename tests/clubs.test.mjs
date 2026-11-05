@@ -28,11 +28,11 @@ test('each book is one of the 30 leagues, its slots numbered 1 to n', () => {
   }
 });
 
-test('no club is in two books, or twice in one', () => {
+test('no club is in two books', () => {
   const seen = new Map();
   for (const [league, rows] of books) {
     for (const { club } of rows) {
-      assert.ok(!seen.has(club), `${club} is in ${seen.get(club)} and ${league}`);
+      assert.ok(!seen.has(club) || seen.get(club) === league, `${club} is in ${seen.get(club)} and ${league}`);
       seen.set(club, league);
     }
   }
@@ -45,9 +45,14 @@ test('every club in a book is a club in the list, under the name the game shows'
   }
 });
 
+// A shown name can stand for two clubs (Kraków Red is Cracovia and Wisła
+// Kraków, and the Poland book lists it twice), and two keys can show the same
+// name for the same club (both Laval keys are Stade Laval, and the France 2
+// book lists it once). So a club is its shown name with its season club.
 test('a league whose book has been read has exactly the clubs in it', () => {
   for (const [league, rows] of books) {
-    const listed = clubs.filter((c) => c.league === league).map((c) => c.club).sort();
-    assert.deepEqual(listed, rows.map((r) => r.club).sort(), league);
+    const listed = new Map();
+    for (const c of clubs) if (c.league === league) listed.set(`${c.club}\n${c.season_name}`, c.club);
+    assert.deepEqual([...listed.values()].sort(), rows.map((r) => r.club).sort(), league);
   }
 });

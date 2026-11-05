@@ -2,7 +2,7 @@
 
 `data/ufm27-clubs.csv` lists the 626 clubs in the game's text table. Its `league` column was filled on 1 November 2026 from each league's current season, as a starting point to check against the league books. Where a book disagrees, the book wins: correct the row.
 
-Ten of the 30 books have been read so far (see [Read off the league books](#read-off-the-league-books)). The other 20 leagues are still the season lists.
+21 of the 30 books have been read so far (see [Read off the league books](#read-off-the-league-books)). The other nine leagues are still the season lists.
 
 ## How it was filled
 
@@ -24,17 +24,17 @@ Ten of the 30 books have been read so far (see [Read off the league books](#read
 | England 2 | EFL Championship | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_Championship) | 5 Nov 2026 |
 | England 3 | EFL League One | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_League_One) | 5 Nov 2026 |
 | England 4 | EFL League Two | 2026–27 | 24 | [Wikipedia](https://en.wikipedia.org/wiki/2026%E2%80%9327_EFL_League_Two) | 5 Nov 2026 |
-| France 1 | Ligue 1 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_1) | |
-| France 2 | Ligue 2 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_2) | |
-| Germany 1 | Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Bundesliga) | |
-| Germany 2 | 2. Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_2._Bundesliga) | |
-| Germany 3 | 3. Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_3._Liga) | |
-| Ireland 1 | League of Ireland Premier Division | 2026 | 10 | [Wikipedia](https://en.wikipedia.org/wiki/2026_League_of_Ireland_Premier_Division) | |
-| Italy 1 | Serie A | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_A) | |
-| Italy 2 | Serie B | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_B) | |
-| Netherlands 1 | Eredivisie | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Eredivisie) | |
-| Norway 1 | Eliteserien | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Eliteserien) | |
-| Poland 1 | Ekstraklasa | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ekstraklasa) | |
+| France 1 | Ligue 1 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_1) | 5 Nov 2026 |
+| France 2 | Ligue 2 | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ligue_2) | 5 Nov 2026 |
+| Germany 1 | Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Bundesliga) | 5 Nov 2026 |
+| Germany 2 | 2. Bundesliga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_2._Bundesliga) | 5 Nov 2026 |
+| Germany 3 | 3. Liga | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_3._Liga) | 5 Nov 2026 |
+| Ireland 1 | League of Ireland Premier Division | 2026 | 10 | [Wikipedia](https://en.wikipedia.org/wiki/2026_League_of_Ireland_Premier_Division) | 5 Nov 2026 |
+| Italy 1 | Serie A | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_A) | 5 Nov 2026 |
+| Italy 2 | Serie B | 2026–27 | 20 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Serie_B) | 5 Nov 2026 |
+| Netherlands 1 | Eredivisie | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Eredivisie) | 5 Nov 2026 |
+| Norway 1 | Eliteserien | 2026 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026_Eliteserien) | 5 Nov 2026 |
+| Poland 1 | Ekstraklasa | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Ekstraklasa) | 5 Nov 2026 |
 | Portugal 1 | Primeira Liga | 2026–27 | 18 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Primeira_Liga) | |
 | Romania 1 | Liga I (SuperLiga) | 2026–27 | 16 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Liga_I) | |
 | Scotland 1 | Scottish Premiership | 2026–27 | 12 | [Wikipedia](https://en.wikipedia.org/wiki/2026–27_Scottish_Premiership) | |
@@ -49,12 +49,13 @@ Ten of the 30 books have been read so far (see [Read off the league books](#read
 
 `data/ufm27-league-books.csv` holds each book's index as the game shows it: the league, the club's slot in the index, and the club under its shown name. Where a book has been read, the clubs carrying that league in `data/ufm27-clubs.csv` are exactly the clubs in the book, and `tests/clubs.test.mjs` fails if they drift apart.
 
-The ten below were read on 5 November 2026 from a player's screenshots of each book's index.
+The 21 below were read on 5 November 2026, in two batches, from a player's screenshots of each book's index.
 
 - **Which book is which.** The index doesn't print the book's name. Each screenshot was matched to its book by its clubs: every club on it carried the same league in the season list, and the counts matched that league's.
 - **The Collection Books screen** counts 30 books, the same 30 as `data/ufm27-leagues.csv`. The covers name the country, with a number from the second tier down: England, then England 2, 3 and 4.
 - **How the index runs.** Two facing pages of four columns by three rows, the left page filled before the right. `slot` follows that order. A book with more than 24 clubs runs on to a second spread: Argentina's slots 25 to 30.
-- **The order is the game's, not alphabetical.** In most books the clubs new to the league this season come last (Coventry, Hull and Ipswich in England 1), and in England 2 to 4 the clubs that came down from the tier above come first.
+- **The order is the game's own**, not alphabetical, and `slot` keeps it.
+- **One name can be two clubs.** Kraków Red is both Cracovia and Wisła Kraków, and the Poland 1 book lists it twice, at slots 6 and 18.
 
 | Book | Clubs | Against the season list |
 |---|---|---|
@@ -68,10 +69,21 @@ The ten below were read on 5 November 2026 from a player's screenshots of each b
 | England 2 | 24 | Agrees |
 | England 3 | 24 | Agrees |
 | England 4 | 24 | Agrees |
+| France 1 | 18 | Agrees |
+| France 2 | 18 | Agrees. Laval is in it once, and both Laval keys keep the league (below) |
+| Germany 1 | 18 | Agrees |
+| Germany 2 | 18 | Agrees, once the key the book doesn't use is dropped (below) |
+| Germany 3 | 20 | Agrees |
+| Ireland 1 | 10 | Agrees |
+| Italy 1 | 20 | Agrees |
+| Italy 2 | 20 | Agrees |
+| Netherlands 1 | 18 | Agrees, once the key the book doesn't use is dropped (below) |
+| Norway 1 | 16 | Agrees, once the key the book doesn't use is dropped (below) |
+| Poland 1 | 18 | Agrees |
 
 ## Clubs the game lists twice
 
-Two keys in the game's table name the same club. Until its book is read, both rows carry the league. Once it is, the key the book uses keeps the league and the other is left blank.
+Two keys in the game's table name the same club. Until its book is read, both rows carry the league. Once it is, the key the book uses keeps the league and the other is left blank. Where both keys show the same name, the book can't tell them apart, so both keep the league.
 
 Settled by the Argentina book:
 
@@ -79,12 +91,18 @@ Settled by the Argentina book:
 - Defensa y Justicia: the book has **Florencio Varela Yellow** (Defensa). The key "Defensa y Justicia" isn't in it.
 - Estudiantes de La Plata: the book has **La Plata Red** (Estudiantes). The key "Estudiantes" (Club Estudiantes de La Plata) isn't in it.
 
+Settled by the Germany 2, Netherlands 1 and Norway 1 books:
+
+- Greuther Fürth: the book has **Fürth Green**. The key "Fürth" isn't in it.
+- AZ: the book has **AZ**. The key "AZ Alkmaar" isn't in it.
+- Vålerenga: the book has **Oslo Blue** (Vålerenga Fotball). The key "Vålerenga" isn't in it.
+
+Can't be settled from a book:
+
+- France 2: Laval. Both keys (Laval MFC, Stade Laval) show as "Laval", and the book has one "Laval". Both rows keep France 2, and `tests/clubs.test.mjs` counts them once.
+
 Still open:
 
-- France 2: Laval: Laval MFC, Stade Laval
-- Germany 2: Greuther Fürth: Fürth, Fürth
-- Netherlands 1: AZ: AZ, AZ Alkmaar
-- Norway 1: Vålerenga: Vålerenga Fotball, Vålerenga
 - Romania 1: Sepsi OSK: Sepsi OSK, Sepsi OSK Sf. Gheorghe
 
 ## Left open
