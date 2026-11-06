@@ -459,7 +459,7 @@ These are server-wide shared goals ("work together with others"). In a set windo
 - **Player view:** PTCs are both the best-liked feature and a frequent complaint, because exchange rates can be harsh (for example five 75+ cards for one 75). [Players]
 
 ### 12.5 Collection Book [APK]
-- **What it is:** a book per **club (League Books)** and per **special rarity (Special Books)**.
+- **What it is:** a book per **league (League Books)**, with a set per club, and a book per **special rarity (Special Books)**, with its sets. Read in the game on 5 and 6 November 2026, there are 30 league books and 14 special books.
 - **Points:** You earn **Collection Points (CP)** the **first** time you obtain each card, with special rarities worth more, plus bonuses for completing a group or book. **Selling a card afterwards doesn't lose the progress.**
 - **Reward track:** thresholds every 250–500 CP up to **60,000 CP**, plus unique **logos** and **badges**.
 - **Other:** It has its own leaderboard and a season tracker. Players report that collection rewards can raise the energy cap. [Players]
